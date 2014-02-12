@@ -1,0 +1,93 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+kill( all );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Rin: 10e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Cin: 2.2e-9;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+C: 100e-9;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+R1: 10e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+R2: 30e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vin: 1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+w: 2*%pi*f;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Zcin: 1/(%i*w*Cin);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Zc: 1/(%i*w*C);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq1: (Vp-Vin)/Rin + Vp/Zcin + (Vp-Vo)/Zc = 0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq2: Vm/R1 + (Vm-Vo)/R2 = 0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq3: Vp=Vm;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+res: solve( [eq1, eq2, eq3], [Vo, Vp, Vm] );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+res: rhs( res[1][1] );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a: cabs( res );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a2: cabs( res^2 );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ph: carg( res );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+asimp: cabs( (Zcin/(Zcin+Rin))^3 );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([asimp], [f,1000,100000], [logx], [logy])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([a], [f,1000,200000], [logx], [logy])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([a2], [f,1000,200000], [logx], [logy])$
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
