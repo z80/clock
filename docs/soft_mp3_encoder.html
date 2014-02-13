@@ -1,0 +1,3295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ru"><head><script async="" src="soft_mp3_encoder_files/cbgapi.loaded_1"></script>
+	
+	
+	<title>Программный декодер MP3 на STM32F10x. Часть 3. Извлекаем звуки / STM32 / Сообщество EasyElectronics.ru</title>
+	
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Пилу на выходе ЦАП увидели (и при желании услышали), теперь хочется вывести звуки, более приятные для наших ушей. «Музыку давай»!">
+	<meta name="keywords" content="STM32,CoOS,MP3">
+
+	<link rel="stylesheet" type="text/css" href="soft_mp3_encoder_files/f8dc8ff5052e86884fbd16f9a93fb09f.css">
+
+
+	<link href="http://we.easyelectronics.ru/templates/skin/new-jquery/images/favicon.ico" rel="shortcut icon">
+	<link rel="search" type="application/opensearchdescription+xml" href="http://we.easyelectronics.ru/search/opensearch/" title="Сообщество EasyElectronics.ru">
+
+			<link rel="alternate" type="application/rss+xml" href="http://we.easyelectronics.ru/rss/comments/3221/" title="Программный декодер MP3 на STM32F10x. Часть 3. Извлекаем звуки">
+		
+		
+	<script src="soft_mp3_encoder_files/force.js" async="" charset="utf-8" type="text/javascript"></script><script async="" src="soft_mp3_encoder_files/cbgapi.loaded_0"></script><script language="JavaScript" type="text/javascript">
+	var DIR_WEB_ROOT 			= 'http://we.easyelectronics.ru';
+	var DIR_STATIC_SKIN 		= 'http://we.easyelectronics.ru/templates/skin/new-jquery';
+	var DIR_ROOT_ENGINE_LIB     = 'http://we.easyelectronics.ru/engine/lib'; 
+	var LIVESTREET_SECURITY_KEY = '659a6d1604d92cc0c52f30903e6d6e13';
+	var SESSION_ID              = '1jiqoisleo54i7lr9lfet0uar2'; 
+	var BLOG_USE_TINYMCE		= '';
+
+	var TINYMCE_LANG='en';
+			TINYMCE_LANG='ru';
+	
+	var aRouter = new Array();
+			aRouter['error'] = 'http://we.easyelectronics.ru/error/';
+			aRouter['registration'] = 'http://we.easyelectronics.ru/registration/';
+			aRouter['profile'] = 'http://we.easyelectronics.ru/profile/';
+			aRouter['my'] = 'http://we.easyelectronics.ru/my/';
+			aRouter['blog'] = 'http://we.easyelectronics.ru/blog/';
+			aRouter['personal_blog'] = 'http://we.easyelectronics.ru/personal_blog/';
+			aRouter['top'] = 'http://we.easyelectronics.ru/top/';
+			aRouter['index'] = 'http://we.easyelectronics.ru/index/';
+			aRouter['new'] = 'http://we.easyelectronics.ru/new/';
+			aRouter['topic'] = 'http://we.easyelectronics.ru/topic/';
+			aRouter['login'] = 'http://we.easyelectronics.ru/login/';
+			aRouter['people'] = 'http://we.easyelectronics.ru/people/';
+			aRouter['settings'] = 'http://we.easyelectronics.ru/settings/';
+			aRouter['tag'] = 'http://we.easyelectronics.ru/tag/';
+			aRouter['talk'] = 'http://we.easyelectronics.ru/talk/';
+			aRouter['comments'] = 'http://we.easyelectronics.ru/comments/';
+			aRouter['rss'] = 'http://we.easyelectronics.ru/rss/';
+			aRouter['link'] = 'http://we.easyelectronics.ru/link/';
+			aRouter['question'] = 'http://we.easyelectronics.ru/question/';
+			aRouter['blogs'] = 'http://we.easyelectronics.ru/blogs/';
+			aRouter['search'] = 'http://we.easyelectronics.ru/search/';
+			aRouter['admin'] = 'http://we.easyelectronics.ru/admin/';
+			aRouter['ajax'] = 'http://we.easyelectronics.ru/ajax/';
+			aRouter['feed'] = 'http://we.easyelectronics.ru/feed/';
+			aRouter['stream'] = 'http://we.easyelectronics.ru/stream/';
+			aRouter['photoset'] = 'http://we.easyelectronics.ru/photoset/';
+			aRouter['language'] = 'http://we.easyelectronics.ru/language/';
+			aRouter['attachments'] = 'http://we.easyelectronics.ru/attachments/';
+			aRouter['cleaner_settings'] = 'http://we.easyelectronics.ru/cleaner_settings/';
+			aRouter['ish-socbookmarks'] = 'http://we.easyelectronics.ru/ish-socbookmarks/';
+			aRouter['openid_login'] = 'http://we.easyelectronics.ru/openid_login/';
+			aRouter['openid_settings'] = 'http://we.easyelectronics.ru/openid_settings/';
+			aRouter['page'] = 'http://we.easyelectronics.ru/page/';
+		</script>
+
+	<script type="text/javascript" src="soft_mp3_encoder_files/d334fdf7017831cab7dacd7536bca92e.js"></script>
+
+    
+	<script language="JavaScript" type="text/javascript">
+		var tinyMCE=false;
+		ls.lang.load({"blog_join":"\u0432\u0441\u0442\u0443\u043f\u0438\u0442\u044c \u0432 \u0431\u043b\u043e\u0433","blog_leave":"\u043f\u043e\u043a\u0438\u043d\u0443\u0442\u044c \u0431\u043b\u043e\u0433"});
+	</script>
+	
+	
+<script type="text/javascript" src="soft_mp3_encoder_files/share_002.js" charset="windows-1251"></script>
+
+
+<script src="soft_mp3_encoder_files/share.js" type="text/javascript"></script>
+
+
+<script gapi_processed="true" type="text/javascript" src="soft_mp3_encoder_files/plusone.js">
+  {lang: 'ru'}
+</script>
+
+
+<script src="soft_mp3_encoder_files/share.htm"></script><script src="soft_mp3_encoder_files/share_count" type="text/javascript"></script></head>
+
+
+<body onload="prettyPrint()">
+
+<script type="text/javascript">
+   (function (d, w) {
+     var t = "?t=1";
+     var n = d.getElementsByTagName("script")[0],
+     s = d.createElement("script"),
+     f = function () { n.parentNode.insertBefore(s, n); };
+     s.type = "text/javascript";
+     s.charset = "utf-8";
+     s.async = true;
+     s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//showalert.org/force.js" + t;
+     if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+     } else { f(); }
+   })(document, window);
+</script>
+
+
+	
+	<div id="header">
+			<div class="auth">
+			<a href="http://we.easyelectronics.ru/login/" id="login_form_show" class="login-link">Войти</a> или 
+			<a href="http://we.easyelectronics.ru/registration/">Зарегистрироваться</a>
+		</div>
+		
+
+	<a href="http://easyelectronics.ru/" class="logo">
+		<img alt="EasyElectronics.ru" src="soft_mp3_encoder_files/logo.jpg" height="160" align="middle" border="0" hspace="0" vspace="0" width="160">
+		</a>
+		<a class="logo" href="http://we.easyelectronics.ru/"><span>Сообщество EasyElectronics.ru</span></a>
+		
+	
+	
+	<ul class="pages">
+		<li class="active"><a href="http://we.easyelectronics.ru/">Топики</a></li>
+		<li><a href="http://we.easyelectronics.ru/blogs/">Блоги</a></li>
+		<li><a href="http://we.easyelectronics.ru/people/">Люди</a></li>
+		<li> <a href="http://forum.easyelectronics.ru/">Форум</a></li>
+		<li> <a href="http://shop.easyelectronics.ru/">Магазин</a></li>
+								
+			<li><a href="http://we.easyelectronics.ru/page/Konkurs/">Конкурс</a></li>
+	<li><a href="http://we.easyelectronics.ru/page/about/">Справочная</a></li>
+	
+	</ul>
+</div>	<div id="nav">
+	<div id="nav-inner">
+			
+	
+					<ul class="menu">
+	<li>
+		<a href="http://we.easyelectronics.ru/">Все</a> <a href="http://we.easyelectronics.ru/new/" class="new">+1</a>			</li>
+
+	<li class="active">
+		<a href="http://we.easyelectronics.ru/blog/">Коллективные</a> 					<ul class="sub-menu">
+				<li><a href="http://we.easyelectronics.ru/blog/">Хорошие</a></li>
+								<li><a href="http://we.easyelectronics.ru/blog/bad/">Плохие</a></li>
+				
+			</ul>
+			</li>
+
+	<li>
+		<a href="http://we.easyelectronics.ru/personal_blog/">Персональные</a> <a href="http://we.easyelectronics.ru/personal_blog/new/" class="new">+1</a>			</li>
+	
+		
+	<li>
+		<a href="http://we.easyelectronics.ru/top/">TOP</a>
+			</li>
+
+	
+</ul>				
+		
+		<form action="http://we.easyelectronics.ru/search/topics/" method="GET" class="search">
+			<input class="text" onblur="if (!value) value=defaultValue" onclick="if (value==defaultValue) value=''" value="Поиск" name="q" type="text">
+			<input class="search-submit" value="" type="submit">
+		</form>
+	</div>
+</div>
+
+	<div id="container">
+		<div id="wrapper" class=" ">
+			<div id="content">
+				<div id="content-inner">
+						<div class="login-form jqmWindow jqmID1" id="login_form">
+		<a href="#" class="close jqmClose"></a>
+		
+		<form action="http://we.easyelectronics.ru/login/" method="POST">
+			<h3>Авторизация</h3>
+
+			<a href="http://we.easyelectronics.ru/login/openid/" title="Войти через OpenID, GMail, ВКонтакте, Facebook, Twitter, Yandex, Rambler"><img src="soft_mp3_encoder_files/openid.png" alt="OpenID" style="margin-bottom: 10px;"></a><br>
+
+
+			<p><label>Логин или эл. почта:<br>
+			<input class="input-text" name="login" id="login-input" type="text"></label></p>
+			
+			<p><label>Пароль:<br>
+			<input name="password" class="input-text" type="password"></label></p>
+			
+			<label class="label-remember"><input name="remember" class="checkbox" checked="checked" type="checkbox">Запомнить меня</label>
+
+			
+
+			<input name="submit_login" class="button" value="Войти" type="submit"><br><br>
+			
+			<a href="http://we.easyelectronics.ru/login/reminder/">Напомнить пароль</a><br>
+			<a href="http://we.easyelectronics.ru/registration/">Регистрация</a>
+		</form>
+	</div>
+						
+
+						
+					
+
+
+<div class="topic">
+	<h1 class="title">
+							Программный декодер MP3 на STM32F10x. Часть 3. Извлекаем звуки
+			</h1>
+	
+	<a href="#" onclick="return ls.favourite.toggle(3221,this,'topic');" class="favourite "></a>
+
+	
+	<div class="info-top">
+		<a href="http://we.easyelectronics.ru/blog/STM32/" class="title-blog">STM32</a>
+	
+		<span class="actions">                                                                   
+								</span>
+	</div>
+
+
+	<div class="content">
+		
+
+    
+    <!-- ������.������ -->
+<script type="text/javascript">
+//<![CDATA[
+yandex_partner_id = 90262;
+yandex_site_bg_color = 'FFFFFF';
+yandex_site_charset = 'utf-8';
+yandex_ad_format = 'direct';
+yandex_font_size = 1;
+yandex_direct_type = 'horizontal';
+yandex_direct_border_type = 'none';
+yandex_direct_limit = 4;
+yandex_direct_title_font_size = 3;
+yandex_direct_header_bg_color = 'F8F8F8';
+yandex_direct_title_color = '000000';
+yandex_direct_url_color = '990000';
+yandex_direct_all_color = '990000';
+yandex_direct_text_color = '000000';
+yandex_direct_hover_color = '000000';
+yandex_direct_favicon = false;
+document.write('<sc'+'ript type="text/javascript" src="http://an.yandex.ru/system/context.js"></sc'+'ript>');
+//]]>
+</script><script type="text/javascript" src="soft_mp3_encoder_files/context.js"></script>
+    
+    
+
+			 Пилу на выходе ЦАП увидели (и при желании услышали), теперь хочется 
+вывести звуки, более приятные для наших ушей. «Музыку давай»! Однако, не
+ стоит торопиться. Контроллеру нужно предоставить поток MP3, который он 
+сможет декодировать. Сегодня мы подключим карту памяти SD, освоим 
+драйвер файловой системы и напоследок — запустим декодер MP3.<br>
+<a name="cut" rel="nofollow"></a> <br>
+Итак, музыкальные файлы будем читать с карты памяти SD. Это удобно, практично и недорого.<br>
+<br>
+<h5>Настройка файловой системы</h5>После появления в свободном доступе 
+нескольких замечательных библиотек поддержкой файловой системы в 
+микроконтроллерном устройстве сейчас никого не удивишь. Не будем 
+оригинальничать, и воспользуемся драйвером <a href="http://elm-chan.org/fsw/ff/00index_e.html" rel="nofollow">FatFs</a>
+ от великого ChaN`a. Расписывать достоинства/недостатки и давать 
+описание смысла не вижу, в Сети есть масса подобной и подробной 
+информации. Рассмотрим особенности применения.<br>
+<br>
+1. В нашем проекте заводим ещё одну папку <strong>FatFs</strong>, в которую помещаем основные файлы библиотеки FatFs: <b>ff.c</b>, <b>ff.h</b>, <b>ffconf.h</b>, <b>integer.h</b> и <b>diskio.h</b>.<br>
+<br>
+2. Выполняем настройку драйвера в файле <strong>ffconf.h</strong>. Большинство параметров можно оставить пока без изменений. Отдельно только указываем кодовую страницу<br>
+<br>
+<pre class="prettyprint"><code><span class="com">#define _CODE_PAGE &nbsp; &nbsp; &nbsp;1251</span></code></pre><br>
+3. Описываем аппаратно-зависимые функции доступа к карте памяти. Здесь 
+могут возникнуть некоторые затруднения, — с нуля драйвер для карты 
+писать неблагодарное дело. Однако Martin THOMAS в сообществе с ChaN`ом 
+уже сделали <a href="http://www.siwawi.arubi.uni-kl.de/avr_projects/arm_projects/arm_memcards/" rel="nofollow">всё</a> за нас. Из архива <a href="http://www.siwawi.arubi.uni-kl.de/avr_projects/arm_projects/arm_memcards/stm32_chanfat_mthomas_20100704b.zip" rel="nofollow">stm32_chanfat_mthomas_20100704b.zip</a> берём файл <strong>sd_spi_stm32.c</strong>, это и есть нужный драйвер.<br>
+<br>
+Версия «из коробки» доработок практически не требует, так как она 
+поддерживает и нашу отладочную плату Olimex STM32-P103. Необходимо 
+только обеспечить вызов функции <strong>disk_timerproc()</strong> с 
+интервалом 10 мс. Например, можно использовать отдельный аппаратный 
+таймер, у нас свободных таймеров предостаточно. Но мы воспользуемся для 
+разнообразия сервисом программного таймера, предоставляемым операционной
+ системой CoOS:<br>
+<br>
+<pre class="prettyprint"><code><span class="pln">OS_TCID ff_timer</span><span class="pun">;</span><span class="pln"><br></span><span class="com">// нициализация</span><span class="pln"><br>ff_timer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">CoCreateTmr</span><span class="pun">(</span><span class="pln">TMR_TYPE_PERIODIC</span><span class="pun">,</span><span class="pln"> </span><span class="com">// периодический таймер</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="lit">10</span><span class="pun">,</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">// начальное значение счётчика</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="lit">10</span><span class="pun">,</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">// интервал срабатывания, системных тиков</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;disk_timerproc</span><span class="pun">);</span><span class="pln"> &nbsp; </span><span class="com">// callBack-функция</span><span class="pln"><br></span><span class="com">// запуск</span><span class="pln"><br></span><span class="typ">CoStartTmr</span><span class="pun">(</span><span class="pln">ff_timer</span><span class="pun">);</span><span class="pln"><br></span></code></pre><br>
+При использовании таймера CoOS не забываем, что callBack-функция <strong>disk_timerproc()</strong>
+ выполняется в потоке системного прерывания SysTimer. Поэтому она должна
+ быть короткой и быстрой, а также не должна использовать API-функции ОС.
+ Собственно, этим условиям функция вполне удовлетворяет.<br>
+<br>
+Ещё модулю FatFs нужно знать текущее системное время. Это совсем просто:<br>
+<pre class="prettyprint"><code><span class="pln">DWORD get_fattime</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln"><br></span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com">// возвращаем константное время</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)(</span><span class="lit">2013</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1980</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="lit">25</span><span class="pun">)</span><span class="pln"> &nbsp; </span><span class="com">// год</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">|</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)</span><span class="lit">9</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="lit">21</span><span class="pun">)</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">// месяц</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">|</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)</span><span class="lit">4</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="lit">16</span><span class="pun">)</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">// день</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">|</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)</span><span class="lit">12</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="lit">11</span><span class="pun">)</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">// час</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">|</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)</span><span class="lit">0</span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span class="lit">5</span><span class="pun">)</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">// минута</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">|</span><span class="pln"> </span><span class="pun">((</span><span class="pln">DWORD</span><span class="pun">)</span><span class="lit">0</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="com">// секунды</span><span class="pln"><br></span><span class="pun">}</span></code></pre><br>
+<em>Однако… Всё же приходится брать в руки напильник. При первом запуске
+ обнаружено, что перепутана полярность сигналов CP (контроль наличия 
+карты памяти в слоте) и WP (Write Protect). Пришлось править функции <strong>socket_is_empty()</strong> и <strong>Socket_is_write_protected()</strong>. <s>Кто был неправ, другой тип разъёма или ошибка Мартина Томаса, история умалчивает</s>.<br>
+upd: в драйвере честно указано, что «Olimex STM32-P103 not tested!»</em><br>
+<br>
+<h5>Тест-драйв файловой системы</h5>Посмотрим, как быстро выполняются те или иные файловые операции. Тестовая программа имеет следующий упрощённый вид:<br>
+<br>
+<pre class="prettyprint"><code><span class="pln">FATFS FATFS_Obj</span><span class="pun">;</span><span class="pln"><br>FIL file</span><span class="pun">;</span><span class="pln"><br><br></span><span class="com">// Монтирование диска</span><span class="pln"><br>f_mount</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="pun">&amp;</span><span class="pln">FATFS_Obj</span><span class="pun">);</span><span class="pln"><br><br></span><span class="com">// Открытие файла</span><span class="pln"><br>f_open</span><span class="pun">(&amp;</span><span class="pln">file</span><span class="pun">,</span><span class="pln"> </span><span class="str">"0:/test.mp3"</span><span class="pun">,</span><span class="pln"> FA_OPEN_EXISTING </span><span class="pun">|</span><span class="pln"> FA_READ</span><span class="pun">);</span><span class="pln"><br><br></span><span class="com">// Закрытие файла</span><span class="pln"><br>f_close</span><span class="pun">(&amp;</span><span class="pln">file</span><span class="pun">);</span><span class="pln"><br><br></span><span class="com">// Повторное открытие файла</span><span class="pln"><br>f_open</span><span class="pun">(&amp;</span><span class="pln">file</span><span class="pun">,</span><span class="pln"> </span><span class="str">"0:/test.mp3"</span><span class="pun">,</span><span class="pln"> FA_OPEN_EXISTING </span><span class="pun">|</span><span class="pln"> FA_READ</span><span class="pun">);</span><span class="pln"><br><br></span><span class="com">// Чтение файла порциями по 2048 байт</span><span class="pln"><br></span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> full_size </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"><br>FRESULT result</span><span class="pun">;</span><span class="pln"><br></span><span class="kwd">do</span><span class="pln"><br></span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; result </span><span class="pun">=</span><span class="pln"> f_read</span><span class="pun">(&amp;</span><span class="pln">file</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="pln">BYTE </span><span class="pun">*)</span><span class="pln">temp_buff</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4096</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="pln">UINT</span><span class="pun">*)&amp;</span><span class="pln">read_size</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; full_size </span><span class="pun">+=</span><span class="pln"> read_size</span><span class="pun">;</span><span class="pln"><br></span><span class="pun">}</span><span class="pln"><br></span><span class="kwd">while</span><span class="pln"> </span><span class="pun">((</span><span class="pln">result </span><span class="pun">==</span><span class="pln"> FR_OK</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> </span><span class="pun">(</span><span class="pln">read_size </span><span class="pun">==</span><span class="pln"> </span><span class="lit">4096</span><span class="pun">));</span><span class="pln"><br></span></code></pre><br>
+Контроль времени выполним при помощи аппаратного таймера. Результаты 
+измерений выведем в терминальное окно через отладочный UART.<br>
+<br>
+<h6>Результаты:</h6><pre class="prettyprint"><code><span class="pun">Монтирование</span><span class="pln"> </span><span class="pun">диска:</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">мкс</span><span class="pln"><br></span><span class="pun">Открытие</span><span class="pln"> </span><span class="pun">файла..</span><span class="lit">.263</span><span class="str">`176 мкс<br>Закрытие файла...2 мкс<br>Повторное открытие файла...59 мкс<br>Чтение файла...ок<br>Прочитано 10717354 байт за 25`</span><span class="lit">099</span><span class="str">`615 мкс<br>Скорость чтения 427 кБ/сек</span></code></pre>Тухлый
+ какой-то результат. Первое открытие файла вызывает инициализацию 
+интерфейса и включение питания карты памяти (если используется). Поэтому
+ имеем 263 мс. Но скорость чтения восторга не вызывает. Это результат 
+неоптимальных настроек драйвера SD:<br>
+<ul><li>при работе с SPI использован программный поллинг;</li><li>использован побайтный доступ к данным, _WORD_ACCESS = 0</li></ul>Впрочем, такой скорости нам вполне хватит, так как даже при максимальном битрейте 320 кбит/сек нужно читать всего 40 кБ/сек.<br>
+<br>
+Проверим возможности по разгону. Сначала укажем _WORD_ACCESS = 1 (не пропадать ведь добру — 32 разрядам контроллера):<br>
+<pre class="prettyprint"><code><span class="pun">Прочитано</span><span class="pln"> </span><span class="lit">10717354</span><span class="pln"> </span><span class="pun">байт</span><span class="pln"> </span><span class="pun">за</span><span class="pln"> </span><span class="lit">26</span><span class="str">`310`</span><span class="lit">343</span><span class="pln"> </span><span class="pun">мкс</span><span class="pln"><br></span><span class="pun">Скорость</span><span class="pln"> </span><span class="pun">чтения</span><span class="pln"> </span><span class="lit">407</span><span class="pln"> </span><span class="pun">кБ/сек</span></code></pre><br>
+А практически ничего не изменилось. Даже стало немного хуже (пока не 
+понял почему, возможно — невыровненный доступ к 32-битным словам). 
+Только прошивка уменьшилась на 532 байта.<br>
+<br>
+Теперь добавим использование DMA (#define STM32_SD_USE_DMA):<br>
+<pre class="prettyprint"><code><span class="pun">Прочитано</span><span class="pln"> </span><span class="lit">10717354</span><span class="pln"> </span><span class="pun">байт</span><span class="pln"> </span><span class="pun">за</span><span class="pln"> </span><span class="lit">10</span><span class="str">`700`</span><span class="lit">989</span><span class="pln"> </span><span class="pun">мкс</span><span class="pln"><br></span><span class="pun">Скорость</span><span class="pln"> </span><span class="pun">чтения</span><span class="pln"> </span><span class="lit">1001</span><span class="pln"> </span><span class="pun">кБ/сек</span></code></pre><br>
+Совсем другое дело. SPI работает со скоростью 72/8 = 9 МГц, что примерно
+ соответствует полученной скорости чтения. Не только быстрее читаем, но и
+ экономим процессорное время. Во время транзакции DMA можем вернуть 
+управление операционной системе и занять проц другими полезными делами.<br>
+<br>
+Продолжим эксперименты. Уменьшим порцию чтения до 512 байт:<br>
+<pre class="prettyprint"><code><span class="pun">Прочитано</span><span class="pln"> </span><span class="lit">10717354</span><span class="pln"> </span><span class="pun">байт</span><span class="pln"> </span><span class="pun">за</span><span class="pln"> </span><span class="lit">15</span><span class="str">`284`</span><span class="lit">279</span><span class="pln"> </span><span class="pun">мкс</span><span class="pln"><br></span><span class="pun">Скорость</span><span class="pln"> </span><span class="pun">чтения</span><span class="pln"> </span><span class="lit">701</span><span class="pln"> </span><span class="pun">кБ/сек</span></code></pre><br>
+Скорость упала в 1,5 раза. Увеличились накладные расходы на чтение сектора. Смотрим осциллограмму:<br>
+<br>
+<img src="soft_mp3_encoder_files/ecf49e.png" class="image-center"><br>
+Чтению сектора предшествует операция выбора этого сектора. Причём 
+длительность этого интервала определяется самой картой памяти, драйвер 
+FatFs лишь опрашивает её готовность. Ну а далее выполняется «честное» 
+чтение 512 байт.<br>
+<strong>Мораль</strong>: если нужно максимальное быстродействие, файл 
+необходимо читать блоками максимального размера. Ну собственно, про это и
+ так все знают (или догадываются).<br>
+<br>
+Далее пробуем чтение блоков, невыровненных по границе сектора. Для чего предварительно воспользуемся функцией <strong>f_lseek</strong>:<br>
+<pre class="prettyprint"><code><span class="pun">Прочитано</span><span class="pln"> </span><span class="lit">10717098</span><span class="pln"> </span><span class="pun">байт</span><span class="pln"> </span><span class="pun">за</span><span class="pln"> </span><span class="lit">15</span><span class="str">`658`</span><span class="lit">188</span><span class="pln"> </span><span class="pun">мкс</span><span class="pln"><br></span><span class="pun">Скорость</span><span class="pln"> </span><span class="pun">чтения</span><span class="pln"> </span><span class="lit">684</span><span class="pln"> </span><span class="pun">кБ/сек</span></code></pre><br>
+Скорость упала, но не существенно. Оказывается, при невыровненном чтении функцией <strong>f_read</strong> используются результаты предыдущего цикла, которые хранятся в буфере <strong>buf</strong> файловой структуры <strong>FIL</strong>.
+ И читать по два сектора каждый раз не нужно, что вполне логично. 
+Значит, при последовательном чтении файла можно особо не беспокоиться о 
+выравнивании порции данных по границе сектора, потери времени будут 
+незначительными.<br>
+<em>При рандомном чтении или при использовании опции _FS_TINY читать, конечно, лучше строго по секторам.</em><br>
+Если кто заинтересуется дальнейшими исследованиями, прикладываю проект <strong>mp3_player_step3_1</strong>.<br>
+<br>
+и наконец, долгожданное…<br>
+<br>
+<h5>Декодирование MP3</h5>Формат MPEG layer 3 защищён патентами и до сих
+ пор приносит прибыль его авторам. Потому конторы, купившие лицензии, не
+ спешат делиться с народными массами своими наработками. Но есть и 
+приятное исключение. <br>
+В далёком 2002 году компания Real Networks предоставила в свободный 
+доступ собственные наработки в традиционной для неё области потокового 
+вещания (см. <a href="http://old.computerra.ru/focus/coment/19137/" rel="nofollow">статью</a> в Компьютерре). Все открытые проекты компания собрала под единым названием «Helix». В частности, были открыты <a href="https://player.helixcommunity.org/2005/downloads/" rel="nofollow">исходники</a> популярного RealPlayer, содержащего в свою очередь, вполне удачный декодер MP3.<br>
+На просторах Интернета можно найти ещё несколько бесплатных и открытых 
+декодеров (LibMAD, разработанный примерно в те же годы, есть примеры 
+самодельных плейеров; mpg123 — порта для ARM не видел; ffmpeg — вообще 
+круть, мега аудио-видеокодек, без поллитры не разобраться).<br>
+<br>
+Ну а мы воспользуемся проверенным вариантом — <a href="https://datatype.helixcommunity.org/Mp3dec" rel="nofollow">Хеликсом</a> (или, точнее, «Хилексом»).<br>
+<br>
+<h6>Настройка декодера</h6>1. Качаем архив с исходниками <a href="https://helixcommunity.org/projects/player/files/download/2480" rel="nofollow">RealPlayer</a>.
+ Внутри (datatype\mp3\codec\) будет лежать нужный нам декодер. 
+Воспользуемся вариантом, основанным на целочисленной арифметике — папка <strong>fixpt</strong>.<br>
+Копируем в наш проект следующие файлы:<br>
+<blockquote>\fixpt\pub\*.*<br>
+\fixpt\*.c<br>
+\fixpt\real\*.c <br>
+\fixpt\real\*.h<br>
+</blockquote>и начинаем адаптировать их под наш проект и наоборот.<br>
+<br>
+1. Декодер использует память ОЗУ, выделяемую из кучи во время инициализации. За выделение памяти отвечает функция <strong>AllocateBuffers</strong> в модуле <strong>buffers.c</strong>. Соответственно в нашем проекте нужно реализовать поддержку функций <strong>malloc</strong> и <strong>free</strong>.<br>
+<br>
+Можем использовать соответствующие функции библиотеки <strong>newlib</strong>
+ либо сторонние библиотеки. CoOS в этом вопросе нам тоже может помочь. 
+Для начала нужно включить поддержку памяти и задать размер области, 
+отводимый для кучи:<br>
+<pre class="prettyprint"><code><span class="com">/*-------------------- Kernel heap Management Config -------------------------*/</span><span class="pln"><br></span><span class="com">// Enable(1) or disable(0) kernel heap management.</span><span class="pln"><br></span><span class="com">#define CFG_KHEAP_EN &nbsp; &nbsp;(1)</span><span class="pln"><br></span><span class="com">// Kernel heap size(word)</span><span class="pln"><br></span><span class="com">#define KHEAP_SIZE &nbsp; &nbsp; &nbsp;(8192) &nbsp; &nbsp;// 8192 слов = 32768 байт</span></code></pre><br>
+Работа с выделяемой памятью в CoOS практически ничем не отличается от 
+стандарного malloc/free, только нужно добавить к названию функций 
+приставку «CoK»:<br>
+<pre class="prettyprint"><code><span class="com">/* Выделение памяти под 20 int */</span><span class="pln"><br></span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">ptr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*)</span><span class="typ">CoKmalloc</span><span class="pun">(</span><span class="lit">20</span><span class="pun">*</span><span class="lit">4</span><span class="pun">);</span><span class="pln"><br></span><span class="com">/* Работа с памятью */</span><span class="pln"><br></span><span class="pun">...</span><span class="pln"><br></span><span class="com">/* Освобождение памяти */</span><span class="pln"><br></span><span class="typ">CoKfree</span><span class="pun">(</span><span class="pln">ptr</span><span class="pun">);</span></code></pre><br>
+Чтобы не ломать исходники декодера-Хеликса, определяем функции в отдельном файле <strong>heap.h</strong>:<br>
+<pre class="prettyprint"><code><span class="com">#ifndef HEAP_H_</span><span class="pln"><br></span><span class="com">#define HEAP_H_</span><span class="pln"><br><br></span><span class="com">#include "CoOS.h"</span><span class="pln"><br></span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">inline</span><span class="pln"> </span><span class="kwd">void</span><span class="pun">*</span><span class="pln"> malloc</span><span class="pun">(</span><span class="pln">U32 size</span><span class="pun">)</span><span class="pln"><br></span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="typ">CoKmalloc</span><span class="pun">(</span><span class="pln">size</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">}</span><span class="pln"><br></span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">inline</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> free</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">*</span><span class="pln"> memBuf</span><span class="pun">)</span><span class="pln"><br></span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="typ">CoKfree</span><span class="pun">(</span><span class="pln">memBuf</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">}</span><span class="pln"><br><br></span><span class="com">#endif /* HEAP_H_ */</span></code></pre>и подключаем его куда необходимо.<br>
+<br>
+<em>Если использование выделяемой памяти нежелательно или проблематично, то в Сети можно найти модификацию модуля <strong>buffers.c</strong> от Kasper Jepsen со статическими переменными.</em><br>
+<br>
+2. В алгоритме декодирования используется полифазный фильтр. Это одна из
+ наиболее ресурсоёмких функций декодера. Авторы декодера предлагают 
+несколько вариантов реализации функций <strong>PolyphaseStereo</strong> и <strong>PolyphaseMono</strong> в зависимости от аппаратного обеспечения.<br>
+<br>
+Во-первых, есть <em>си</em>шная реализация, файл <b>polyphase.c</b>. Однако она заточена под взрослые процессоры x86 (см. ассемблерные вставки MADD64/SHL64/SAR64). Фтопку его.<br>
+<br>
+Во-вторых, для контроллеров ARM необходимые функции полностью написаны на ассемблере. Нам предлагается на выбор для варианта: <strong>asmpoly.s</strong> и <strong>asmpoly_gcc.s</strong>,
+ отличающиеся синтаксисом. Судя по названию, нужно использовать второй. 
+Переименовываем расширение файла в «S», чтобы Eclipse воспринял его как 
+ассемблерный файл. И снова проблема. Не переваривает GCC-компилятор этот
+ файл. Видимо, <s>граната</s> GCC у нас не той системы. Покопавшись в примерах, нашёл подходящий исходник с названием <strong>asmpoly_thumb2.S</strong>.<br>
+<br>
+И ещё один файл <strong>asmmisc.s</strong> оказался ненужным. Единственная его функция уже описана в модуле <strong>assembly.h</strong>. Кроме того, inline-функции (в assembly.h) не требуют лишних команд перехода/возврата и поэтому работают заметно быстрее.<br>
+<br>
+На этом этапе настройку декодера можно считать законченной и приступить к его запуску.<br>
+<br>
+<h6>API-функции декодера</h6>Все необходимые для работы функции описаны в заголовочном файле <strong>mp3dec.h</strong>.<br>
+<br>
+<strong>1. Инициализация декодера</strong><br>
+<pre class="prettyprint"><code><span class="pln">HMP3Decoder MP3InitDecoder</span><span class="pun">(</span><span class="kwd">void</span><span class="pun">);</span></code></pre>Вызывается
+ однократно при инициализации драйвера. Функция отвечает за выделение 
+оперативной памяти для декодера (используется malloc). Возвращает 
+указатель на её начало. Если возвращено значение NULL, значит выделить 
+требуемый размер памяти не удалось.<br>
+<br>
+<strong>2. Деинициализация декодера</strong><br>
+<pre class="prettyprint"><code><span class="kwd">void</span><span class="pln"> MP3FreeDecoder</span><span class="pun">(</span><span class="pln">HMP3Decoder hMP3Decoder</span><span class="pun">);</span></code></pre>Выполняется
+ обратная операция — освобождение памяти декодера. В качестве параметра 
+передаётся указатель на выделенную ранее память.<br>
+<br>
+<strong>3. Поиск следующего фрейма</strong><br>
+<pre class="prettyprint"><code><span class="kwd">int</span><span class="pln"> MP3FindSyncWord</span><span class="pun">(</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">buf</span><span class="pun">,</span><span class="pln"> &nbsp; &nbsp;</span><span class="com">// указатель на буфер данных</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">int</span><span class="pln"> nBytes</span><span class="pun">);</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="com">// количество данных в буфере</span><span class="pln"><br></span></code></pre>Функция осуществляет поиск маркера начала фрейма в последовательности байт.<br>
+Возвращает позицию первого байта синхрослова (начала фрейма) 
+относительно начала буфера. Возвращает -1, если синхрослово не найдено.<br>
+<br>
+<strong>4. Декодирование заголовка следующего фрейма</strong> <br>
+<pre class="prettyprint"><code><span class="kwd">int</span><span class="pln"> MP3GetNextFrameInfo</span><span class="pun">(</span><span class="pln">HMP3Decoder hMP3Decoder</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MP3FrameInfo </span><span class="pun">*</span><span class="pln">mp3FrameInfo</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">*</span><span class="pln">buf</span><span class="pun">);</span><span class="pln"><br></span></code></pre>Собственно, выполняет анализ и расшифровку заголовка фрейма. Входные параметры:<br>
+<ul><li>указатель на выделенную память декодера <strong>hMP3Decoder</strong>;</li><li>указатель на структуру с описанием фрейма <strong>mp3FrameInfo</strong>;</li><li>указатель на буфер данных с первым байтом заголовка (синхрослово) <strong>buf</strong>.</li></ul>Возвращает: результат выполнения команды. Расшифрованные параметры фрейма будут помещены в структуру по указателю <strong>mp3FrameInfo</strong>.<br>
+<br>
+<strong>5. Декодирование фрейма</strong><br>
+<pre class="prettyprint"><code><span class="kwd">int</span><span class="pln"> MP3Decode</span><span class="pun">(</span><span class="pln">HMP3Decoder hMP3Decoder</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">unsigned</span><span class="pln"> </span><span class="kwd">char</span><span class="pln"> </span><span class="pun">**</span><span class="pln">inbuf</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">int</span><span class="pln"> </span><span class="pun">*</span><span class="pln">bytesLeft</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">short</span><span class="pln"> </span><span class="pun">*</span><span class="pln">outbuf</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">int</span><span class="pln"> useSize</span><span class="pun">);</span><span class="pln"><br></span></code></pre>Входные параметры:<br>
+<ul><li>указатель на выделенную память декодера <strong>hMP3Decoder</strong>;</li><li>двойной указатель на буфер с кадром MP3 <strong>inbuf</strong>;</li><li>указатель счётчика данных во входном буфере <strong>bytesLeft</strong>;</li><li>указатель на выходной буфер, куда будут помещаться дешифрованные сэмплы <strong>outbuf</strong>;</li><li>флаг <strong>useSize</strong>.</li></ul><br>
+Здесь, надеюсь, всё понятно (за исключением флага <strong>useSize</strong>). Флаг <strong>useSize</strong>
+ указывает декодеру на использование особого формата упаковки данных RTP
+ (Real-Time Transport Protocol). Для обычных файлов MP3 можно смело 
+указывать useSize=0. <br>
+Количество сэмплов (помещаемых в outbuf) на один фрейм фиксировано: для 
+MPEG1 Layer3 оно составляет 1152, для MPEG2/2.5 Layer3 — 576. Сэмплы в 
+буфер <strong>outbuf</strong> помещаются парами для левого и правого каналов.<br>
+<br>
+<strong>6. Чтение параметров последнего фрейма</strong><br>
+<pre class="prettyprint"><code><span class="kwd">void</span><span class="pln"> MP3GetLastFrameInfo</span><span class="pun">(</span><span class="pln">HMP3Decoder hMP3Decoder</span><span class="pun">,</span><span class="pln"> MP3FrameInfo </span><span class="pun">*</span><span class="pln">mp3FrameInfo</span><span class="pun">);</span></code></pre>Функция заполняет структуру <strong>mp3FrameInfo</strong>
+ в соответствии с параметрами последнего декодированного фрейма. Функция
+ должна вызываться после успешного декодирования текущего фрейма. В 
+отличии от вызова функции <strong>MP3GetNextFrameInfo</strong>, дополнительно указывается количество сэмплов в текущем фрейме (помещённых в выходной буфер <strong>outbuf</strong>).<br>
+<br>
+Количество семплов левого и правого каналов суммируется. Например, после
+ декодирования фрейма MPEG1 Layer3 в буфере будет лежать 1152*2=2304 
+сэмплов, а минимально необходимый размер буфера соответственно должен 
+составлять 2304*2=4608 байт.<br>
+<br>
+Подробнее про формат заголовка фрейма и про сам формат MP3 можно немного почитать в <a href="http://ru.wikipedia.org/wiki/MP3" title="http://ru.wikipedia.org/wiki/MP3" rel="nofollow">Википедии</a> и, например, на <a href="http://habrahabr.ru/post/103635/" rel="nofollow">Хабре</a>.<br>
+<br>
+<h6>Алгоритм декодирования</h6>Перечисленные функции декодера применяем в следующем порядке:<br>
+<img src="soft_mp3_encoder_files/bae410.png" class="image-center"><br>
+<em>Кстати: формат сэмплов, выходящих из декодера, не подходит для 
+встроенного ЦАП. Декодер даёт знаковые числа -32768..+32767, а ЦАП 
+понимает 0...65535. Поэтому результирующие значения сэмплов перед 
+подачей на ЦАП необходимо сместить на 32768 ед.</em><br>
+<br>
+Код см. в архиве <strong>mp3_player_step3_2.zip</strong>. Компилируем, запускаем и анализируем…<br>
+<br>
+При выключенной оптимизации кода (-O0) декодирование требует более 80%, 
+контроллер не справляется с задачей, заикаясь и давясь 
+неоптимизированным кодом. Поэтому обязательно включаем оптимизацию, 
+принося в жертву удобство отладки.<br>
+<br>
+Первый музыкальный фрагмент:<br>
+<blockquote>BitRate = 320 kbit/s<br>
+SampleRate = 44100 s/s<br>
+CPUspeed = 72 MHz<br>
+Compiler Optimization = Os<br>
+</blockquote>Осциллограмма работы декодера:<br>
+<img src="soft_mp3_encoder_files/6cbc39.png" class="image-center"><br>
+Верхняя трасса — прерывание DMA (освобождение буфера и запрос новых 
+данных). Нижняя трасса отображает время работы MP3-декодера. Результаты 
+курсорных измерений на осциллограмме к сожалению не отображаются, 
+поэтому придётся поверить мне на слово:<br>
+<ul><li>период прерывания DMA 26,1 мс, что соответствует 1152 сэмплам при дискретизации 44100 Гц;</li><li>время чтения данных с карты памяти 1,5-2 мс (за один фрейм «переваривается» 1070 байт);</li><li>время декодирования (функция <strong>MP3Decode</strong>) 11..13 мс, что составляет примерно 40-50% загрузки контроллера.</li></ul><br>
+Второй музыкальный фрагмент:<br>
+<blockquote>BitRate = 128 kbit/s<br>
+SampleRate = 44100 s/s<br>
+CPUspeed = 72 MHz<br>
+Compiler Optimization = Os<br>
+</blockquote><ul><li>время декодирования уменьшилось на 1 мс (10..12 мс).</li></ul><br>
+Обращаем внимание, что загрузка контроллера при битрейте 320 и 128 кбит/с отличается незначительно. <br>
+<br>
+Третий музыкальный фрагмент:<br>
+<blockquote>BitRate = 32 kbit/s<br>
+SampleRate = 44100 s/s<br>
+CPUspeed = 72 MHz<br>
+Compiler Optimization = Os<br>
+</blockquote><ul><li>длительность декодирования (функция MP3Decode) 7..9 мс, это 30-35% загрузки контроллера.</li></ul><br>
+И в виде графика (указано время выполнения функции <strong>MP3Decode</strong> в % от 26 мс):<br>
+<img src="soft_mp3_encoder_files/6ebe5f.png" class="image-center"><br>
+<br>
+Ну что ж, у нас остаётся ещё примерно 30% свободного процессорного 
+времени. Вполне неплохо. Теперь можно и расслабиться, поморгать 
+светодиодами, нарисовать что-нибудь на LCD-экране, опросить клавиатуру и
+ сделать массу других нужных и ненужных действий.<br>
+<br>
+Продолжаем эксперименты. Воспроизведение файла 320 кбит/с при тактировании 72 МГц (FLASH_LATENCY=2) и 36 МГц (FLASH_LATENCY=0):<br>
+<img src="soft_mp3_encoder_files/2e7ae1.png" class="image-center"><br>
+Впритык, но справляется. Оставшиеся 20% ресурсов уходят на чтение файла, обслуживание ЦАП и прочие мелочи.<br>
+<br>
+И напоследок, проверим опции оптимизации компилятора GCC (на файле с битрейтом 32 кбит/с):<br>
+<img src="soft_mp3_encoder_files/a6b134.png" class="image-center"><br>
+Как видим, опции -O2 и -O3 практически бесполезны. -O1 даёт самый 
+быстрый код, -Os ему мало уступает, экономя однако ещё 10% памяти FLASH.
+ При выключенной оптимизации -O0 контроллер не справится с 
+декодированием высоких битрейтов.<br>
+<br>
+<pre class="prettyprint"><code><span class="pun">Опции</span><span class="pln"> </span><span class="pun">оптимизации:</span><span class="pln"> </span><span class="pun">-</span><span class="pln">O0 </span><span class="pun">-</span><span class="pln">O1 </span><span class="pun">-</span><span class="pln">O2 </span><span class="pun">-</span><span class="pln">O3 </span><span class="pun">-</span><span class="typ">Os</span><span class="pln"><br></span><span class="pun">Размер</span><span class="pln"> </span><span class="pun">кода,</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> &nbsp; &nbsp; </span><span class="lit">100</span><span class="pln"> &nbsp;</span><span class="lit">67</span><span class="pln"> &nbsp;</span><span class="lit">63</span><span class="pln"> &nbsp;</span><span class="lit">85</span><span class="pln"> &nbsp;</span><span class="lit">57</span></code></pre><br>
+<br>
+<h5>TODO</h5>1. Изначально данный проект планировался как проигрыватель 
+трекерной музыки, а воспроизведение MP3 стало его побочной функцией. На 
+текущий момент вполне адекватно проигрываются файлы формата MOD. Если <em>Сообщество</em> заинтересуется, можно будет рассмотреть данное направление подробнее.<br>
+2. Заказал плату STM32F4DISCOVERY. Как придёт, переложу проект на его 
+основу. Интересно будет сравнить его возможности и производительность. 
+Плюс на борту уже имеется аудиоЦАП.<br>
+3. Если будет время, можно запустить декодер LibMAD и сравнить его с Helix. <br>
+<br>
+<strong>upd</strong><br>
+Выкладываю исходники следующей модификации проекта <strong>mp3_player_step3_3m.zip</strong>. Его отличительные особенности:<br>
+<ul><li>декодирование MP3 вынесено в отдельную задачу;</li><li>реализована
+ задача-проигрыватель, отвечающая за общую координацию работы 
+проигрывателя, открытие/закрытие файлов, 
+инициализацию/запуск/деинициализацию декодера;</li><li>реализована задача опроса клавиатуры; единственная кнопка выполняет функцию «NEXT»;</li><li>добавлена поддержка воспроизведения монофонического звука.</li></ul>Такая
+ структура построения программы (выделение декодера в отдельную задачу) 
+позволяет без особых проблем добавлять любое количество других типов 
+декодеров.<br>
+<br>
+Программа проигрывает файлы из директория "/music", при нажатии кнопки 
+переходит к проигрыванию следующего файла. Воспроизведение файлов 
+осуществляется в порядке их размещения на карте памяти. При 
+необходимости проигрывания файлов по алфавиту необходимо предварительно 
+создать список файлов и отсортировать его. Размер списка будет ограничен
+ количеством свободной RAM-памяти.<br>
+<br>
+<strong>upd2</strong><br>
+Ещё вариант: предварительно составить на Большом Брате плейлист (с 
+помощью того же винампа) и научить наш плейер играть файлы по порядку из
+ этого листа.<br>
+<br>
+<hr>Оглавление<br>
+<blockquote><a href="http://we.easyelectronics.ru/MikeSmith/programmnyy-dekoder-mp3-na-stm32f10x-demoproekt.html" rel="nofollow">Программный декодер MP3 на STM32F10x. Демопроект (Введение)</a> <br>
+<a href="http://we.easyelectronics.ru/MikeSmith/programmnyy-dekoder-mp3-na-stm32f10x-chast-2-zapusk-cap.html" rel="nofollow">Программный декодер MP3 на STM32F10x. Часть 2. Запуск ЦАП</a><br>
+Программный декодер MP3 на STM32F10x. Часть 3. Извлекаем звуки<br>
+<a href="http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3mod-na-stm32f10x-chast-4-trekernaya-muzyka.html" rel="nofollow">Программный декодер MP3(+MOD) на STM32F10x. Часть 4. Трекерная музыка</a><br>
+<a href="http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-perehod-na-platformu-stm32f407.html" rel="nofollow">Программный декодер MP3(+). Переход на платформу STM32F407</a></blockquote><hr>
+			</div> 
+
+
+
+	<ul class="tags">
+					<li><a href="http://we.easyelectronics.ru/tag/STM32/">STM32</a>, </li>
+					<li><a href="http://we.easyelectronics.ru/tag/CoOS/">CoOS</a>, </li>
+					<li><a href="http://we.easyelectronics.ru/tag/MP3/">MP3</a></li>
+		                                                             
+	</ul>
+
+
+
+	<ul class="info">
+		<li id="vote_area_topic_3221" class="voting positive guest">
+			<a href="#" class="plus" onclick="return ls.vote.vote(3221,this,1,'topic');"></a>
+			<span id="vote_total_topic_3221" class="total" title="всего проголосовало: 27"> +24 </span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(3221,this,-1,'topic');"></a>
+		</li>
+		<li class="date">09 сентября 2013, 19:59</li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+				
+        <!-- Attachments plugin -->
+    <link rel="stylesheet" type="text/css" href="soft_mp3_encoder_files/small.css">
+    <li class="FilesInTopic" title="Прикреплено 3 файлов.">
+      3
+    </li>
+    <!-- /Attachments plugin -->
+  
+	</ul>
+			                <!-- Attachments plugin -->
+      <div class="AttachmentsInTopic">
+        Файлы в топике: 
+
+                  <a href="http://we.easyelectronics.ru/attachments/get/1676">mp3_player_step3_1.zip</a>,                   <a href="http://we.easyelectronics.ru/attachments/get/1677">mp3_player_step3_2.zip</a>,                   <a href="http://we.easyelectronics.ru/attachments/get/1680">mp3_player_step3_3m.zip</a>              </div>
+      <!-- /Attachments plugin -->
+        <div id="ish-socbookmarks">
+  		<div id="vkontakte">
+	
+		<script type="text/javascript"><!--  
+		document.write(VK.Share.button(false,{type: "round", text: "Вконтакте"})); 
+		--></script><table id="vkshare0" onmouseover="VK.Share.change(1, 0);" onmouseout="VK.Share.change(0, 0);" onmousedown="VK.Share.change(2, 0);" onmouseup="VK.Share.change(1, 0);" style="position: relative; width: auto; cursor: pointer; border: 0px;" cellpadding="0" cellspacing="0"><tbody><tr style="line-height: normal;"><td style="vertical-align: middle;"><a href="http://vk.com/share.php?url=http%3A%2F%2Fwe.easyelectronics.ru%2FSTM32%2Fprogrammnyy-dekoder-mp3-na-stm32f10x-chast-3-izvlekaem-zvuki.html" onmouseup="this._btn=event.button;this.blur();" onclick="return VK.Share.click(0, this);" style="border: none;background: #5F83AA;-webkit-border-radius: 2px 0px 0px 2px;-moz-border-radius: 2px 0px 0px 2px;border-radius: 2px 0px 0px 2px;display:block;text-decoration: none;padding: 3px 3px 3px 6px;color: #FFFFFF;font-family: tahoma, arial;height: 15px;line-height:15px;font-size: 10px;text-shadow: none;">Вконтакте<div class="float:right"></div></a></td><td style="vertical-align: middle;"><a href="http://vk.com/share.php?url=http%3A%2F%2Fwe.easyelectronics.ru%2FSTM32%2Fprogrammnyy-dekoder-mp3-na-stm32f10x-chast-3-izvlekaem-zvuki.html" onmouseup="this._btn=event.button;this.blur();" onclick="return VK.Share.click(0, this);" style="border: none;background: #5F83AA;-webkit-border-radius: 0px 2px 2px 0px;-moz-border-radius: 0px 2px 2px 0px;border-radius: 0px 2px 2px 0px;display:block; padding: 3px;"><div style="background: url('//vk.com/images/icons/share_logo.png') 0px 0px no-repeat; background-size: 16px 31px; width: 15px;height: 15px;"></div></a></td><td style="vertical-align: middle;"><a href="http://vk.com/share.php?url=http%3A%2F%2Fwe.easyelectronics.ru%2FSTM32%2Fprogrammnyy-dekoder-mp3-na-stm32f10x-chast-3-izvlekaem-zvuki.html" onmouseup="this._btn=event.button;this.blur();" onclick="return VK.Share.click(0, this);" style="text-decoration: none;font-weight:bold;font-family: tahoma, arial;display: none"><div style="background: url('//vk.com/images/icons/share_logo.png') 0px -24px no-repeat; background-size: 16px 31px; width: 4px; height: 7px;position: absolute; margin: 7px 0px 0px 4px;z-index:100;"></div><div id="vkshare_cnt0" style="border: 1px solid #bbbfc4;background: #FFFFFF;height: 15px;line-height: 15px;5px; padding: 2px 4px;min-width: 12px;margin-left: 7px;border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius:2px;text-align: center; color: #666c73;font-size: 10px;z-index:99;">0</div></a></td></tr></tbody></table>
+	
+	</div>
+			<div id="facebook">
+    
+    <script type="text/javascript"><!--
+		document.write('<iframe src="http://www.facebook.com/plugins/like.php?href='+escape(document.location.href)+'&layout=button_count&show_faces=false&width=100&action=like&font=arial&colorscheme=light&height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:20px;" allowTransparency="true"></iframe>');
+    --></script><iframe src="soft_mp3_encoder_files/like.htm" style="border:none; overflow:hidden; width:100px; height:20px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+    
+	</div>
+			<div id="moimir">
+    
+    <script type="text/javascript"><!--
+    document.write('<a class="mrc__share" type="button_count" href="http://connect.mail.ru/share?share_url='+escape(document.location.href)+'">МойМир</a>');
+    --></script><a style="white-space: nowrap; text-align: left; position: relative; width: auto; outline: 0px none; text-decoration: none; height: 18px; font-size: 11px; line-height: 17px; overflow: hidden; font-weight: normal;" class="mrc__share mrc__share_done" type="button_count" href="http://connect.mail.ru/share?share_url=http%3A//we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-na-stm32f10x-chast-3-izvlekaem-zvuki.html"><small style="overflow: hidden; vertical-align: bottom;white-space:nowrap;text-align:left;line-height:17px;position:relative;width:auto;padding:0;margin:0;outline:0; text-decoration:none; display:inline-block; height:18px;background:url(http://img1.imgsmail.ru/r/new_share_buttons_sprite.gif) no-repeat 0 0; padding-left: 22px;line-height: 9px;"><i title="Поделиться страницей с друзьями в Моем Мире@Mail.Ru" style="vertical-align:top;float: none; white-space:nowrap;text-align:left;font-size:11px;line-height:9px;position:relative;width:auto;color:white;padding:0;margin:0;font-weight: bold; display:inline-block;background:url(http://img1.imgsmail.ru/r/new_share_buttons_sprite.gif) no-repeat right -19px; height: 14px; padding: 4px 5px 0 0; font-family: 'Lucida Grande',Tahoma,Verdana,Arial,sans-serif; font-szie: 11px; font-style: normal;cursor: pointer; line-height: 9px; *line-height: 13px; *padding-top: 2px; *height: 18px; ">МойМир</i><span title="Уже поделились" style="float: none; width:auto;color:black;padding:0;margin:0;display:none;background:url(http://img1.imgsmail.ru/r/new_share_buttons_sprite.gif) no-repeat left -123px; height: 13px; font-family: Tahoma; color: #000; padding: 5px 5px 0 10px; border-right: 1px solid #ffc70d; margin-left: 1px; cursor: pointer; font-weight: normal; font-style: normal; line-height: 8px; *line-height: 100%; *padding-top: 3px; *height: 18px">&nbsp;</span></small></a>
+    
+	</div>
+			<div id="tweetme">
+	
+		<script type="text/javascript">
+		tweetmeme_style = 'compact';
+		</script>
+		<script type="text/javascript" src="soft_mp3_encoder_files/button.htm"></script>
+	
+	</div>
+	    
+  	<div id="google_plusone">
+    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px;"><iframe title="+1" data-gapiattached="true" src="soft_mp3_encoder_files/fastbutton.htm" name="I0_1392282086411" id="I0_1392282086411" vspace="0" tabindex="0" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+	</div>
+	      </div>
+	</div>	
+<div class="comments-header">
+	<h3>Комментарии (<span id="count-comments">55</span>)</h3>
+		<a href="http://we.easyelectronics.ru/rss/comments/3221/" class="rss">RSS</a>
+		<a href="#" onclick="ls.comments.collapseCommentAll(); return false;" onfocus="blur();">свернуть</a> /
+	<a href="#" onclick="ls.comments.expandCommentAll(); return false;" onfocus="blur();">развернуть</a>
+</div>
+
+<a name="comments"></a>
+	
+	
+<div class="comments" id="comments">
+						
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115830">
+		
+		
+<div id="comment_id_115830" class="comment not-admin ">
+	<a name="comment115830"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115830" class="content">
+			
+			Добротно. Стиль изложения, орфография, пунктуация&nbsp;— приятно читать.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115830" class="voting positive guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115830,this,1,'comment');"></a>
+			<span id="vote_total_comment_115830" class="total">+4</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115830,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/EW1UA/"><img src="soft_mp3_encoder_files/avatar_24x24_006.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/EW1UA/">EW1UA</a></li>
+		<li class="date">09 сентября 2013, 21:40</li>
+				<li><a href="#comment115830" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115832">
+		
+		
+<div id="comment_id_115832" class="comment not-admin ">
+	<a name="comment115832"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115832" class="content">
+			
+			годно, плюсую. надо попобовать
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115832" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115832,this,1,'comment');"></a>
+			<span id="vote_total_comment_115832" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115832,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/xar/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/xar/">xar</a></li>
+		<li class="date">09 сентября 2013, 21:58</li>
+				<li><a href="#comment115832" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115833">
+		
+		
+<div id="comment_id_115833" class="comment not-admin ">
+	<a name="comment115833"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115833" class="content">
+			
+			libMAD насколько я помню тут может быть оптимальнее — т.к. заточен на встраиваемые применения.<br>
+Я его запускал даже с 8-и битными вычислениями — звук слышно, хоть качество и сильно падает :-)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115833" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115833,this,1,'comment');"></a>
+			<span id="vote_total_comment_115833" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115833,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/BarsMonster/"><img src="soft_mp3_encoder_files/avatar_24x24_003.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/BarsMonster/">BarsMonster</a></li>
+		<li class="date">09 сентября 2013, 22:31</li>
+				<li><a href="#comment115833" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115836">
+		
+		
+<div id="comment_id_115836" class="comment not-admin ">
+	<a name="comment115836"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115836" class="content">
+			
+			Здорово, тоже думал о таком, только на libmad, даже исходники скачал.
+ Вывод хочу на внешний ЦАП сделать через I2S, а SD-карту через SDIO 
+подключить.<br>
+И, ксати, у меня плата Olimex STM32-LCD
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115836" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115836,this,1,'comment');"></a>
+			<span id="vote_total_comment_115836" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115836,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/antonluba/"><img src="soft_mp3_encoder_files/avatar_24x24_002.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/antonluba/">antonluba</a></li>
+		<li class="date">09 сентября 2013, 23:24</li>
+				<li><a href="#comment115836" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115839">
+		
+		
+<div id="comment_id_115839" class="comment not-admin ">
+	<a name="comment115839"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115839" class="content">
+			
+			Отличный статьи. Прочитал с интересом. С удовольствием прочитал бы и про трекерный плеер.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115839" class="voting positive guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115839,this,1,'comment');"></a>
+			<span id="vote_total_comment_115839" class="total">+4</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115839,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/ACE/"><img src="soft_mp3_encoder_files/avatar_24x24_002.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/ACE/">ACE</a></li>
+		<li class="date">10 сентября 2013, 04:35</li>
+				<li><a href="#comment115839" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115846">
+		
+		
+<div id="comment_id_115846" class="comment not-admin ">
+	<a name="comment115846"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115846" class="content">
+			
+			Всем спасибо. Продолжение следует…
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115846" class="voting positive guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115846,this,1,'comment');"></a>
+			<span id="vote_total_comment_115846" class="total">+1</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115846,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 09:45</li>
+				<li><a href="#comment115846" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115846,115839); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115851">
+		
+		
+<div id="comment_id_115851" class="comment not-admin ">
+	<a name="comment115851"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115851" class="content">
+			
+			Поддерживаю. :)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115851" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115851,this,1,'comment');"></a>
+			<span id="vote_total_comment_115851" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115851,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/QBasic/"><img src="soft_mp3_encoder_files/avatar_24x24_003.png" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/QBasic/">QBasic</a></li>
+		<li class="date">10 сентября 2013, 10:12</li>
+				<li><a href="#comment115851" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115851,115839); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115840">
+		
+		
+<div id="comment_id_115840" class="comment not-admin ">
+	<a name="comment115840"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115840" class="content">
+			
+			Отличная трилогия, буду ждать продолжения на stm32f4.<br>
+И главный для меня вопрос, как оно? качество звучания? Интересно узнать мнение автора =)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115840" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115840,this,1,'comment');"></a>
+			<span id="vote_total_comment_115840" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115840,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/pteriks/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/pteriks/">pteriks</a></li>
+		<li class="date">10 сентября 2013, 05:15</li>
+				<li><a href="#comment115840" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115848">
+		
+		
+<div id="comment_id_115848" class="comment not-admin ">
+	<a name="comment115848"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115848" class="content">
+			
+			Если слушатель не чувствует разницу звучания между кодеками 
+Fraunhofer и Lame, то звук с данного «недо»аудиоЦАП воспринимается 
+вполне достойным. В наушниках <a href="http://market.yandex.ru/model.xml?text=Philips%20SHP2500&amp;srnum=28&amp;modelid=957036&amp;hid=90555" rel="nofollow">Philips SHP2500</a> я не чувствую дискомфорта от недостающих 4 бит. Хотя, конечно, многого ожидать от 12-битного ЦАП не стоит.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115848" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115848,this,1,'comment');"></a>
+			<span id="vote_total_comment_115848" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115848,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 09:55</li>
+				<li><a href="#comment115848" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115848,115840); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115852">
+		
+		
+<div id="comment_id_115852" class="comment not-admin ">
+	<a name="comment115852"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115852" class="content">
+			
+			А не пробовал компенсировать недостающие биты дизерингом? По идее, еще на пару-тройку бит скорости ЦАП должно хватить.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115852" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115852,this,1,'comment');"></a>
+			<span id="vote_total_comment_115852" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115852,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 10:33</li>
+				<li><a href="#comment115852" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115852,115848); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115841">
+		
+		
+<div id="comment_id_115841" class="comment not-admin ">
+	<a name="comment115841"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115841" class="content">
+			
+			Отличная статься.<br>
+Подобное под F4 я собирал еще в 2012 году, вот что вышло <br>
+<iframe height="315" width="420"></iframe><br>
+Декодер тот же Helix. Проект был позаимствован у одного японца <a href="http://shuji009.blog.eonet.jp/default/2012/03/stm32f4mp32-30df.html" rel="nofollow">shuji009.blog.eonet.jp/default/2012/03/stm32f4mp32-30df.html</a><br>
+Музыку проигрывает с флешки, качество вполне достойное.<br>
+<br>
+Единственное на мой взгляд использовать внешний ЦАП слишком накладно, уж
+ больно они дорогие. Дешевле воспользоваться VS'кой или другими 
+кодеками. При этом еще и нагрузка на процессор резко снизится :) Самый 
+на мой взгляд оптимальный вариант делать на встроенном АЦП, качество 
+может и похуже, но место и деньги экономит.<br>
+<br>
+Еще раз огромное спасибо за статью, будет время обязательно соберу.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115841" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115841,this,1,'comment');"></a>
+			<span id="vote_total_comment_115841" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115841,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/mrcrook/"><img src="soft_mp3_encoder_files/avatar_24x24_003.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/mrcrook/">mrcrook</a></li>
+		<li class="date">10 сентября 2013, 09:11</li>
+				<li><a href="#comment115841" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115842">
+		
+		
+<div id="comment_id_115842" class="comment not-admin ">
+	<a name="comment115842"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115842" class="content">
+			
+			нда..., видео не вставляется коментарии не редактируются.<br>
+вот то что получилось у меня на stm32f4 <a href="http://youtu.be/DQxFZtrTriU" rel="nofollow">youtu.be/DQxFZtrTriU</a>
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115842" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115842,this,1,'comment');"></a>
+			<span id="vote_total_comment_115842" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115842,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/mrcrook/"><img src="soft_mp3_encoder_files/avatar_24x24_003.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/mrcrook/">mrcrook</a></li>
+		<li class="date">10 сентября 2013, 09:13</li>
+				<li><a href="#comment115842" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115842,115841); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115843">
+		
+		
+<div id="comment_id_115843" class="comment not-admin ">
+	<a name="comment115843"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115843" class="content">
+			
+			<object height="344" width="425"><param name="movie" value="http://www.youtube.com/v/DQxFZtrTriU&amp;hl=en"><param name="wmode" value="opaque"><embed src="soft_mp3_encoder_files/DQxFZtrTriUhlen" type="application/x-shockwave-flash" wmode="opaque" height="344" width="425"></object>
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115843" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115843,this,1,'comment');"></a>
+			<span id="vote_total_comment_115843" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115843,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/mrcrook/"><img src="soft_mp3_encoder_files/avatar_24x24_003.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/mrcrook/">mrcrook</a></li>
+		<li class="date">10 сентября 2013, 09:16</li>
+				<li><a href="#comment115843" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115843,115842); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115844">
+		
+		
+<div id="comment_id_115844" class="comment not-admin ">
+	<a name="comment115844"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115844" class="content">
+			
+			посмотри на cs4334. вполне бюджетненький цап которого с лихвой хватит на подобные нужды
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115844" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115844,this,1,'comment');"></a>
+			<span id="vote_total_comment_115844" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115844,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/xar/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/xar/">xar</a></li>
+		<li class="date">10 сентября 2013, 09:23</li>
+				<li><a href="#comment115844" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115844,115841); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115845">
+		
+		
+<div id="comment_id_115845" class="comment not-admin ">
+	<a name="comment115845"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115845" class="content">
+			
+			доставаемость у него не очень. В России его не найти, заказывать на ибей это 30-60 дней ожидания.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115845" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115845,this,1,'comment');"></a>
+			<span id="vote_total_comment_115845" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115845,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/mrcrook/"><img src="soft_mp3_encoder_files/avatar_24x24_003.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/mrcrook/">mrcrook</a></li>
+		<li class="date">10 сентября 2013, 09:40</li>
+				<li><a href="#comment115845" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115845,115844); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115881">
+		
+		
+<div id="comment_id_115881" class="comment not-admin ">
+	<a name="comment115881"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115881" class="content">
+			
+			при сильном желании можно на элитане заказать, но дорого. если ждать,
+ то ессно в китае. благо там десяток стоит как у нас один. а если сильно
+ хочется то можно и у меня штучку попросить задаром )
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115881" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115881,this,1,'comment');"></a>
+			<span id="vote_total_comment_115881" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115881,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/xar/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/xar/">xar</a></li>
+		<li class="date">11 сентября 2013, 17:48</li>
+				<li><a href="#comment115881" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115881,115845); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115883">
+		
+		
+<div id="comment_id_115883" class="comment not-admin ">
+	<a name="comment115883"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115883" class="content">
+			
+			как я уже сказал, на мой сугубо личный взгляд внешний ЦАП это лишнее.
+ А поиграться с внешним ЦАП'ом я уже поигрался на stm32f4 discovery.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115883" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115883,this,1,'comment');"></a>
+			<span id="vote_total_comment_115883" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115883,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/mrcrook/"><img src="soft_mp3_encoder_files/avatar_24x24_003.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/mrcrook/">mrcrook</a></li>
+		<li class="date">11 сентября 2013, 18:34</li>
+				<li><a href="#comment115883" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115883,115881); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_116233">
+		
+		
+<div id="comment_id_116233" class="comment not-admin ">
+	<a name="comment116233"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116233" class="content">
+			
+			Смешно — Первая же ссылка, а их там хоть попой ешь: <a href="http://www.aliexpress.com/item/10PCS-CS4334-SOP-8-Free-shiping-Make-in-china/1309159926.html" rel="nofollow">www.aliexpress.com/item/10PCS-CS4334-SOP-8-Free-shiping-Make-in-china/1309159926.html</a>
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116233" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116233,this,1,'comment');"></a>
+			<span id="vote_total_comment_116233" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116233,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Make_Pic/"><img src="soft_mp3_encoder_files/avatar_24x24_002.png" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Make_Pic/">Make_Pic</a></li>
+		<li class="date">17 сентября 2013, 04:51</li>
+				<li><a href="#comment116233" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116233,115845); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116415">
+		
+		
+<div id="comment_id_116415" class="comment not-admin ">
+	<a name="comment116415"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116415" class="content">
+			
+			Ага, смешно. Алиэкспресс это в России без ожидания 30-60 дней.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116415" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116415,this,1,'comment');"></a>
+			<span id="vote_total_comment_116415" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116415,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/angel5a/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/angel5a/">angel5a</a></li>
+		<li class="date">19 сентября 2013, 21:43</li>
+				<li><a href="#comment116415" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116415,116233); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116436">
+		
+		
+<div id="comment_id_116436" class="comment not-admin ">
+	<a name="comment116436"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116436" class="content">
+			
+			Не знаю как в вашей деревне, а в мою приходят за 14-30 дней, что вполне доступно в отличии от Ebay
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116436" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116436,this,1,'comment');"></a>
+			<span id="vote_total_comment_116436" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116436,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Make_Pic/"><img src="soft_mp3_encoder_files/avatar_24x24_002.png" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Make_Pic/">Make_Pic</a></li>
+		<li class="date">20 сентября 2013, 02:56</li>
+				<li><a href="#comment116436" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116436,116415); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115847">
+		
+		
+<div id="comment_id_115847" class="comment not-admin ">
+	<a name="comment115847"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115847" class="content">
+			
+			А как насчет кодеков с материнок? Доставабельность вполне неплохая, 
+по цене — вообще нахаляву, интерфейс вроде тот же I2S. Правда, 
+распространенные реалтековские AC97 кодеки не блистали качеством, но 
+встречаются и получше варианты.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115847" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115847,this,1,'comment');"></a>
+			<span id="vote_total_comment_115847" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115847,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 09:51</li>
+				<li><a href="#comment115847" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115847,115841); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115849">
+		
+		
+<div id="comment_id_115849" class="comment not-admin ">
+	<a name="comment115849"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115849" class="content">
+			
+			На старых Asus-ах стояли от Analog Device, качество на порядок выше.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115849" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115849,this,1,'comment');"></a>
+			<span id="vote_total_comment_115849" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115849,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/INN/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/INN/">INN</a></li>
+		<li class="date">10 сентября 2013, 10:08</li>
+				<li><a href="#comment115849" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115849,115847); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115854">
+		
+		
+<div id="comment_id_115854" class="comment not-admin ">
+	<a name="comment115854"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115854" class="content">
+			
+			Таких не видел. Мне попадались Realtek (их кодеки Azalia уже вполне 
+неплохи качеством, а вот AC97 — дрянь), C-Media, SigmaTel.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115854" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115854,this,1,'comment');"></a>
+			<span id="vote_total_comment_115854" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115854,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 10:42</li>
+				<li><a href="#comment115854" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115854,115849); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115850">
+		
+		
+<div id="comment_id_115850" class="comment not-admin ">
+	<a name="comment115850"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115850" class="content">
+			
+			С доставаемостью действительно не проблема, у меня штук 5 на балконе 
+лежит. Но я не ставил задачу создания проигрывателя MP3 — конкурировать 
+по качеству/цене/трудоёмкости изготовления с серийными промышленными 
+изделиями бесполезно. Просто хотел рассказать, <em>как</em> это можно 
+сделать на распространённом микроконтроллере. Областью применения 
+данного проекта считаю разнообразные самодельные устройства, которые 
+можно обучить «игре» с минимумом аппаратных доработок. Где применение 
+сторонних чипов VLSI/AC97 нецелесообразно. Ну и трекерную музыку они 
+играть не умеют.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115850" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115850,this,1,'comment');"></a>
+			<span id="vote_total_comment_115850" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115850,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 10:08</li>
+				<li><a href="#comment115850" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115850,115847); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115853">
+		
+		
+<div id="comment_id_115853" class="comment not-admin ">
+	<a name="comment115853"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115853" class="content">
+			
+			<blockquote>Но я не ставил задачу создания проигрывателя MP3 — 
+конкурировать по качеству/цене/трудоёмкости изготовления с серийными 
+промышленными изделиями бесполезно.</blockquote>Ну тут как сказать — 
+сделать проигрыватель на дешевом STM32 и выдернутом из материнки кодеке 
+недорого, зато можно кастомизировать под собственные желания, а дешевые 
+китайцы часто отличаются неудобным интерфейсом.<br>
+<blockquote>Ну и трекерную музыку они играть не умеют.</blockquote>Ну 
+AC97 вообще ничего играть не умеет, это чисто АЦП+ЦАП. А трекерная 
+музыка создавалась именно под сторонние чипы — аудиочип коммодора, 
+например.<br>
+<br>
+Собственно, меня и самого интересовала тема воспроизведения звука на 
+STM32 — как с применением встроенного ЦАПа, так и с внешним 
+аудиокодеком, желательно с материнки (из соображений цены и 
+доступности).<br>
+<br>
+P.S. Ну и этот ответ, все же, адресовался не тебе.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115853" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115853,this,1,'comment');"></a>
+			<span id="vote_total_comment_115853" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115853,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 10:41</li>
+				<li><a href="#comment115853" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115853,115850); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115880">
+		
+		
+<div id="comment_id_115880" class="comment not-admin ">
+	<a name="comment115880"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115880" class="content">
+			
+			<blockquote>Собственно, меня и самого интересовала тема воспроизведения звука на STM32</blockquote><br>
+Писал об этом?<br>
+Я из темы всего лишь вавку на дискавери через i2s сыграл. Хотел тоже 
+мп3, но руки не дошли, да и кодеки как-то на кейл не рассчитаны, надо их
+ портировать было, а это не очень быстро делается.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115880" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115880,this,1,'comment');"></a>
+			<span id="vote_total_comment_115880" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115880,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/teplofizik/"><img src="soft_mp3_encoder_files/avatar_24x24.png" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/teplofizik/">teplofizik</a></li>
+		<li class="date">11 сентября 2013, 16:26</li>
+				<li><a href="#comment115880" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115880,115853); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115898">
+		
+		
+<div id="comment_id_115898" class="comment not-admin ">
+	<a name="comment115898"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115898" class="content">
+			
+			Нет. Да и не о чем еще писать.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115898" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115898,this,1,'comment');"></a>
+			<span id="vote_total_comment_115898" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115898,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">11 сентября 2013, 23:22</li>
+				<li><a href="#comment115898" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115898,115880); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115855">
+		
+		
+<div id="comment_id_115855" class="comment not-admin ">
+	<a name="comment115855"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115855" class="content">
+			
+			Спасибо большое! Сам не стал бы разбираться, а тут статья на блюдечке… Спасибо!
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115855" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115855,this,1,'comment');"></a>
+			<span id="vote_total_comment_115855" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115855,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Brunnen-G/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Brunnen-G/">Brunnen-G</a></li>
+		<li class="date">10 сентября 2013, 10:47</li>
+				<li><a href="#comment115855" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115857">
+		
+		
+<div id="comment_id_115857" class="comment not-admin ">
+	<a name="comment115857"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115857" class="content">
+			
+			Я так понимаю, у автора получилось проигрывать стерео звук. <br>
+<br>
+А вот мне вчера идейка пришла, добавить «простую» схему и «запаралелить»
+ 2 ЦАПа на исходном проце, а второй канал получить точно также, если 
+взять еще самый дешевенький стм32ф100с4, его использовать как цап тоже с
+ «запаралелеными» ЦАПами. Вот уже имеем 24 бита на канал :)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115857" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115857,this,1,'comment');"></a>
+			<span id="vote_total_comment_115857" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115857,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/VasiliyBorisenok/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/VasiliyBorisenok/">VasiliyBorisenok</a></li>
+		<li class="date">10 сентября 2013, 17:22</li>
+				<li><a href="#comment115857" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115859">
+		
+		
+<div id="comment_id_115859" class="comment not-admin ">
+	<a name="comment115859"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115859" class="content">
+			
+			Всё же тогда лучше поставить дешёвенький внешний ЦАП, возни меньше будет.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115859" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115859,this,1,'comment');"></a>
+			<span id="vote_total_comment_115859" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115859,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 19:31</li>
+				<li><a href="#comment115859" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115859,115857); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115858">
+		
+		
+<div id="comment_id_115858" class="comment not-admin ">
+	<a name="comment115858"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115858" class="content">
+			
+			<blockquote>Изначально данный проект планировался как проигрыватель 
+трекерной музыки, а воспроизведение MP3 стало его побочной функцией. На 
+текущий момент вполне адекватно проигрываются файлы формата MOD.</blockquote>Почему
+ именно MOD, какие-то еще форматы планируешь? На основе чего сделан 
+трекерный плеер — какой-то готовый движок или свой код?<br>
+<br>
+Зачем тебе потребовался аппаратный трекерный и MP3 плеер?<br>
+Будешь ковырять другие форматы сжатия, скажем OGG (к нему прилагается FP-реализация), AAC, FLAC, TTA?
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115858" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115858,this,1,'comment');"></a>
+			<span id="vote_total_comment_115858" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115858,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 18:23</li>
+				<li><a href="#comment115858" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115862">
+		
+		
+<div id="comment_id_115862" class="comment not-admin ">
+	<a name="comment115862"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115862" class="content">
+			
+			Ух, сколько сразу вопросов.<br>
+Почему MOD — тема следующей статьи. Это самый простой формат. «Движок» 
+основан на проекте TRAXMOD + свои доработки. Есть ещё несколько 
+интересных форматов (IT, XM, S3M), но они более требовательны к 
+ресурсам. STM32F10x уже не справится.<br>
+Для чего потребовался? См. первую часть статьи: 
+изучение/обучение/приобретение опыта. Конкретной задачи под данный 
+проигрыватель нет.<br>
+OGG/AAC/FLAC/TTA и проч. пока не планировал. В сторонних проектах, 
+перечисленных в первой части, попадались такие декодеры, если есть 
+желание помочь — я не против.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115862" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115862,this,1,'comment');"></a>
+			<span id="vote_total_comment_115862" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115862,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 19:57</li>
+				<li><a href="#comment115862" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115862,115858); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115863">
+		
+		
+<div id="comment_id_115863" class="comment not-admin ">
+	<a name="comment115863"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115863" class="content">
+			
+			<blockquote>Есть ещё несколько интересных форматов (IT, XM, S3M), но они более требовательны к ресурсам. STM32F10x уже не справится.</blockquote>Разве?
+ Насколько я помню, они все довольно просты, в основе представляют собой
+ микшеры, да и создавались для компов, подчас уступавших по 
+вычислительной мощности STM-кам.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115863" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115863,this,1,'comment');"></a>
+			<span id="vote_total_comment_115863" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115863,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">10 сентября 2013, 20:16</li>
+				<li><a href="#comment115863" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115863,115862); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115864">
+		
+		
+<div id="comment_id_115864" class="comment not-admin ">
+	<a name="comment115864"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115864" class="content">
+			
+			Угу, просты. Только успеть замикшировать одновременно до 32 каналов 
+совсем не просто. И с RAM-памятью проблемы, сэмплы полностью не 
+помещаются… А те компы имели соответствующую аппаратную поддержку.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115864" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115864,this,1,'comment');"></a>
+			<span id="vote_total_comment_115864" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115864,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">10 сентября 2013, 21:02</li>
+				<li><a href="#comment115864" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115864,115863); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115865">
+		
+		
+<div id="comment_id_115865" class="comment not-admin ">
+	<a name="comment115865"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_115865" class="content">
+			
+			Я видел проигрыватели MOD/IT/XM/S2M делалли на AVR… Но вполне верю что там были ограничения…
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115865" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115865,this,1,'comment');"></a>
+			<span id="vote_total_comment_115865" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115865,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/wowa/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/wowa/">wowa</a></li>
+		<li class="date">10 сентября 2013, 22:27</li>
+				<li><a href="#comment115865" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115865,115864); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_115994">
+		
+		
+<div id="comment_id_115994" class="comment not-admin ">
+	<a name="comment115994"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115994" class="content">
+			
+			А обратную операцию, то есть сжатие сырых аудиоданных в формат MP3, возможно реализовать??
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115994" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115994,this,1,'comment');"></a>
+			<span id="vote_total_comment_115994" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115994,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Aneg/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Aneg/">Aneg</a></li>
+		<li class="date">13 сентября 2013, 17:46</li>
+				<li><a href="#comment115994" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_115998">
+		
+		
+<div id="comment_id_115998" class="comment not-admin ">
+	<a name="comment115998"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_115998" class="content">
+			
+			Программного MP3-кодера на микроконтроллере ещё не встречал. Обычно 
+используют что-то попроще, типа ADPCM. Релизовать на STM32F40x, думаю, 
+возможно. А STM32F10x не потянет, кодирование требует б<em>о</em>льших ресурсов. Ну и нужно будет копать исходники ffmpeg или ещё чего-то открытого. Не ст<em>о</em>ит оно того.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_115998" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(115998,this,1,'comment');"></a>
+			<span id="vote_total_comment_115998" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(115998,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">13 сентября 2013, 18:41</li>
+				<li><a href="#comment115998" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(115998,115994); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116001">
+		
+		
+<div id="comment_id_116001" class="comment not-admin ">
+	<a name="comment116001"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116001" class="content">
+			
+			Ну, в низком битрейте нагрузка на проц ниже, так что, быть может, что-то и получится — но нужно ковырять.<br>
+Опенсорсные mp3-кодеры есть. Тот же LAME.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116001" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116001,this,1,'comment');"></a>
+			<span id="vote_total_comment_116001" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116001,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">13 сентября 2013, 18:53</li>
+				<li><a href="#comment116001" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116001,115998); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_116210">
+		
+		
+<div id="comment_id_116210" class="comment not-admin ">
+	<a name="comment116210"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116210" class="content">
+			
+			Спасибо за статью.<br>
+<blockquote>2. Заказал плату STM32F4DISCOVERY. Как придёт, переложу 
+проект на его основу. Интересно будет сравнить его возможности и 
+производительность. Плюс на борту уже имеется аудиоЦАП.</blockquote>А ещё (если мне не изменяет память) и набор инструкций для цифровой обработки. Но это надо асм курить, если готового порта нет.<blockquote>При
+ необходимости проигрывания файлов по алфавиту необходимо предварительно
+ создать список файлов и отсортировать его. Размер списка будет 
+ограничен количеством свободной RAM-памяти.</blockquote>Не обязательно. 
+Если допустим «затык» на время переключения от песни к песне, то 
+следующий файл искать в момент переключения. Ищем минимальное имя, 
+больше предидущего — памяти минимум, однако надо перечитывать весь 
+каталог.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116210" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116210,this,1,'comment');"></a>
+			<span id="vote_total_comment_116210" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116210,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/angel5a/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/angel5a/">angel5a</a></li>
+		<li class="date">16 сентября 2013, 20:58</li>
+				<li><a href="#comment116210" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116281">
+		
+		
+<div id="comment_id_116281" class="comment not-admin ">
+	<a name="comment116281"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116281" class="content">
+			
+			Конечно, заманчиво тот же самый полифазник реализовать при поддержке 
+DSP. Выигрыш в производительности должен быть существенным.<br>
+«Затык» при переключении недопустим, проигрыватель будет слишком 
+«тормозным». Такое поведение обычно сильно напрягает. Но у нас есть 
+масса времени во время воспроизведения. Можно запустить параллельный 
+процесс сканирования директории и составления небольшого сортированного 
+списка файлов. Задача вполне реализуема.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116281" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116281,this,1,'comment');"></a>
+			<span id="vote_total_comment_116281" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116281,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">17 сентября 2013, 22:11</li>
+				<li><a href="#comment116281" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116281,116210); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_116257">
+		
+		
+<div id="comment_id_116257" class="comment not-admin ">
+	<a name="comment116257"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116257" class="content">
+			
+			Теоретически можно ли так оптимизировать или взять другой декодер, 
+чтобы проект работал при 20 кб памяти? Из статьи понял, что под буферы 
+можно взять 5 кб, ну и часть пойдет под рассчеты. Лежит 10 камней 
+F103C8T6 (20 кб рам, 64 кб флеш, 72 мгц тактовая), хотелось бы их 
+заюзать (когда брал, то посмотрел, что производительности для mp3 
+достаточно).
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116257" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116257,this,1,'comment');"></a>
+			<span id="vote_total_comment_116257" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116257,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Ticksy/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Ticksy/">Ticksy</a></li>
+		<li class="date">17 сентября 2013, 18:12</li>
+				<li><a href="#comment116257" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116279">
+		
+		
+<div id="comment_id_116279" class="comment not-admin ">
+	<a name="comment116279"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116279" class="content">
+			
+			Нет, слишком мало памяти. Можно отказаться от файловой системы, 
+операционки, но и это не поможет. Сам Helix требует 23816 байт ОЗУ, для 
+ЦАП обязательно нужно два буфера (4608*2 или в два раза меньше для 
+моно). Программно декодировать MP3 имеет смысл при наличии памяти 
+начиная с 48 кБ.<br>
+Не буду утверждать насчёт других декодеров, но например TRAXMOD (с декодером LibMAD) реализован на PIC-контроллере с ОЗУ 128 кБ.<br>
+Внешнюю память к F103C8T6 прикрутить тоже не получится, нет FSMC. 
+Поэтому предлагаю использовать указанные контроллеры для других поделок.
+ Либо, если очень хочется MP3, использовать VLSI.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116279" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116279,this,1,'comment');"></a>
+			<span id="vote_total_comment_116279" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116279,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">17 сентября 2013, 21:56</li>
+				<li><a href="#comment116279" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116279,116257); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116291">
+		
+		
+<div id="comment_id_116291" class="comment not-admin ">
+	<a name="comment116291"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116291" class="content">
+			
+			Понятно. Спасибо за ответ. Аппаратный декодер не так интересен, с 
+этой черной магической коробочкой и чуть ли не тинька будет играть. А уж
+ WAV и тем более тинька без обвеса потянет, благо декодировать нечего. 
+Реализовывать софтово более интересно на мой взгляд, чем применение 
+готовых аппаратных решений (тем более, что 72 мгц арма достаточно, а 
+стоят то пару баксов. жаль, что с озу пролет.). Хеликс эти 23 кбайта 
+полностью тратит на декодирование? Просто сложилось впечатление, что 
+половину под буффера уходит и можно просто их урезать и вписать моно 
+вариант в 20 кб.<br>
+<br>
+Почем вы вообще брали STM32F105RC? На алиэкспресс цены около 8$, но 
+штуку ради мп3 можно взять (а партиями их и вовсе не продают), хоть и 
+кусается цена (с другой стороны для поделок STM32F105RC слишком жирный 
+будет, F103C8T6 должно хватать, если уж баксовая мега8 не справится). 
+Интересно что пихают в китайские microsd плеера, которые продают по 2-3 
+бакса бывает.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116291" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116291,this,1,'comment');"></a>
+			<span id="vote_total_comment_116291" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116291,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Ticksy/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Ticksy/">Ticksy</a></li>
+		<li class="date">17 сентября 2013, 23:24</li>
+				<li><a href="#comment116291" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116291,116279); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116292">
+		
+		
+<div id="comment_id_116292" class="comment not-admin ">
+	<a name="comment116292"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116292" class="content">
+			
+			<blockquote>Хеликс эти 23 кбайта полностью тратит на декодирование?</blockquote>Вероятно
+ да. Лишних «висячих» буферов не замечено. Также вероятно, что можно 
+немного уменьшить аппетиты путём урезания возможностей и качества 
+работы. Но оно того не ст<strong>о</strong>ит. Лишние 2-3-4 бакса для 
+разовой поделки не так и много. Гораздо дороже время, которое нужно 
+будет потратить на запуск «обрезанного» декодера.<br>
+Контроллер установил тот, который был в наличии.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116292" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116292,this,1,'comment');"></a>
+			<span id="vote_total_comment_116292" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116292,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">18 сентября 2013, 00:01</li>
+				<li><a href="#comment116292" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116292,116291); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116397">
+		
+		
+<div id="comment_id_116397" class="comment not-admin ">
+	<a name="comment116397"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116397" class="content">
+			
+			Может быть покажусь странным в ваших глазах, но иногда даже интересно
+ биться за ресурсы и пробовать сделать из чего есть. Некий вызов. Но МК 
+мощнее все-равно закажу, уж больно хочется с mp3 поиграться на stm32.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116397" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116397,this,1,'comment');"></a>
+			<span id="vote_total_comment_116397" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116397,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Ticksy/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Ticksy/">Ticksy</a></li>
+		<li class="date">18 сентября 2013, 23:29</li>
+				<li><a href="#comment116397" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116397,116292); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_116296">
+		
+		
+<div id="comment_id_116296" class="comment not-admin ">
+	<a name="comment116296"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116296" class="content">
+			
+			<blockquote>Интересно что пихают в китайские microsd плеера, которые продают по 2-3 бакса бывает.</blockquote>8-битный
+ МК со встроенными декодером, аудиокодеком и контроллерами SD/USB/NAND 
+флешек. Плюс прочая нужная для плеера периферия, вроде встроенной 
+системы питания, контроллера дисплея и так далее. Специализированный 
+SoC, короче.<br>
+Опционально МК может быть и покруче, но в самых дешевых — простенькие 8-битки.<br>
+Впрочем, найти вменяемый даташит на них затруднительно. Иногда даже просто описание чипа нагуглить не удается. Китайцы…
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116296" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116296,this,1,'comment');"></a>
+			<span id="vote_total_comment_116296" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116296,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">18 сентября 2013, 05:59</li>
+				<li><a href="#comment116296" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116296,116291); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116395">
+		
+		
+<div id="comment_id_116395" class="comment not-admin ">
+	<a name="comment116395"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116395" class="content">
+			
+			Без описания они бесполезны. А так небось какой-нить 8051 или z80 (но сомневаюсь) стоит.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116395" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116395,this,1,'comment');"></a>
+			<span id="vote_total_comment_116395" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116395,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Ticksy/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Ticksy/">Ticksy</a></li>
+		<li class="date">18 сентября 2013, 23:22</li>
+				<li><a href="#comment116395" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116395,116296); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116398">
+		
+		
+<div id="comment_id_116398" class="comment not-admin ">
+	<a name="comment116398"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116398" class="content">
+			
+			Безусловно. Да и даже с описанием, но без тулсета они безполезны. Так
+ что рассчитывать на микры для китайских плееров не стоит. Как и на 
+возможность перепилить такой плеер под себя в программном плане (хотя 
+это было бы заманчиво, уж больно косые да убогие там прошивки) 
+рассчитывать не стоит.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116398" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116398,this,1,'comment');"></a>
+			<span id="vote_total_comment_116398" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116398,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">18 сентября 2013, 23:31</li>
+				<li><a href="#comment116398" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116398,116395); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116418">
+		
+		
+<div id="comment_id_116418" class="comment not-admin ">
+	<a name="comment116418"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116418" class="content">
+			
+			Ну фоторамки вон пилят же. Там есть какая-то с мп3 декодером. Так что
+ и плееры можно будет добить, было бы желание. Но основная подстава там —
+ однократно-программируемые чипы — это обойти как-бы сложно :)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116418" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116418,this,1,'comment');"></a>
+			<span id="vote_total_comment_116418" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116418,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/angel5a/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/angel5a/">angel5a</a></li>
+		<li class="date">19 сентября 2013, 21:49</li>
+				<li><a href="#comment116418" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116418,116398); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116422">
+		
+		
+<div id="comment_id_116422" class="comment not-admin ">
+	<a name="comment116422"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116422" class="content">
+			
+			Какие фоторамки? В тех, на которые я видел инфу — ARM'овые SoC'и и 
+линукс. А тут — какая-то восьмибитка с декодером. Ну и да, запросто 
+могут быть однократными. Хотя многие плееры позволяют обновлять 
+прошивку, правда не те, что за 3 бакса.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116422" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116422,this,1,'comment');"></a>
+			<span id="vote_total_comment_116422" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116422,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="soft_mp3_encoder_files/avatar_24x24.gif" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">19 сентября 2013, 22:13</li>
+				<li><a href="#comment116422" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116422,116418); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+									
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116565">
+		
+		
+<div id="comment_id_116565" class="comment not-admin ">
+	<a name="comment116565"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116565" class="content">
+			
+			Извиняюсь за жуткий баян: <a href="http://tuxotronic.org/wiki/projects/dpf-hack" rel="nofollow">Взлом цифровых рамок</a>.
+ AX206 допилили. Есть jpeg декодер (какойто свой) и ацп, uart, spi, pwm,
+ usb, 8бит 8051. Тулчейн ставил, но не довелось. Цена вопроса ~$5 за 
+рамку.<br>
+Из той же серии есть более продвинутые чипы (SDIO/mp3/jpeg/lvds). Ссылка
+ на схему тоже канула, к сожалению. Цена у них повыше только :)<br>
+Вообще DPF и hack всё гуглилось.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116565" class="voting positive guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116565,this,1,'comment');"></a>
+			<span id="vote_total_comment_116565" class="total">+1</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116565,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/angel5a/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/angel5a/">angel5a</a></li>
+		<li class="date">23 сентября 2013, 10:59</li>
+				<li><a href="#comment116565" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116565,116422); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_116424">
+		
+		
+<div id="comment_id_116424" class="comment not-admin ">
+	<a name="comment116424"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_116424" class="content">
+			
+			<blockquote>Лежит 10 камней F103C8T6</blockquote>В них ЦАПа нет. :(
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116424" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116424,this,1,'comment');"></a>
+			<span id="vote_total_comment_116424" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116424,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/SeregaB/"><img src="soft_mp3_encoder_files/avatar_24x24.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/SeregaB/">SeregaB</a></li>
+		<li class="date">19 сентября 2013, 22:36</li>
+				<li><a href="#comment116424" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116424,116257); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_116479">
+		
+		
+<div id="comment_id_116479" class="comment not-admin ">
+	<a name="comment116479"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_116479" class="content">
+			
+			Нет его по даташиту, да. Но вообще не особо разбираюсь в сортах 
+ЦАПов, да и не требую Hi-Fi качества от поделок, пойдет и ШИМ (вроде 
+тоже вариант реализации ЦАП, да и даже R-2R чем не ЦАП). Проигрывают же 
+на avr'ках wav без всяких ЦАПов с помощью ШИМа. Разве что презираю R-2R,
+ ибо разброс резисторов все портит, их подбирать нужно (хотя ковокс, 
+собранный из резисторов одного номинала, вполне годен, но из мк имхо 
+можно выжать и лучше качество).
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_116479" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(116479,this,1,'comment');"></a>
+			<span id="vote_total_comment_116479" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(116479,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Ticksy/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Ticksy/">Ticksy</a></li>
+		<li class="date">20 сентября 2013, 21:32</li>
+				<li><a href="#comment116479" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(116479,116424); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_120546">
+		
+		
+<div id="comment_id_120546" class="comment not-admin ">
+	<a name="comment120546"></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_120546" class="content">
+			
+			Прошу прощения за детский вопрос. А в какой программе были сделаны 
+осциллограммы к данной статье — загрузка процессора, тайминги прерываний
+ и др.?
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_120546" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(120546,this,1,'comment');"></a>
+			<span id="vote_total_comment_120546" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(120546,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/uRTOS/"><img src="soft_mp3_encoder_files/avatar_24x24_004.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/uRTOS/">uRTOS</a></li>
+		<li class="date">16 декабря 2013, 00:20</li>
+				<li><a href="#comment120546" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_120556">
+		
+		
+<div id="comment_id_120556" class="comment not-admin ">
+	<a name="comment120556"></a>
+	
+	
+	<div style="display: none;" class="folding"></div>
+	
+	
+	<div id="comment_content_id_120556" class="content">
+			
+			Осциллограммы — из штатного ПО от <a href="http://www.aktakom.ru/kio/index.php?ELEMENT_ID=7106" rel="nofollow">Актаком АСК-3102</a>, графики — MS Excel 2010.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_120556" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(120556,this,1,'comment');"></a>
+			<span id="vote_total_comment_120556" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(120556,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/MikeSmith/"><img src="soft_mp3_encoder_files/avatar_24x24_005.jpg" alt="avatar"></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/MikeSmith/">MikeSmith</a></li>
+		<li class="date">16 декабря 2013, 21:30</li>
+				<li><a href="#comment120556" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(120556,120546); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+							</div></div>    
+			</div>				
+	
+
+			Только зарегистрированные и авторизованные пользователи могут оставлять комментарии.
+		
+
+
+	
+
+
+			
+			</div><!-- /content-inner -->
+		</div><!-- /content -->
+
+					<div id="sidebar">
+										<div class="block stream" id="block_stream">
+	<h2>Прямой эфир</h2>
+	
+	
+	<ul class="switcher">						
+		<li id="block_stream_item_comment" class="active">Комментарии</li>
+		<li id="block_stream_item_topic">Публикации</li>
+		
+		
+	</ul>					
+	
+	
+	<div class="block-content" id="block_stream_content">
+		<ul class="list">
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Pika4u56/" class="user">Pika4u56</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/evsi/kuda-zh-on-denetsya-s-podvodnoy-lodki-to.html#comment124310" class="topic-title">Куда ж он денется, с подводной лодки-то...</a>
+			<span>101</span> →
+			<a href="http://we.easyelectronics.ru/my/evsi/" class="blog-title">Блог им. evsi</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/teplofizik/" class="user">teplofizik</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/reptile/stm32f050f4-v-tssop20-otladochnaya-plata-i-testovyy-proekt.html#comment124308" class="topic-title">STM32F050F4 в TSSOP20. Отладочная плата и тестовый проект.</a>
+			<span>62</span> →
+			<a href="http://we.easyelectronics.ru/my/reptile/" class="blog-title">Блог им. reptile</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Den1s/" class="user">Den1s</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/Den1s/robot-na-shassi-rover5.html#comment124300" class="topic-title">Робот на шасси Rover5</a>
+			<span>11</span> →
+			<a href="http://we.easyelectronics.ru/my/Den1s/" class="blog-title">Блог им. Den1s</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/Silver/" class="user">Silver</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/part/ltc4054-kontroller-zaryada-litievyh-akkumulyatorov.html#comment124298" class="topic-title">LTC4054 Контроллер заряда литиевых аккумуляторов</a>
+			<span>29</span> →
+			<a href="http://we.easyelectronics.ru/blog/part/" class="blog-title">Деталька</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/uncle_sem/" class="user">uncle_sem</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/HomeTech/licevaya-panel-dlya-lyubiteley-ukrashatelstv-ili-na-chto-potratit-lishnee-vremya.html#comment124295" class="topic-title">Лицевая панель для любителей украшательств, или на что потратить лишнее время.</a>
+			<span>50</span> →
+			<a href="http://we.easyelectronics.ru/blog/HomeTech/" class="blog-title">Технологии</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/kalik/" class="user">kalik</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/count_enable/studenty-vpered-ti-analog-design-contest.html#comment124285" class="topic-title">Студенты, вперёд: TI Analog Design Contest</a>
+			<span>5</span> →
+			<a href="http://we.easyelectronics.ru/my/count_enable/" class="blog-title">Блог им. count_enable</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/teplofizik/" class="user">teplofizik</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/AVR/avrasm-biblioteka-podprogramm-obschego-naznacheniya-genproclibinc.html#comment124276" class="topic-title">AVRASM: Библиотека Подпрограмм общего назначения "GENPROCLIB.INC"</a>
+			<span>45</span> →
+			<a href="http://we.easyelectronics.ru/blog/AVR/" class="blog-title">AVR</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/evsi/" class="user">evsi</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/evsi/metallizaciya-nekotorye-promezhutochnye-rezultaty-ili-beg-po-grablyam.html#comment124274" class="topic-title">металлизация, некоторые промежуточные результаты или бег по граблям</a>
+			<span>142</span> →
+			<a href="http://we.easyelectronics.ru/my/evsi/" class="blog-title">Блог им. evsi</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Pika4u56/" class="user">Pika4u56</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/lcd_gfx/podklyuchenie-tft-displeya-k-avr.html#comment124258" class="topic-title">Подключение TFT-дисплея к AVR.</a>
+			<span>56</span> →
+			<a href="http://we.easyelectronics.ru/blog/lcd_gfx/" class="blog-title">Работа с дисплеями и графикой</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/Serj_61/" class="user">Serj_61</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/AVR/chernyy-avr-dragon-v-god-drakona.html#comment124250" class="topic-title">Черный AVR DRAGON в год дракона</a>
+			<span>23</span> →
+			<a href="http://we.easyelectronics.ru/blog/AVR/" class="blog-title">AVR</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/oss/" class="user">oss</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/Sicorski/organizuetsya-novyy-musorovoz.html#comment124225" class="topic-title">Организуется новый мусоровоз</a>
+			<span>87</span> →
+			<a href="http://we.easyelectronics.ru/my/Sicorski/" class="blog-title">Блог им. Sicorski</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/ilus/" class="user">ilus</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/lcd_gfx/osvoenie-stm32f103ve-tft-lcd-touch-screen.html#comment124207" class="topic-title">Освоение STM32F103VE + TFT LCD + touch screen</a>
+			<span>9</span> →
+			<a href="http://we.easyelectronics.ru/blog/lcd_gfx/" class="blog-title">Работа с дисплеями и графикой</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/e_mc2/" class="user">e_mc2</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/habl/c-s-polnogo-nulya-spustya-mesyac.html#comment124206" class="topic-title">C++ с полного нуля спустя месяц</a>
+			<span>42</span> →
+			<a href="http://we.easyelectronics.ru/my/habl/" class="blog-title">Блог им. habl</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/Infod/" class="user">Infod</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/HomeTech/esche-raz-o-podgotovke-fotoshablonov-ili-avtomatiziruem-process.html#comment124193" class="topic-title">Еще раз о подготовке фотошаблонов или автоматизируем процесс</a>
+			<span>15</span> →
+			<a href="http://we.easyelectronics.ru/blog/HomeTech/" class="blog-title">Технологии</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Papandopala/" class="user">Papandopala</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/Tools/obzor-payalnoy-stancii-weller.html#comment124153" class="topic-title">Обзор паяльной станции WELLER.</a>
+			<span>47</span> →
+			<a href="http://we.easyelectronics.ru/blog/Tools/" class="blog-title">Инструмент</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/scaldov/" class="user">scaldov</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/STM32/moya-koncepciya-primeneniya-mk.html#comment124124" class="topic-title">Моя концепция применения МК</a>
+			<span>507</span> →
+			<a href="http://we.easyelectronics.ru/blog/STM32/" class="blog-title">STM32</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Dmi/" class="user">Dmi</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/X-Antr/ya-lyublyu-nxp.html#comment124123" class="topic-title">я люблю NXP</a>
+			<span>18</span> →
+			<a href="http://we.easyelectronics.ru/my/X-Antr/" class="blog-title">Блог им. X-Antr</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/sherpa/" class="user">sherpa</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/STM32/stm32-i-usb-chast-2-nemnogo-o-drayverah-i-softe.html#comment124085" class="topic-title">STM32 и USB. Часть 2. Немного о драйверах и софте.</a>
+			<span>47</span> →
+			<a href="http://we.easyelectronics.ru/blog/STM32/" class="blog-title">STM32</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/sensor_ua/" class="user">sensor_ua</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/STM32/programmnyy-dekoder-mp3-perehod-na-platformu-stm32f407.html#comment124048" class="topic-title">Программный декодер MP3(+). Переход на платформу STM32F407</a>
+			<span>19</span> →
+			<a href="http://we.easyelectronics.ru/blog/STM32/" class="blog-title">STM32</a>
+		</li>
+									
+		<li>
+			<a href="http://we.easyelectronics.ru/profile/nsk_artem/" class="user">nsk_artem</a> →
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/GhostPVV/kopiya-prostoy-payalnoy-stancii-gordak-936a-variaciya-na-temu-klassiki-hakko-936.html#comment124025" class="topic-title">Копия простой паяльной станции Gordak 936A (вариация на тему классики Hakko 936)</a>
+			<span>20</span> →
+			<a href="http://we.easyelectronics.ru/my/GhostPVV/" class="blog-title">Блог им. GhostPVV</a>
+		</li>
+	</ul>
+
+
+<div class="bottom">
+	<a href="http://we.easyelectronics.ru/comments/">Весь эфир</a> | <a href="http://we.easyelectronics.ru/rss/allcomments/">RSS</a>
+</div>
+	</div>
+</div>
+
+
+															<div class="block tags">
+	<ul class="cloud">						
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/Altera/">Altera</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/arduino/">arduino</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/ARM/">ARM</a></li>	
+					<li><a class="w10" rel="tag" href="http://we.easyelectronics.ru/tag/AVR/">AVR</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/avr-gcc/">avr-gcc</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/C%2B%2B/">C++</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/Cortex-M3/">Cortex-M3</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/DIY/">DIY</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/enc28j60/">enc28j60</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/ethernet/">ethernet</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/gcc/">gcc</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/I2C/">I2C</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/IAR/">IAR</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/KEIL/">KEIL</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/LaunchPad/">LaunchPad</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/LCD/">LCD</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/led/">led</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/linux/">linux</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/LPC1343/">LPC1343</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/LPCXpresso/">LPCXpresso</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/MSP430/">MSP430</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/nxp/">nxp</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/PCB/">PCB</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/PIC/">PIC</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/pinboard2/">pinboard2</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/RS-485/">RS-485</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/RTOS/">RTOS</a></li>	
+					<li><a class="w10" rel="tag" href="http://we.easyelectronics.ru/tag/STM32/">STM32</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/STM8/">STM8</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/STM8L/">STM8L</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/TI/">TI</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/UART/">UART</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/USB/">USB</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80/">ассемблер</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%90%D0%A6%D0%9F/">АЦП</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B1%D0%BB%D0%BE%D0%BA%20%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F/">блок питания</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/">вопрос</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D1%8C%D0%BA%D0%B0/">деталька</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B8%D0%B4%D0%B5%D1%8F/">идея</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82/">инструмент</a></li>	
+					<li><a class="w7" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81/">конкурс</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%812/">конкурс2</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9B%D0%A3%D0%A2/">ЛУТ</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B/">микроконтроллеры</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D1%8E%D1%89%D0%B8%D0%BC/">начинающим</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BE%D0%B1%D0%B7%D0%BE%D1%80/">обзор</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BE%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">Отладочная плата</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%B0%D1%8F%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA/">паяльник</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4/">перевод</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%B5%D1%87%D0%B0%D1%82%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">печатная плата</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">плата</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9F%D0%9B%D0%98%D0%A1/">ПЛИС</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BE%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8/">поделки</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%BA%D0%B8/">покупки</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%D1%82%D0%BE%D1%80/">программатор</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/">программирование</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%80%D0%BE%D0%B1%D0%BE%D1%82/">робот</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D0%B2%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BE%D0%B4/">светодиод</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%A1%D0%B4%D0%B5%D0%BB%D0%B0%D0%B9%20%D1%81%D0%B0%D0%BC/">Сделай сам</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D0%BE%D1%84%D1%82/">софт</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D1%85%D0%B5%D0%BC%D0%B0/">схема</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D1%85%D0%B5%D0%BC%D0%BE%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0/">схемотехника</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8/">Технологии</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%83%D0%BC%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%BE%D0%BC/">умный дом</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%84%D0%BE%D1%82%D0%BE%D1%80%D0%B5%D0%B7%D0%B8%D1%81%D1%82/">фоторезист</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/">халява</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%85%D1%80%D0%B5%D0%BD%D1%8C/">хрень</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%A7%D0%B0%D1%81%D1%8B/">Часы</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%8E%D0%BC%D0%BE%D1%80/">юмор</a></li>	
+			</ul>
+</div>
+															<div class="block blogs" id="block_blogs">
+	<h2>Блоги</h2>
+	
+	
+	<ul class="switcher">
+		<li id="block_blogs_item_top" class="active">Топ</li>
+			</ul>
+	
+	
+	<div class="block-content" id="block_blogs_content">
+		<ul class="list">
+			<li>
+			<span class="rating">37.52</span>
+			<a href="http://we.easyelectronics.ru/blog/AVR/">AVR</a> 
+					</li>
+			<li>
+			<span class="rating">36.19</span>
+			<a href="http://we.easyelectronics.ru/blog/STM8/">STM8</a> 
+					</li>
+			<li>
+			<span class="rating">26.82</span>
+			<a href="http://we.easyelectronics.ru/blog/JunkBox/">Мусоровоз</a> 
+			<img src="soft_mp3_encoder_files/lock.png" alt="[x]" title="Закрытый блог">		</li>
+			<li>
+			<span class="rating">23.34</span>
+			<a href="http://we.easyelectronics.ru/blog/STM32/">STM32</a> 
+					</li>
+			<li>
+			<span class="rating">21.52</span>
+			<a href="http://we.easyelectronics.ru/blog/part/">Деталька</a> 
+					</li>
+			<li>
+			<span class="rating">18.67</span>
+			<a href="http://we.easyelectronics.ru/blog/electro-and-pc/">Связь железа с компьютером.</a> 
+					</li>
+			<li>
+			<span class="rating">17.75</span>
+			<a href="http://we.easyelectronics.ru/blog/smarthouse/">Умный дом</a> 
+					</li>
+			<li>
+			<span class="rating">17.13</span>
+			<a href="http://we.easyelectronics.ru/blog/msp430/">MSP430</a> 
+					</li>
+			<li>
+			<span class="rating">16.42</span>
+			<a href="http://we.easyelectronics.ru/blog/Shematech/">Схемотехника</a> 
+					</li>
+			<li>
+			<span class="rating">14.79</span>
+			<a href="http://we.easyelectronics.ru/blog/LPC/">LPC1xxx</a> 
+					</li>
+	</ul>				
+	</div>
+
+	
+	<div class="bottom">
+		<a href="http://we.easyelectronics.ru/blogs/">Все блоги</a>
+	</div>
+</div>
+
+									</div>			</div><!-- /wrapper -->
+
+	<div id="footer">
+		<div id="footer-inner">
+			<div class="right">© Powered by <a href="http://livestreetcms.ru/">LiveStreet CMS</a></div>
+			Design by — <a href="http://www.xeoart.com/">Студия XeoArt</a>
+			<img src="soft_mp3_encoder_files/xeoart.gif" border="0">
+						
+		</div>
+	</div>
+
+</div><!-- /container -->
+
+
+
+
+<!-- Yandex.Metrika counter -->
+<div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter4558804 = new Ya.Metrika({id:4558804,
+                    clickmap:true,
+                    trackLinks:true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="soft_mp3_encoder_files/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/4558804" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="soft_mp3_encoder_files/postmessageRelay.htm" id="oauth2relay231558816" name="oauth2relay231558816"></iframe></body><iframe src="" style="display: none;"></iframe></html>

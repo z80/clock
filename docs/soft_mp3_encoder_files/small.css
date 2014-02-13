@@ -1,0 +1,27 @@
+/*
+
+  Attachments plugin
+  (P) Rafrica.net team, 2010 - 2011
+  http://we.rafrica.net
+  
+*/
+
+li.FilesInTopic {
+  margin: 0 10px;
+  font-size: 10px;
+  background: transparent url(../images/attach.png) left center no-repeat;
+  padding-left: 18px;
+  float: left;
+}
+
+div.AttachmentsInTopic {
+  color: #777;
+  font-size: 10px;
+  background: #FAFAFA;
+  padding: 1px 10px 2px;
+}
+
+div.AttachmentsInTopic a {
+  outline: none;
+  margin: 0 2px;
+}
