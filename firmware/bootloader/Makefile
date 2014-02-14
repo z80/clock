@@ -10,8 +10,8 @@
 
 OPTIMIZATION = s
 #CROSS_PATH   = c:/programs/codesourcery/arm-2011.09-70
-#CROSS_PATH   = c:/programs/codesourcery/arm-2011.03-41
-CROSS_PATH   = ~/programs/code-sourcery/2011.03-42
+CROSS_PATH   = C:/Programs/CodeSourcery/arm-2012.03-56
+#CROSS_PATH   = ~/programs/code-sourcery/2011.03-42
 #CROSS_PREFIX = arm-none-linux-gnueabi-
 CROSS_PREFIX = arm-none-eabi-
 LINKER_LD    = cmsis/linker/stm32_flash.ld

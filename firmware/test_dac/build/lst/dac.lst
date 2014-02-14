@@ -1,0 +1,1129 @@
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"dac.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 63010000 		.text
+  20      02003301 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.section	.text.dacInit,"ax",%progbits
+  24              		.align	2
+  25              		.p2align 4,,15
+  26              		.global	dacInit
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	dacInit, %function
+  30              	dacInit:
+  31              	.LFB63:
+  32              		.file 1 "src/dac.c"
+  33              		.loc 1 9 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37 0000 10B5     		push	{r4, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.loc 1 10 0
+  41 0002 0A4C     		ldr	r4, .L2
+  42              		.cfi_offset 14, -4
+  43              		.cfi_offset 4, -8
+  44 0004 1021     		movs	r1, #16
+  45 0006 0522     		movs	r2, #5
+  46 0008 2046     		mov	r0, r4
+  47 000a FFF7FEFF 		bl	_pal_lld_setgroupmode
+  48              		.loc 1 11 0
+  49 000e 2046     		mov	r0, r4
+  50 0010 2021     		movs	r1, #32
+  51 0012 0522     		movs	r2, #5
+  52 0014 FFF7FEFF 		bl	_pal_lld_setgroupmode
+  53              		.loc 1 12 0
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 2
+
+
+  54 0018 0549     		ldr	r1, .L2+4
+  55              		.loc 1 16 0
+  56 001a 064B     		ldr	r3, .L2+8
+  57              		.loc 1 12 0
+  58 001c CA69     		ldr	r2, [r1, #28]
+  59 001e 42F00050 		orr	r0, r2, #536870912
+  60              		.loc 1 16 0
+  61 0022 4FF00112 		mov	r2, #65537
+  62              		.loc 1 12 0
+  63 0026 C861     		str	r0, [r1, #28]
+  64              		.loc 1 16 0
+  65 0028 1A60     		str	r2, [r3, #0]
+  66              		.loc 1 17 0
+  67 002a 10BD     		pop	{r4, pc}
+  68              	.L3:
+  69              		.align	2
+  70              	.L2:
+  71 002c 00080140 		.word	1073809408
+  72 0030 00100240 		.word	1073876992
+  73 0034 00740040 		.word	1073771520
+  74              		.cfi_endproc
+  75              	.LFE63:
+  76              		.size	dacInit, .-dacInit
+  77 0038 AFF30080 		.section	.text.dacSet,"ax",%progbits
+  77      AFF30080 
+  78              		.align	2
+  79              		.p2align 4,,15
+  80              		.global	dacSet
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	dacSet, %function
+  84              	dacSet:
+  85              	.LFB64:
+  86              		.loc 1 20 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91              	.LVL0:
+  92              		.loc 1 21 0
+  93 0000 0188     		ldrh	r1, [r0, #0]
+  94 0002 024B     		ldr	r3, .L5
+  95              		.loc 1 22 0
+  96 0004 4288     		ldrh	r2, [r0, #2]
+  97              		.loc 1 21 0
+  98 0006 9960     		str	r1, [r3, #8]
+  99              		.loc 1 22 0
+ 100 0008 5A61     		str	r2, [r3, #20]
+ 101              		.loc 1 23 0
+ 102 000a 7047     		bx	lr
+ 103              	.L6:
+ 104              		.align	2
+ 105              	.L5:
+ 106 000c 00740040 		.word	1073771520
+ 107              		.cfi_endproc
+ 108              	.LFE64:
+ 109              		.size	dacSet, .-dacSet
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 3
+
+
+ 110              		.text
+ 111              	.Letext0:
+ 112              		.section	.debug_loc,"",%progbits
+ 113              	.Ldebug_loc0:
+ 114              	.LLST0:
+ 115 0000 00000000 		.4byte	.LFB63
+ 116 0004 02000000 		.4byte	.LCFI0
+ 117 0008 0200     		.2byte	0x2
+ 118 000a 7D       		.byte	0x7d
+ 119 000b 00       		.sleb128 0
+ 120 000c 02000000 		.4byte	.LCFI0
+ 121 0010 38000000 		.4byte	.LFE63
+ 122 0014 0200     		.2byte	0x2
+ 123 0016 7D       		.byte	0x7d
+ 124 0017 08       		.sleb128 8
+ 125 0018 00000000 		.4byte	0x0
+ 126 001c 00000000 		.4byte	0x0
+ 127              		.file 2 "c:\\programs\\codesourcery\\arm-2012.03-56\\bin\\../lib/gcc/arm-none-eabi/4.5.2/../../../
+ 128              		.file 3 "src/dac.h"
+ 129              		.file 4 "./stm32f10x.h"
+ 130              		.file 5 "../chibios_2.6.3/os/hal/platforms/STM32/GPIOv1/pal_lld.h"
+ 131              		.file 6 "../chibios_2.6.3/os/ports/common/ARMCMx/CMSIS/include/core_cm3.h"
+ 132              		.section	.debug_info
+ 133 0000 3F030000 		.4byte	0x33f
+ 134 0004 0200     		.2byte	0x2
+ 135 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 136 000a 04       		.byte	0x4
+ 137 000b 01       		.uleb128 0x1
+ 138 000c BE000000 		.4byte	.LASF43
+ 139 0010 01       		.byte	0x1
+ 140 0011 5F010000 		.4byte	.LASF44
+ 141 0015 58000000 		.4byte	.LASF45
+ 142 0019 00000000 		.4byte	0x0
+ 143 001d 00000000 		.4byte	0x0
+ 144 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 145 0025 00000000 		.4byte	.Ldebug_line0
+ 146 0029 02       		.uleb128 0x2
+ 147 002a 04       		.byte	0x4
+ 148 002b 05       		.byte	0x5
+ 149 002c 696E7400 		.ascii	"int\000"
+ 150 0030 03       		.uleb128 0x3
+ 151 0031 04       		.byte	0x4
+ 152 0032 07       		.byte	0x7
+ 153 0033 05010000 		.4byte	.LASF0
+ 154 0037 03       		.uleb128 0x3
+ 155 0038 01       		.byte	0x1
+ 156 0039 06       		.byte	0x6
+ 157 003a A1010000 		.4byte	.LASF1
+ 158 003e 03       		.uleb128 0x3
+ 159 003f 01       		.byte	0x1
+ 160 0040 08       		.byte	0x8
+ 161 0041 4A000000 		.4byte	.LASF2
+ 162 0045 03       		.uleb128 0x3
+ 163 0046 02       		.byte	0x2
+ 164 0047 05       		.byte	0x5
+ 165 0048 69010000 		.4byte	.LASF3
+ 166 004c 04       		.uleb128 0x4
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 4
+
+
+ 167 004d 73010000 		.4byte	.LASF5
+ 168 0051 02       		.byte	0x2
+ 169 0052 36       		.byte	0x36
+ 170 0053 57000000 		.4byte	0x57
+ 171 0057 03       		.uleb128 0x3
+ 172 0058 02       		.byte	0x2
+ 173 0059 07       		.byte	0x7
+ 174 005a 9B000000 		.4byte	.LASF4
+ 175 005e 04       		.uleb128 0x4
+ 176 005f 31010000 		.4byte	.LASF6
+ 177 0063 02       		.byte	0x2
+ 178 0064 4F       		.byte	0x4f
+ 179 0065 69000000 		.4byte	0x69
+ 180 0069 03       		.uleb128 0x3
+ 181 006a 04       		.byte	0x4
+ 182 006b 05       		.byte	0x5
+ 183 006c 91010000 		.4byte	.LASF7
+ 184 0070 04       		.uleb128 0x4
+ 185 0071 88010000 		.4byte	.LASF8
+ 186 0075 02       		.byte	0x2
+ 187 0076 50       		.byte	0x50
+ 188 0077 7B000000 		.4byte	0x7b
+ 189 007b 03       		.uleb128 0x3
+ 190 007c 04       		.byte	0x4
+ 191 007d 07       		.byte	0x7
+ 192 007e 89000000 		.4byte	.LASF9
+ 193 0082 03       		.uleb128 0x3
+ 194 0083 08       		.byte	0x8
+ 195 0084 05       		.byte	0x5
+ 196 0085 00000000 		.4byte	.LASF10
+ 197 0089 03       		.uleb128 0x3
+ 198 008a 08       		.byte	0x8
+ 199 008b 07       		.byte	0x7
+ 200 008c C2010000 		.4byte	.LASF11
+ 201 0090 03       		.uleb128 0x3
+ 202 0091 01       		.byte	0x1
+ 203 0092 02       		.byte	0x2
+ 204 0093 BC010000 		.4byte	.LASF12
+ 205 0097 05       		.uleb128 0x5
+ 206 0098 70000000 		.4byte	0x70
+ 207 009c 03       		.uleb128 0x3
+ 208 009d 01       		.byte	0x1
+ 209 009e 08       		.byte	0x8
+ 210 009f 1F010000 		.4byte	.LASF13
+ 211 00a3 06       		.uleb128 0x6
+ 212 00a4 04       		.byte	0x4
+ 213 00a5 03       		.byte	0x3
+ 214 00a6 07       		.byte	0x7
+ 215 00a7 C8000000 		.4byte	0xc8
+ 216 00ab 07       		.uleb128 0x7
+ 217 00ac 84000000 		.4byte	.LASF14
+ 218 00b0 03       		.byte	0x3
+ 219 00b1 09       		.byte	0x9
+ 220 00b2 4C000000 		.4byte	0x4c
+ 221 00b6 02       		.byte	0x2
+ 222 00b7 23       		.byte	0x23
+ 223 00b8 00       		.uleb128 0x0
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 5
+
+
+ 224 00b9 07       		.uleb128 0x7
+ 225 00ba B7010000 		.4byte	.LASF15
+ 226 00be 03       		.byte	0x3
+ 227 00bf 0A       		.byte	0xa
+ 228 00c0 4C000000 		.4byte	0x4c
+ 229 00c4 02       		.byte	0x2
+ 230 00c5 23       		.byte	0x23
+ 231 00c6 02       		.uleb128 0x2
+ 232 00c7 00       		.byte	0x0
+ 233 00c8 04       		.uleb128 0x4
+ 234 00c9 ED000000 		.4byte	.LASF16
+ 235 00cd 03       		.byte	0x3
+ 236 00ce 0B       		.byte	0xb
+ 237 00cf A3000000 		.4byte	0xa3
+ 238 00d3 05       		.uleb128 0x5
+ 239 00d4 5E000000 		.4byte	0x5e
+ 240 00d8 08       		.uleb128 0x8
+ 241 00d9 34       		.byte	0x34
+ 242 00da 04       		.byte	0x4
+ 243 00db 0B03     		.2byte	0x30b
+ 244 00dd A4010000 		.4byte	0x1a4
+ 245 00e1 09       		.uleb128 0x9
+ 246 00e2 435200   		.ascii	"CR\000"
+ 247 00e5 04       		.byte	0x4
+ 248 00e6 0D03     		.2byte	0x30d
+ 249 00e8 97000000 		.4byte	0x97
+ 250 00ec 02       		.byte	0x2
+ 251 00ed 23       		.byte	0x23
+ 252 00ee 00       		.uleb128 0x0
+ 253 00ef 0A       		.uleb128 0xa
+ 254 00f0 D6000000 		.4byte	.LASF17
+ 255 00f4 04       		.byte	0x4
+ 256 00f5 0E03     		.2byte	0x30e
+ 257 00f7 97000000 		.4byte	0x97
+ 258 00fb 02       		.byte	0x2
+ 259 00fc 23       		.byte	0x23
+ 260 00fd 04       		.uleb128 0x4
+ 261 00fe 0A       		.uleb128 0xa
+ 262 00ff AE000000 		.4byte	.LASF18
+ 263 0103 04       		.byte	0x4
+ 264 0104 0F03     		.2byte	0x30f
+ 265 0106 97000000 		.4byte	0x97
+ 266 010a 02       		.byte	0x2
+ 267 010b 23       		.byte	0x23
+ 268 010c 08       		.uleb128 0x8
+ 269 010d 0A       		.uleb128 0xa
+ 270 010e 24000000 		.4byte	.LASF19
+ 271 0112 04       		.byte	0x4
+ 272 0113 1003     		.2byte	0x310
+ 273 0115 97000000 		.4byte	0x97
+ 274 0119 02       		.byte	0x2
+ 275 011a 23       		.byte	0x23
+ 276 011b 0C       		.uleb128 0xc
+ 277 011c 0A       		.uleb128 0xa
+ 278 011d 49010000 		.4byte	.LASF20
+ 279 0121 04       		.byte	0x4
+ 280 0122 1103     		.2byte	0x311
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 6
+
+
+ 281 0124 97000000 		.4byte	0x97
+ 282 0128 02       		.byte	0x2
+ 283 0129 23       		.byte	0x23
+ 284 012a 10       		.uleb128 0x10
+ 285 012b 0A       		.uleb128 0xa
+ 286 012c B6000000 		.4byte	.LASF21
+ 287 0130 04       		.byte	0x4
+ 288 0131 1203     		.2byte	0x312
+ 289 0133 97000000 		.4byte	0x97
+ 290 0137 02       		.byte	0x2
+ 291 0138 23       		.byte	0x23
+ 292 0139 14       		.uleb128 0x14
+ 293 013a 0A       		.uleb128 0xa
+ 294 013b 2C000000 		.4byte	.LASF22
+ 295 013f 04       		.byte	0x4
+ 296 0140 1303     		.2byte	0x313
+ 297 0142 97000000 		.4byte	0x97
+ 298 0146 02       		.byte	0x2
+ 299 0147 23       		.byte	0x23
+ 300 0148 18       		.uleb128 0x18
+ 301 0149 0A       		.uleb128 0xa
+ 302 014a 50010000 		.4byte	.LASF23
+ 303 014e 04       		.byte	0x4
+ 304 014f 1403     		.2byte	0x314
+ 305 0151 97000000 		.4byte	0x97
+ 306 0155 02       		.byte	0x2
+ 307 0156 23       		.byte	0x23
+ 308 0157 1C       		.uleb128 0x1c
+ 309 0158 0A       		.uleb128 0xa
+ 310 0159 F4000000 		.4byte	.LASF24
+ 311 015d 04       		.byte	0x4
+ 312 015e 1503     		.2byte	0x315
+ 313 0160 97000000 		.4byte	0x97
+ 314 0164 02       		.byte	0x2
+ 315 0165 23       		.byte	0x23
+ 316 0166 20       		.uleb128 0x20
+ 317 0167 0A       		.uleb128 0xa
+ 318 0168 57010000 		.4byte	.LASF25
+ 319 016c 04       		.byte	0x4
+ 320 016d 1603     		.2byte	0x316
+ 321 016f 97000000 		.4byte	0x97
+ 322 0173 02       		.byte	0x2
+ 323 0174 23       		.byte	0x23
+ 324 0175 24       		.uleb128 0x24
+ 325 0176 0A       		.uleb128 0xa
+ 326 0177 9A010000 		.4byte	.LASF26
+ 327 017b 04       		.byte	0x4
+ 328 017c 1703     		.2byte	0x317
+ 329 017e 97000000 		.4byte	0x97
+ 330 0182 02       		.byte	0x2
+ 331 0183 23       		.byte	0x23
+ 332 0184 28       		.uleb128 0x28
+ 333 0185 0A       		.uleb128 0xa
+ 334 0186 AD010000 		.4byte	.LASF27
+ 335 018a 04       		.byte	0x4
+ 336 018b 1803     		.2byte	0x318
+ 337 018d 97000000 		.4byte	0x97
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 7
+
+
+ 338 0191 02       		.byte	0x2
+ 339 0192 23       		.byte	0x23
+ 340 0193 2C       		.uleb128 0x2c
+ 341 0194 0A       		.uleb128 0xa
+ 342 0195 B2010000 		.4byte	.LASF28
+ 343 0199 04       		.byte	0x4
+ 344 019a 1903     		.2byte	0x319
+ 345 019c 97000000 		.4byte	0x97
+ 346 01a0 02       		.byte	0x2
+ 347 01a1 23       		.byte	0x23
+ 348 01a2 30       		.uleb128 0x30
+ 349 01a3 00       		.byte	0x0
+ 350 01a4 0B       		.uleb128 0xb
+ 351 01a5 CA000000 		.4byte	.LASF29
+ 352 01a9 04       		.byte	0x4
+ 353 01aa 1D03     		.2byte	0x31d
+ 354 01ac D8000000 		.4byte	0xd8
+ 355 01b0 08       		.uleb128 0x8
+ 356 01b1 1C       		.byte	0x1c
+ 357 01b2 04       		.byte	0x4
+ 358 01b3 F803     		.2byte	0x3f8
+ 359 01b5 23020000 		.4byte	0x223
+ 360 01b9 09       		.uleb128 0x9
+ 361 01ba 43524C00 		.ascii	"CRL\000"
+ 362 01be 04       		.byte	0x4
+ 363 01bf FA03     		.2byte	0x3fa
+ 364 01c1 97000000 		.4byte	0x97
+ 365 01c5 02       		.byte	0x2
+ 366 01c6 23       		.byte	0x23
+ 367 01c7 00       		.uleb128 0x0
+ 368 01c8 09       		.uleb128 0x9
+ 369 01c9 43524800 		.ascii	"CRH\000"
+ 370 01cd 04       		.byte	0x4
+ 371 01ce FB03     		.2byte	0x3fb
+ 372 01d0 97000000 		.4byte	0x97
+ 373 01d4 02       		.byte	0x2
+ 374 01d5 23       		.byte	0x23
+ 375 01d6 04       		.uleb128 0x4
+ 376 01d7 09       		.uleb128 0x9
+ 377 01d8 49445200 		.ascii	"IDR\000"
+ 378 01dc 04       		.byte	0x4
+ 379 01dd FC03     		.2byte	0x3fc
+ 380 01df 97000000 		.4byte	0x97
+ 381 01e3 02       		.byte	0x2
+ 382 01e4 23       		.byte	0x23
+ 383 01e5 08       		.uleb128 0x8
+ 384 01e6 09       		.uleb128 0x9
+ 385 01e7 4F445200 		.ascii	"ODR\000"
+ 386 01eb 04       		.byte	0x4
+ 387 01ec FD03     		.2byte	0x3fd
+ 388 01ee 97000000 		.4byte	0x97
+ 389 01f2 02       		.byte	0x2
+ 390 01f3 23       		.byte	0x23
+ 391 01f4 0C       		.uleb128 0xc
+ 392 01f5 0A       		.uleb128 0xa
+ 393 01f6 1F000000 		.4byte	.LASF30
+ 394 01fa 04       		.byte	0x4
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 8
+
+
+ 395 01fb FE03     		.2byte	0x3fe
+ 396 01fd 97000000 		.4byte	0x97
+ 397 0201 02       		.byte	0x2
+ 398 0202 23       		.byte	0x23
+ 399 0203 10       		.uleb128 0x10
+ 400 0204 09       		.uleb128 0x9
+ 401 0205 42525200 		.ascii	"BRR\000"
+ 402 0209 04       		.byte	0x4
+ 403 020a FF03     		.2byte	0x3ff
+ 404 020c 97000000 		.4byte	0x97
+ 405 0210 02       		.byte	0x2
+ 406 0211 23       		.byte	0x23
+ 407 0212 14       		.uleb128 0x14
+ 408 0213 0A       		.uleb128 0xa
+ 409 0214 D9010000 		.4byte	.LASF31
+ 410 0218 04       		.byte	0x4
+ 411 0219 0004     		.2byte	0x400
+ 412 021b 97000000 		.4byte	0x97
+ 413 021f 02       		.byte	0x2
+ 414 0220 23       		.byte	0x23
+ 415 0221 18       		.uleb128 0x18
+ 416 0222 00       		.byte	0x0
+ 417 0223 0B       		.uleb128 0xb
+ 418 0224 12010000 		.4byte	.LASF32
+ 419 0228 04       		.byte	0x4
+ 420 0229 0104     		.2byte	0x401
+ 421 022b B0010000 		.4byte	0x1b0
+ 422 022f 08       		.uleb128 0x8
+ 423 0230 28       		.byte	0x28
+ 424 0231 04       		.byte	0x4
+ 425 0232 4304     		.2byte	0x443
+ 426 0234 CE020000 		.4byte	0x2ce
+ 427 0238 09       		.uleb128 0x9
+ 428 0239 435200   		.ascii	"CR\000"
+ 429 023c 04       		.byte	0x4
+ 430 023d 4504     		.2byte	0x445
+ 431 023f 97000000 		.4byte	0x97
+ 432 0243 02       		.byte	0x2
+ 433 0244 23       		.byte	0x23
+ 434 0245 00       		.uleb128 0x0
+ 435 0246 0A       		.uleb128 0xa
+ 436 0247 13000000 		.4byte	.LASF33
+ 437 024b 04       		.byte	0x4
+ 438 024c 4604     		.2byte	0x446
+ 439 024e 97000000 		.4byte	0x97
+ 440 0252 02       		.byte	0x2
+ 441 0253 23       		.byte	0x23
+ 442 0254 04       		.uleb128 0x4
+ 443 0255 09       		.uleb128 0x9
+ 444 0256 43495200 		.ascii	"CIR\000"
+ 445 025a 04       		.byte	0x4
+ 446 025b 4704     		.2byte	0x447
+ 447 025d 97000000 		.4byte	0x97
+ 448 0261 02       		.byte	0x2
+ 449 0262 23       		.byte	0x23
+ 450 0263 08       		.uleb128 0x8
+ 451 0264 0A       		.uleb128 0xa
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 9
+
+
+ 452 0265 FC000000 		.4byte	.LASF34
+ 453 0269 04       		.byte	0x4
+ 454 026a 4804     		.2byte	0x448
+ 455 026c 97000000 		.4byte	0x97
+ 456 0270 02       		.byte	0x2
+ 457 0271 23       		.byte	0x23
+ 458 0272 0C       		.uleb128 0xc
+ 459 0273 0A       		.uleb128 0xa
+ 460 0274 41000000 		.4byte	.LASF35
+ 461 0278 04       		.byte	0x4
+ 462 0279 4904     		.2byte	0x449
+ 463 027b 97000000 		.4byte	0x97
+ 464 027f 02       		.byte	0x2
+ 465 0280 23       		.byte	0x23
+ 466 0281 10       		.uleb128 0x10
+ 467 0282 0A       		.uleb128 0xa
+ 468 0283 18000000 		.4byte	.LASF36
+ 469 0287 04       		.byte	0x4
+ 470 0288 4A04     		.2byte	0x44a
+ 471 028a 97000000 		.4byte	0x97
+ 472 028e 02       		.byte	0x2
+ 473 028f 23       		.byte	0x23
+ 474 0290 14       		.uleb128 0x14
+ 475 0291 0A       		.uleb128 0xa
+ 476 0292 41010000 		.4byte	.LASF37
+ 477 0296 04       		.byte	0x4
+ 478 0297 4B04     		.2byte	0x44b
+ 479 0299 97000000 		.4byte	0x97
+ 480 029d 02       		.byte	0x2
+ 481 029e 23       		.byte	0x23
+ 482 029f 18       		.uleb128 0x18
+ 483 02a0 0A       		.uleb128 0xa
+ 484 02a1 E5000000 		.4byte	.LASF38
+ 485 02a5 04       		.byte	0x4
+ 486 02a6 4C04     		.2byte	0x44c
+ 487 02a8 97000000 		.4byte	0x97
+ 488 02ac 02       		.byte	0x2
+ 489 02ad 23       		.byte	0x23
+ 490 02ae 1C       		.uleb128 0x1c
+ 491 02af 0A       		.uleb128 0xa
+ 492 02b0 0E000000 		.4byte	.LASF39
+ 493 02b4 04       		.byte	0x4
+ 494 02b5 4D04     		.2byte	0x44d
+ 495 02b7 97000000 		.4byte	0x97
+ 496 02bb 02       		.byte	0x2
+ 497 02bc 23       		.byte	0x23
+ 498 02bd 20       		.uleb128 0x20
+ 499 02be 09       		.uleb128 0x9
+ 500 02bf 43535200 		.ascii	"CSR\000"
+ 501 02c3 04       		.byte	0x4
+ 502 02c4 4E04     		.2byte	0x44e
+ 503 02c6 97000000 		.4byte	0x97
+ 504 02ca 02       		.byte	0x2
+ 505 02cb 23       		.byte	0x23
+ 506 02cc 24       		.uleb128 0x24
+ 507 02cd 00       		.byte	0x0
+ 508 02ce 0B       		.uleb128 0xb
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 10
+
+
+ 509 02cf 7C010000 		.4byte	.LASF40
+ 510 02d3 04       		.byte	0x4
+ 511 02d4 5904     		.2byte	0x459
+ 512 02d6 2F020000 		.4byte	0x22f
+ 513 02da 04       		.uleb128 0x4
+ 514 02db 34000000 		.4byte	.LASF41
+ 515 02df 05       		.byte	0x5
+ 516 02e0 6D       		.byte	0x6d
+ 517 02e1 70000000 		.4byte	0x70
+ 518 02e5 0C       		.uleb128 0xc
+ 519 02e6 01       		.byte	0x1
+ 520 02e7 39010000 		.4byte	.LASF46
+ 521 02eb 01       		.byte	0x1
+ 522 02ec 08       		.byte	0x8
+ 523 02ed 01       		.byte	0x1
+ 524 02ee 00000000 		.4byte	.LFB63
+ 525 02f2 38000000 		.4byte	.LFE63
+ 526 02f6 00000000 		.4byte	.LLST0
+ 527 02fa 0D       		.uleb128 0xd
+ 528 02fb 01       		.byte	0x1
+ 529 02fc DE000000 		.4byte	.LASF47
+ 530 0300 01       		.byte	0x1
+ 531 0301 13       		.byte	0x13
+ 532 0302 01       		.byte	0x1
+ 533 0303 00000000 		.4byte	.LFB64
+ 534 0307 10000000 		.4byte	.LFE64
+ 535 030b 02       		.byte	0x2
+ 536 030c 7D       		.byte	0x7d
+ 537 030d 00       		.sleb128 0
+ 538 030e 20030000 		.4byte	0x320
+ 539 0312 0E       		.uleb128 0xe
+ 540 0313 64616300 		.ascii	"dac\000"
+ 541 0317 01       		.byte	0x1
+ 542 0318 13       		.byte	0x13
+ 543 0319 20030000 		.4byte	0x320
+ 544 031d 01       		.byte	0x1
+ 545 031e 50       		.byte	0x50
+ 546 031f 00       		.byte	0x0
+ 547 0320 0F       		.uleb128 0xf
+ 548 0321 04       		.byte	0x4
+ 549 0322 C8000000 		.4byte	0xc8
+ 550 0326 10       		.uleb128 0x10
+ 551 0327 24010000 		.4byte	.LASF42
+ 552 032b 06       		.byte	0x6
+ 553 032c 0706     		.2byte	0x607
+ 554 032e D3000000 		.4byte	0xd3
+ 555 0332 01       		.byte	0x1
+ 556 0333 01       		.byte	0x1
+ 557 0334 10       		.uleb128 0x10
+ 558 0335 24010000 		.4byte	.LASF42
+ 559 0339 06       		.byte	0x6
+ 560 033a 0706     		.2byte	0x607
+ 561 033c D3000000 		.4byte	0xd3
+ 562 0340 01       		.byte	0x1
+ 563 0341 01       		.byte	0x1
+ 564 0342 00       		.byte	0x0
+ 565              		.section	.debug_abbrev
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 11
+
+
+ 566 0000 01       		.uleb128 0x1
+ 567 0001 11       		.uleb128 0x11
+ 568 0002 01       		.byte	0x1
+ 569 0003 25       		.uleb128 0x25
+ 570 0004 0E       		.uleb128 0xe
+ 571 0005 13       		.uleb128 0x13
+ 572 0006 0B       		.uleb128 0xb
+ 573 0007 03       		.uleb128 0x3
+ 574 0008 0E       		.uleb128 0xe
+ 575 0009 1B       		.uleb128 0x1b
+ 576 000a 0E       		.uleb128 0xe
+ 577 000b 11       		.uleb128 0x11
+ 578 000c 01       		.uleb128 0x1
+ 579 000d 52       		.uleb128 0x52
+ 580 000e 01       		.uleb128 0x1
+ 581 000f 55       		.uleb128 0x55
+ 582 0010 06       		.uleb128 0x6
+ 583 0011 10       		.uleb128 0x10
+ 584 0012 06       		.uleb128 0x6
+ 585 0013 00       		.byte	0x0
+ 586 0014 00       		.byte	0x0
+ 587 0015 02       		.uleb128 0x2
+ 588 0016 24       		.uleb128 0x24
+ 589 0017 00       		.byte	0x0
+ 590 0018 0B       		.uleb128 0xb
+ 591 0019 0B       		.uleb128 0xb
+ 592 001a 3E       		.uleb128 0x3e
+ 593 001b 0B       		.uleb128 0xb
+ 594 001c 03       		.uleb128 0x3
+ 595 001d 08       		.uleb128 0x8
+ 596 001e 00       		.byte	0x0
+ 597 001f 00       		.byte	0x0
+ 598 0020 03       		.uleb128 0x3
+ 599 0021 24       		.uleb128 0x24
+ 600 0022 00       		.byte	0x0
+ 601 0023 0B       		.uleb128 0xb
+ 602 0024 0B       		.uleb128 0xb
+ 603 0025 3E       		.uleb128 0x3e
+ 604 0026 0B       		.uleb128 0xb
+ 605 0027 03       		.uleb128 0x3
+ 606 0028 0E       		.uleb128 0xe
+ 607 0029 00       		.byte	0x0
+ 608 002a 00       		.byte	0x0
+ 609 002b 04       		.uleb128 0x4
+ 610 002c 16       		.uleb128 0x16
+ 611 002d 00       		.byte	0x0
+ 612 002e 03       		.uleb128 0x3
+ 613 002f 0E       		.uleb128 0xe
+ 614 0030 3A       		.uleb128 0x3a
+ 615 0031 0B       		.uleb128 0xb
+ 616 0032 3B       		.uleb128 0x3b
+ 617 0033 0B       		.uleb128 0xb
+ 618 0034 49       		.uleb128 0x49
+ 619 0035 13       		.uleb128 0x13
+ 620 0036 00       		.byte	0x0
+ 621 0037 00       		.byte	0x0
+ 622 0038 05       		.uleb128 0x5
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 12
+
+
+ 623 0039 35       		.uleb128 0x35
+ 624 003a 00       		.byte	0x0
+ 625 003b 49       		.uleb128 0x49
+ 626 003c 13       		.uleb128 0x13
+ 627 003d 00       		.byte	0x0
+ 628 003e 00       		.byte	0x0
+ 629 003f 06       		.uleb128 0x6
+ 630 0040 13       		.uleb128 0x13
+ 631 0041 01       		.byte	0x1
+ 632 0042 0B       		.uleb128 0xb
+ 633 0043 0B       		.uleb128 0xb
+ 634 0044 3A       		.uleb128 0x3a
+ 635 0045 0B       		.uleb128 0xb
+ 636 0046 3B       		.uleb128 0x3b
+ 637 0047 0B       		.uleb128 0xb
+ 638 0048 01       		.uleb128 0x1
+ 639 0049 13       		.uleb128 0x13
+ 640 004a 00       		.byte	0x0
+ 641 004b 00       		.byte	0x0
+ 642 004c 07       		.uleb128 0x7
+ 643 004d 0D       		.uleb128 0xd
+ 644 004e 00       		.byte	0x0
+ 645 004f 03       		.uleb128 0x3
+ 646 0050 0E       		.uleb128 0xe
+ 647 0051 3A       		.uleb128 0x3a
+ 648 0052 0B       		.uleb128 0xb
+ 649 0053 3B       		.uleb128 0x3b
+ 650 0054 0B       		.uleb128 0xb
+ 651 0055 49       		.uleb128 0x49
+ 652 0056 13       		.uleb128 0x13
+ 653 0057 38       		.uleb128 0x38
+ 654 0058 0A       		.uleb128 0xa
+ 655 0059 00       		.byte	0x0
+ 656 005a 00       		.byte	0x0
+ 657 005b 08       		.uleb128 0x8
+ 658 005c 13       		.uleb128 0x13
+ 659 005d 01       		.byte	0x1
+ 660 005e 0B       		.uleb128 0xb
+ 661 005f 0B       		.uleb128 0xb
+ 662 0060 3A       		.uleb128 0x3a
+ 663 0061 0B       		.uleb128 0xb
+ 664 0062 3B       		.uleb128 0x3b
+ 665 0063 05       		.uleb128 0x5
+ 666 0064 01       		.uleb128 0x1
+ 667 0065 13       		.uleb128 0x13
+ 668 0066 00       		.byte	0x0
+ 669 0067 00       		.byte	0x0
+ 670 0068 09       		.uleb128 0x9
+ 671 0069 0D       		.uleb128 0xd
+ 672 006a 00       		.byte	0x0
+ 673 006b 03       		.uleb128 0x3
+ 674 006c 08       		.uleb128 0x8
+ 675 006d 3A       		.uleb128 0x3a
+ 676 006e 0B       		.uleb128 0xb
+ 677 006f 3B       		.uleb128 0x3b
+ 678 0070 05       		.uleb128 0x5
+ 679 0071 49       		.uleb128 0x49
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 13
+
+
+ 680 0072 13       		.uleb128 0x13
+ 681 0073 38       		.uleb128 0x38
+ 682 0074 0A       		.uleb128 0xa
+ 683 0075 00       		.byte	0x0
+ 684 0076 00       		.byte	0x0
+ 685 0077 0A       		.uleb128 0xa
+ 686 0078 0D       		.uleb128 0xd
+ 687 0079 00       		.byte	0x0
+ 688 007a 03       		.uleb128 0x3
+ 689 007b 0E       		.uleb128 0xe
+ 690 007c 3A       		.uleb128 0x3a
+ 691 007d 0B       		.uleb128 0xb
+ 692 007e 3B       		.uleb128 0x3b
+ 693 007f 05       		.uleb128 0x5
+ 694 0080 49       		.uleb128 0x49
+ 695 0081 13       		.uleb128 0x13
+ 696 0082 38       		.uleb128 0x38
+ 697 0083 0A       		.uleb128 0xa
+ 698 0084 00       		.byte	0x0
+ 699 0085 00       		.byte	0x0
+ 700 0086 0B       		.uleb128 0xb
+ 701 0087 16       		.uleb128 0x16
+ 702 0088 00       		.byte	0x0
+ 703 0089 03       		.uleb128 0x3
+ 704 008a 0E       		.uleb128 0xe
+ 705 008b 3A       		.uleb128 0x3a
+ 706 008c 0B       		.uleb128 0xb
+ 707 008d 3B       		.uleb128 0x3b
+ 708 008e 05       		.uleb128 0x5
+ 709 008f 49       		.uleb128 0x49
+ 710 0090 13       		.uleb128 0x13
+ 711 0091 00       		.byte	0x0
+ 712 0092 00       		.byte	0x0
+ 713 0093 0C       		.uleb128 0xc
+ 714 0094 2E       		.uleb128 0x2e
+ 715 0095 00       		.byte	0x0
+ 716 0096 3F       		.uleb128 0x3f
+ 717 0097 0C       		.uleb128 0xc
+ 718 0098 03       		.uleb128 0x3
+ 719 0099 0E       		.uleb128 0xe
+ 720 009a 3A       		.uleb128 0x3a
+ 721 009b 0B       		.uleb128 0xb
+ 722 009c 3B       		.uleb128 0x3b
+ 723 009d 0B       		.uleb128 0xb
+ 724 009e 27       		.uleb128 0x27
+ 725 009f 0C       		.uleb128 0xc
+ 726 00a0 11       		.uleb128 0x11
+ 727 00a1 01       		.uleb128 0x1
+ 728 00a2 12       		.uleb128 0x12
+ 729 00a3 01       		.uleb128 0x1
+ 730 00a4 40       		.uleb128 0x40
+ 731 00a5 06       		.uleb128 0x6
+ 732 00a6 00       		.byte	0x0
+ 733 00a7 00       		.byte	0x0
+ 734 00a8 0D       		.uleb128 0xd
+ 735 00a9 2E       		.uleb128 0x2e
+ 736 00aa 01       		.byte	0x1
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 14
+
+
+ 737 00ab 3F       		.uleb128 0x3f
+ 738 00ac 0C       		.uleb128 0xc
+ 739 00ad 03       		.uleb128 0x3
+ 740 00ae 0E       		.uleb128 0xe
+ 741 00af 3A       		.uleb128 0x3a
+ 742 00b0 0B       		.uleb128 0xb
+ 743 00b1 3B       		.uleb128 0x3b
+ 744 00b2 0B       		.uleb128 0xb
+ 745 00b3 27       		.uleb128 0x27
+ 746 00b4 0C       		.uleb128 0xc
+ 747 00b5 11       		.uleb128 0x11
+ 748 00b6 01       		.uleb128 0x1
+ 749 00b7 12       		.uleb128 0x12
+ 750 00b8 01       		.uleb128 0x1
+ 751 00b9 40       		.uleb128 0x40
+ 752 00ba 0A       		.uleb128 0xa
+ 753 00bb 01       		.uleb128 0x1
+ 754 00bc 13       		.uleb128 0x13
+ 755 00bd 00       		.byte	0x0
+ 756 00be 00       		.byte	0x0
+ 757 00bf 0E       		.uleb128 0xe
+ 758 00c0 05       		.uleb128 0x5
+ 759 00c1 00       		.byte	0x0
+ 760 00c2 03       		.uleb128 0x3
+ 761 00c3 08       		.uleb128 0x8
+ 762 00c4 3A       		.uleb128 0x3a
+ 763 00c5 0B       		.uleb128 0xb
+ 764 00c6 3B       		.uleb128 0x3b
+ 765 00c7 0B       		.uleb128 0xb
+ 766 00c8 49       		.uleb128 0x49
+ 767 00c9 13       		.uleb128 0x13
+ 768 00ca 02       		.uleb128 0x2
+ 769 00cb 0A       		.uleb128 0xa
+ 770 00cc 00       		.byte	0x0
+ 771 00cd 00       		.byte	0x0
+ 772 00ce 0F       		.uleb128 0xf
+ 773 00cf 0F       		.uleb128 0xf
+ 774 00d0 00       		.byte	0x0
+ 775 00d1 0B       		.uleb128 0xb
+ 776 00d2 0B       		.uleb128 0xb
+ 777 00d3 49       		.uleb128 0x49
+ 778 00d4 13       		.uleb128 0x13
+ 779 00d5 00       		.byte	0x0
+ 780 00d6 00       		.byte	0x0
+ 781 00d7 10       		.uleb128 0x10
+ 782 00d8 34       		.uleb128 0x34
+ 783 00d9 00       		.byte	0x0
+ 784 00da 03       		.uleb128 0x3
+ 785 00db 0E       		.uleb128 0xe
+ 786 00dc 3A       		.uleb128 0x3a
+ 787 00dd 0B       		.uleb128 0xb
+ 788 00de 3B       		.uleb128 0x3b
+ 789 00df 05       		.uleb128 0x5
+ 790 00e0 49       		.uleb128 0x49
+ 791 00e1 13       		.uleb128 0x13
+ 792 00e2 3F       		.uleb128 0x3f
+ 793 00e3 0C       		.uleb128 0xc
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 15
+
+
+ 794 00e4 3C       		.uleb128 0x3c
+ 795 00e5 0C       		.uleb128 0xc
+ 796 00e6 00       		.byte	0x0
+ 797 00e7 00       		.byte	0x0
+ 798 00e8 00       		.byte	0x0
+ 799              		.section	.debug_pubnames,"",%progbits
+ 800 0000 25000000 		.4byte	0x25
+ 801 0004 0200     		.2byte	0x2
+ 802 0006 00000000 		.4byte	.Ldebug_info0
+ 803 000a 43030000 		.4byte	0x343
+ 804 000e E5020000 		.4byte	0x2e5
+ 805 0012 64616349 		.ascii	"dacInit\000"
+ 805      6E697400 
+ 806 001a FA020000 		.4byte	0x2fa
+ 807 001e 64616353 		.ascii	"dacSet\000"
+ 807      657400
+ 808 0025 00000000 		.4byte	0x0
+ 809              		.section	.debug_pubtypes,"",%progbits
+ 810 0000 81000000 		.4byte	0x81
+ 811 0004 0200     		.2byte	0x2
+ 812 0006 00000000 		.4byte	.Ldebug_info0
+ 813 000a 43030000 		.4byte	0x343
+ 814 000e 4C000000 		.4byte	0x4c
+ 815 0012 75696E74 		.ascii	"uint16_t\000"
+ 815      31365F74 
+ 815      00
+ 816 001b 5E000000 		.4byte	0x5e
+ 817 001f 696E7433 		.ascii	"int32_t\000"
+ 817      325F7400 
+ 818 0027 70000000 		.4byte	0x70
+ 819 002b 75696E74 		.ascii	"uint32_t\000"
+ 819      33325F74 
+ 819      00
+ 820 0034 C8000000 		.4byte	0xc8
+ 821 0038 44616343 		.ascii	"DacCfg\000"
+ 821      666700
+ 822 003f A4010000 		.4byte	0x1a4
+ 823 0043 4441435F 		.ascii	"DAC_TypeDef\000"
+ 823      54797065 
+ 823      44656600 
+ 824 004f 23020000 		.4byte	0x223
+ 825 0053 4750494F 		.ascii	"GPIO_TypeDef\000"
+ 825      5F547970 
+ 825      65446566 
+ 825      00
+ 826 0060 CE020000 		.4byte	0x2ce
+ 827 0064 5243435F 		.ascii	"RCC_TypeDef\000"
+ 827      54797065 
+ 827      44656600 
+ 828 0070 DA020000 		.4byte	0x2da
+ 829 0074 696F706F 		.ascii	"ioportmask_t\000"
+ 829      72746D61 
+ 829      736B5F74 
+ 829      00
+ 830 0081 00000000 		.4byte	0x0
+ 831              		.section	.debug_aranges,"",%progbits
+ 832 0000 24000000 		.4byte	0x24
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 16
+
+
+ 833 0004 0200     		.2byte	0x2
+ 834 0006 00000000 		.4byte	.Ldebug_info0
+ 835 000a 04       		.byte	0x4
+ 836 000b 00       		.byte	0x0
+ 837 000c 0000     		.2byte	0x0
+ 838 000e 0000     		.2byte	0x0
+ 839 0010 00000000 		.4byte	.LFB63
+ 840 0014 38000000 		.4byte	.LFE63-.LFB63
+ 841 0018 00000000 		.4byte	.LFB64
+ 842 001c 10000000 		.4byte	.LFE64-.LFB64
+ 843 0020 00000000 		.4byte	0x0
+ 844 0024 00000000 		.4byte	0x0
+ 845              		.section	.debug_ranges,"",%progbits
+ 846              	.Ldebug_ranges0:
+ 847 0000 00000000 		.4byte	.LFB63
+ 848 0004 38000000 		.4byte	.LFE63
+ 849 0008 00000000 		.4byte	.LFB64
+ 850 000c 10000000 		.4byte	.LFE64
+ 851 0010 00000000 		.4byte	0x0
+ 852 0014 00000000 		.4byte	0x0
+ 853              		.section	.debug_str,"MS",%progbits,1
+ 854              	.LASF10:
+ 855 0000 6C6F6E67 		.ascii	"long long int\000"
+ 855      206C6F6E 
+ 855      6720696E 
+ 855      7400
+ 856              	.LASF39:
+ 857 000e 42444352 		.ascii	"BDCR\000"
+ 857      00
+ 858              	.LASF33:
+ 859 0013 43464752 		.ascii	"CFGR\000"
+ 859      00
+ 860              	.LASF36:
+ 861 0018 41484245 		.ascii	"AHBENR\000"
+ 861      4E5200
+ 862              	.LASF30:
+ 863 001f 42535252 		.ascii	"BSRR\000"
+ 863      00
+ 864              	.LASF19:
+ 865 0024 44485231 		.ascii	"DHR12L1\000"
+ 865      324C3100 
+ 866              	.LASF22:
+ 867 002c 44485231 		.ascii	"DHR12L2\000"
+ 867      324C3200 
+ 868              	.LASF41:
+ 869 0034 696F706F 		.ascii	"ioportmask_t\000"
+ 869      72746D61 
+ 869      736B5F74 
+ 869      00
+ 870              	.LASF35:
+ 871 0041 41504231 		.ascii	"APB1RSTR\000"
+ 871      52535452 
+ 871      00
+ 872              	.LASF2:
+ 873 004a 756E7369 		.ascii	"unsigned char\000"
+ 873      676E6564 
+ 873      20636861 
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 17
+
+
+ 873      7200
+ 874              	.LASF45:
+ 875 0058 433A5C70 		.ascii	"C:\\projects\\clock.git\\git\\firmware\\test_dac\000"
+ 875      726F6A65 
+ 875      6374735C 
+ 875      636C6F63 
+ 875      6B2E6769 
+ 876              	.LASF14:
+ 877 0084 64616331 		.ascii	"dac1\000"
+ 877      00
+ 878              	.LASF9:
+ 879 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 879      20756E73 
+ 879      69676E65 
+ 879      6420696E 
+ 879      7400
+ 880              	.LASF4:
+ 881 009b 73686F72 		.ascii	"short unsigned int\000"
+ 881      7420756E 
+ 881      7369676E 
+ 881      65642069 
+ 881      6E7400
+ 882              	.LASF18:
+ 883 00ae 44485231 		.ascii	"DHR12R1\000"
+ 883      32523100 
+ 884              	.LASF21:
+ 885 00b6 44485231 		.ascii	"DHR12R2\000"
+ 885      32523200 
+ 886              	.LASF43:
+ 887 00be 474E5520 		.ascii	"GNU C 4.5.2\000"
+ 887      4320342E 
+ 887      352E3200 
+ 888              	.LASF29:
+ 889 00ca 4441435F 		.ascii	"DAC_TypeDef\000"
+ 889      54797065 
+ 889      44656600 
+ 890              	.LASF17:
+ 891 00d6 53575452 		.ascii	"SWTRIGR\000"
+ 891      49475200 
+ 892              	.LASF47:
+ 893 00de 64616353 		.ascii	"dacSet\000"
+ 893      657400
+ 894              	.LASF38:
+ 895 00e5 41504231 		.ascii	"APB1ENR\000"
+ 895      454E5200 
+ 896              	.LASF16:
+ 897 00ed 44616343 		.ascii	"DacCfg\000"
+ 897      666700
+ 898              	.LASF24:
+ 899 00f4 44485231 		.ascii	"DHR12RD\000"
+ 899      32524400 
+ 900              	.LASF34:
+ 901 00fc 41504232 		.ascii	"APB2RSTR\000"
+ 901      52535452 
+ 901      00
+ 902              	.LASF0:
+ 903 0105 756E7369 		.ascii	"unsigned int\000"
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 18
+
+
+ 903      676E6564 
+ 903      20696E74 
+ 903      00
+ 904              	.LASF32:
+ 905 0112 4750494F 		.ascii	"GPIO_TypeDef\000"
+ 905      5F547970 
+ 905      65446566 
+ 905      00
+ 906              	.LASF13:
+ 907 011f 63686172 		.ascii	"char\000"
+ 907      00
+ 908              	.LASF42:
+ 909 0124 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 909      52784275 
+ 909      66666572 
+ 909      00
+ 910              	.LASF6:
+ 911 0131 696E7433 		.ascii	"int32_t\000"
+ 911      325F7400 
+ 912              	.LASF46:
+ 913 0139 64616349 		.ascii	"dacInit\000"
+ 913      6E697400 
+ 914              	.LASF37:
+ 915 0141 41504232 		.ascii	"APB2ENR\000"
+ 915      454E5200 
+ 916              	.LASF20:
+ 917 0149 44485238 		.ascii	"DHR8R1\000"
+ 917      523100
+ 918              	.LASF23:
+ 919 0150 44485238 		.ascii	"DHR8R2\000"
+ 919      523200
+ 920              	.LASF25:
+ 921 0157 44485231 		.ascii	"DHR12LD\000"
+ 921      324C4400 
+ 922              	.LASF44:
+ 923 015f 7372632F 		.ascii	"src/dac.c\000"
+ 923      6461632E 
+ 923      6300
+ 924              	.LASF3:
+ 925 0169 73686F72 		.ascii	"short int\000"
+ 925      7420696E 
+ 925      7400
+ 926              	.LASF5:
+ 927 0173 75696E74 		.ascii	"uint16_t\000"
+ 927      31365F74 
+ 927      00
+ 928              	.LASF40:
+ 929 017c 5243435F 		.ascii	"RCC_TypeDef\000"
+ 929      54797065 
+ 929      44656600 
+ 930              	.LASF8:
+ 931 0188 75696E74 		.ascii	"uint32_t\000"
+ 931      33325F74 
+ 931      00
+ 932              	.LASF7:
+ 933 0191 6C6F6E67 		.ascii	"long int\000"
+ 933      20696E74 
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 19
+
+
+ 933      00
+ 934              	.LASF26:
+ 935 019a 44485238 		.ascii	"DHR8RD\000"
+ 935      524400
+ 936              	.LASF1:
+ 937 01a1 7369676E 		.ascii	"signed char\000"
+ 937      65642063 
+ 937      68617200 
+ 938              	.LASF27:
+ 939 01ad 444F5231 		.ascii	"DOR1\000"
+ 939      00
+ 940              	.LASF28:
+ 941 01b2 444F5232 		.ascii	"DOR2\000"
+ 941      00
+ 942              	.LASF15:
+ 943 01b7 64616332 		.ascii	"dac2\000"
+ 943      00
+ 944              	.LASF12:
+ 945 01bc 5F426F6F 		.ascii	"_Bool\000"
+ 945      6C00
+ 946              	.LASF11:
+ 947 01c2 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 947      206C6F6E 
+ 947      6720756E 
+ 947      7369676E 
+ 947      65642069 
+ 948              	.LASF31:
+ 949 01d9 4C434B52 		.ascii	"LCKR\000"
+ 949      00
+ 950              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
+ARM GAS  C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 dac.c
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:24     .text.dacInit:00000000 $t
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:30     .text.dacInit:00000000 dacInit
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:71     .text.dacInit:0000002c $d
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:78     .text.dacSet:00000000 $t
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:84     .text.dacSet:00000000 dacSet
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:106    .text.dacSet:0000000c $d
+                     .debug_frame:00000010 $d
+C:\DOCUME~1\z_80\LOCALS~1\Temp\ccNVBOnV.s:77     .text.dacInit:00000038 $t
+
+UNDEFINED SYMBOLS
+_pal_lld_setgroupmode
