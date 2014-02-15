@@ -22,19 +22,19 @@ aStop: -40;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-wPass: 15e3 * 2 * %pi;
+wPass: 8e3 * 2 * %pi;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-wStop: 36e3 * 2 * %pi;
+wStop: 20e3 * 2 * %pi;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-nC:acosh( sqrt( (10^(-aStop/10) - 1)/( 10^(-aPass/10) - 1 ) ) )/acosh( wStop/wPass );
+nI:acosh( sqrt( (10^(-aStop/10) - 1)/( 10^(-aPass/10) - 1 ) ) )/acosh( wStop/wPass );
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-n: ceiling( nC );
+n: ceiling( nI );
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -49,15 +49,14 @@ D: asinh( %epsilon^(-1) )/n;
 if ceiling( n/2 ) = n/2 then
 (
     cnt: n/2, 
-    array( Hs, cnt ), 
-    G: (10^(aPass/20))^(1/cnt)
+    array( Hs, cnt )
 )
 else
 (
     cnt: (n-1)/2, 
     array( Hs, cnt+1 ), 
-    Hs[cnt]: sinh(D)/( s/wPass + sinh(D) ), 
-    G: 1
+    sigmaR: -1/sinh(D), 
+    Hs[cnt]: (1/sinh(D))/( s/wStop + 1/sinh(D) )
 );
 /* [wxMaxima: input   end   ] */
 
@@ -68,12 +67,21 @@ H: 1;
 /* [wxMaxima: input   start ] */
 for i from 0 thru (cnt-1) do
 ( 
-    fi: %pi * ( 2*i + 1 )/(2*n), 
-    sigma: -sinh(D) * sin(fi), 
-    w: cosh(D)* cos(fi), 
-    B1m: -2*sigma, 
-    B2m: sigma^2 + w^2, 
-    Hs[i]: G * B2m/((s/wPass)^2 + B1m*(s/wPass) + B2m), 
+    fiM: %pi * ( 2*i + 1 )/(2*n), 
+    sigmaM_: -sinh(D) * sin(fiM), 
+    wM_: cosh(D)* cos(fiM), 
+
+    sigmaM: sigmaM_/(sigmaM_^2 + wM_^2), 
+    wM:     wM_/(sigmaM_^2 + wM_^2), 
+
+    sigmaZm: 0, 
+    wZm:     sec( fiM ), 
+
+    B1m: -2*sigmaM, 
+    B2m: sigmaM^2 + wM^2, 
+    A1m: 0, 
+    A2m: wZm^2, 
+    Hs[i]: B2m*((s/wStop)^2 + A1m*(s/wStop) + A2m)/( A2m * ((s/wStop)^2 + B1m*(s/wStop) + B2m) ), 
     H: H * Hs[i]
 );
 /* [wxMaxima: input   end   ] */
@@ -83,7 +91,7 @@ H: subst( %i*2*%pi*f, s, H );
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-wxplot2d([cabs(H)], [f,10,30000])$
+wxplot2d([cabs(H)], [f,10,100000])$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -142,11 +150,11 @@ R[1]: 2000;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Rb[0]: 17000;
+Rb[0]: 16000;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Rb[1]: 7200;
+Rb[1]: 1000;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -174,7 +182,7 @@ a: cabs(Hs)$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-wxplot2d([a], [f,10,50000])$
+wxplot2d([a], [f,10,22500])$
 /* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
