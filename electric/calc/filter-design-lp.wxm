@@ -1,0 +1,221 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 11.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+numer: true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprec : 64;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Filter parameters.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+aPass: -1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+aStop: -20;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Unnormalized paremeters.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fPass: 40;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fStop: 50;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Calculatable constants.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+eps: sqrt( 10^( -0.1*aPass ) - 1 );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n: ceiling( acosh( sqrt( ( 10^(-0.1*aStop) - 1 )/( 10^(-0.1*aPass) - 1 ) ) ) / acosh( fStop/fPass ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D: asinh( 1/eps )/n;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if ceiling( n/2 ) = n/2 then
+  ( cnt: n/2, sigmaN: 1 )
+else
+  ( cnt: (n-1)/2, sigmaN: -sinh(D) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Hs: 1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i from 0 thru (cnt-1) do
+    ( fi: %pi*(2*i+1)/(2*n),
+      sigma: -sinh(D) * sin(fi),
+      w: cosh(D) * cos(fi), 
+      B2m: sigma^2 + w^2, 
+      B1m: -2 * sigma, 
+      Hs: ratsimp( Hs * B2m / ( s^2 + B1m*s + B2m ) ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if ( ceiling( n/2 ) = n/2 ) then
+    ( Hs: ratsimp( Hs * 10^(aPass/20) ) )
+else
+    ( Hs: ratsimp( Hs * sinh(D)/(s+sinh(D)) ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Normalized bandstop.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Parameters for normalized to bandstop convertion.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Ss: s / (2 * %pi * fPass);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+notchHs: ratsimp( subst( Ss, s, Hs ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Frequency responce.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Frequency response.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+complexHs: subst( 2*%pi*%i*ss, s, Hs );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+absHs: cabs( complexHs );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+phHs: carg( complexHs );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([absHs], [ss,0,1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([phHs], [ss,0,1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Discretizing.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+f: 200;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Hz: subst( 2*f*(1-z)/(1+z), s, notchHs );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Hz: ratsimp( expand( Hz ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+numHz: num( Hz );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+denHz: denom( Hz );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+coeffY0: coeff( numHz, z, 0 );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+coeffX0: coeff( denHz, z, 0 );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load( powers );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+res: powers( numHz, z );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+szY: res[1]+1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+res: powers( denHz, z );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+szX: res[1]+1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Divide all coefs on denominator's coef at power 0.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+array( coefX, szX );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+array( coefY, szY );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i from 0 thru (szX-1) do
+    ( coefX[i]: coeff( denHz, z, i )/coeffX0, 
+      print( coefX[i] ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i from 0 thru (szY-1) do
+    ( coefY[i]: -coeff( numHz, z, i )/coeffY0, 
+      print( coefY[i] ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+G: coeffY0/coeffX0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: title   start ]
+Impulse responce.
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill( w );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+absHz: cabs( subst( exp(-%i*w), z, Hz ) );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([absHz], [w,0,%pi]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
