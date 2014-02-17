@@ -1,4 +1,4 @@
-update=Sun 16 Feb 2014 04:46:32 PM MSK
+update=Mon 17 Feb 2014 10:54:57 PM MSK
 version=1
 last_client=eeschema
 [cvpcb]
@@ -99,3 +99,4 @@ LibName42=ad8607_2
 LibName43=lm4861
 LibName44=sdc
 LibName45=conn_cls_28
+LibName46=ds18s20
