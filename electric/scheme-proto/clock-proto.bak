@@ -1461,7 +1461,7 @@ F 1 "p2" V 30300 18800 60  0000 C CNN
 F 2 "~" H 30400 18800 60  0000 C CNN
 F 3 "~" H 30400 18800 60  0000 C CNN
 	1    30200 18850
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 $Comp
 L CONN_6 P?
@@ -1475,7 +1475,7 @@ F 3 "" H 29900 20400 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	29650 20750 29650 21100
+	29650 20750 29650 21550
 Text Label 29650 21050 1    60   ~ 0
 pb10
 Text Label 29750 21050 1    60   ~ 0
@@ -1489,21 +1489,21 @@ pb14
 Text Label 30150 21050 1    60   ~ 0
 pb15
 Wire Wire Line
-	29750 20750 29750 21100
+	29750 20750 29750 21550
 Wire Wire Line
-	29850 20750 29850 21100
+	29850 20750 29850 21650
 Wire Wire Line
-	29950 20750 29950 21100
+	29950 20750 29950 21650
 Wire Wire Line
-	30050 20750 30050 21100
+	30050 20750 30050 21650
 Wire Wire Line
-	30150 20750 30150 21100
+	30150 20750 30150 21650
 Wire Wire Line
 	29100 17500 28550 17500
 Wire Wire Line
 	29100 17600 28550 17600
 Wire Wire Line
-	29100 17700 28550 17700
+	27350 17700 29100 17700
 Wire Wire Line
 	29100 17800 28550 17800
 Wire Wire Line
@@ -1519,9 +1519,9 @@ Wire Wire Line
 Wire Wire Line
 	29100 18400 28550 18400
 Wire Wire Line
-	29100 18500 28550 18500
+	27850 18500 29100 18500
 Wire Wire Line
-	29100 18600 28550 18600
+	27850 18600 29100 18600
 Wire Wire Line
 	29100 18700 28550 18700
 Wire Wire Line
@@ -1529,17 +1529,17 @@ Wire Wire Line
 Wire Wire Line
 	29100 18900 28550 18900
 Wire Wire Line
-	29100 19000 28550 19000
+	28000 19000 29100 19000
 Wire Wire Line
-	29100 19100 28550 19100
+	28000 19100 29100 19100
 Wire Wire Line
-	29100 19200 28550 19200
+	28000 19200 29100 19200
 Wire Wire Line
-	29100 19300 28550 19300
+	27650 19300 29100 19300
 Wire Wire Line
-	29100 19400 28550 19400
+	28000 19400 29100 19400
 Wire Wire Line
-	29100 19500 28550 19500
+	28000 19500 29100 19500
 $Comp
 L PNP Q?
 U 1 1 53016F7C
@@ -1715,37 +1715,37 @@ Wire Notes Line
 Text Notes 8350 12550 0    20   ~ 0
 Because servo-vcc could \nbe less then 3.3v if batteries \npack is very discharged.
 Wire Wire Line
-	29100 19600 28550 19600
+	28000 19600 29100 19600
 Wire Wire Line
-	29100 19700 28550 19700
+	28000 19700 29100 19700
 Wire Wire Line
-	29100 19800 28550 19800
+	28000 19800 29100 19800
 Wire Wire Line
-	29100 19900 28550 19900
+	28000 19900 29100 19900
 Wire Wire Line
 	29100 20000 28550 20000
 Wire Wire Line
 	29100 20100 28550 20100
 Wire Wire Line
-	29100 20200 28550 20200
+	28500 20200 29100 20200
 Wire Wire Line
 	31250 17500 30700 17500
 Wire Wire Line
 	31250 17600 30700 17600
 Wire Wire Line
-	31250 17700 30700 17700
+	30700 17700 32300 17700
 Wire Wire Line
 	31250 17800 30700 17800
 Wire Wire Line
-	31250 17900 30700 17900
+	30700 17900 31950 17900
 Wire Wire Line
 	31250 18000 30700 18000
 Wire Wire Line
-	31250 18100 30700 18100
+	30700 18100 31750 18100
 Wire Wire Line
-	31250 18200 30700 18200
+	30700 18200 31750 18200
 Wire Wire Line
-	31250 18300 30700 18300
+	30700 18300 31750 18300
 Wire Wire Line
 	31250 18400 30700 18400
 Wire Wire Line
@@ -1755,9 +1755,9 @@ Wire Wire Line
 Wire Wire Line
 	31250 18700 30700 18700
 Wire Wire Line
-	31250 18800 30700 18800
+	30700 18800 32250 18800
 Wire Wire Line
-	31250 18900 30700 18900
+	30700 18900 32250 18900
 Wire Wire Line
 	31250 19000 30700 19000
 Wire Wire Line
@@ -1765,17 +1765,17 @@ Wire Wire Line
 Wire Wire Line
 	31250 19200 30700 19200
 Wire Wire Line
-	31250 19300 30700 19300
+	30700 19300 31950 19300
 Wire Wire Line
-	31250 19400 30700 19400
+	30700 19400 31950 19400
 Wire Wire Line
-	31250 19500 30700 19500
+	30700 19500 31950 19500
 Wire Wire Line
-	31250 19600 30700 19600
+	30700 19600 31950 19600
 Wire Wire Line
-	31250 19700 30700 19700
+	30700 19700 31950 19700
 Wire Wire Line
-	31250 19800 30700 19800
+	30700 19800 31950 19800
 Wire Wire Line
 	31250 19900 30700 19900
 Wire Wire Line
@@ -3590,62 +3590,159 @@ Wire Wire Line
 Connection ~ 14700 1400
 Wire Wire Line
 	13800 17050 13800 17350
-Text Label 27600 17600 0    60   ~ 0
+Text Label 28050 19700 0    60   ~ 0
 lcd-cs
-Text Label 27600 17750 0    60   ~ 0
+Text Label 28050 19800 0    60   ~ 0
 lcd-rst
-Text Label 27600 17900 0    60   ~ 0
+Text Label 28050 19400 0    60   ~ 0
 lcd-clk
-Text Label 27600 18050 0    60   ~ 0
+Text Label 28050 19600 0    60   ~ 0
 lcd-mosi
-Text Label 27600 18200 0    60   ~ 0
+Text Label 28050 19900 0    60   ~ 0
 lcd-mode
-Text Label 27550 18700 0    60   ~ 0
+Text Label 30050 21600 1    60   ~ 0
 sd-miso
-Text Label 27550 18850 0    60   ~ 0
+Text Label 29950 21600 1    60   ~ 0
 sd-sck
-Text Label 27550 19000 0    60   ~ 0
+Text Label 30150 21600 1    60   ~ 0
 sd-mosi
-Text Label 27550 19150 0    60   ~ 0
+Text Label 29850 21550 1    60   ~ 0
 sd-cs
-Text Label 26550 19350 0    60   ~ 0
+Text Label 31400 19600 0    60   ~ 0
 5v-en
-Text Label 27300 19900 0    60   ~ 0
+Text Label 31400 18800 0    60   ~ 0
 servo-en-60mA
-Text Label 27300 20050 0    60   ~ 0
+Text Label 31400 18900 0    60   ~ 0
 servo-en-400mA
-Text Label 27300 20200 0    60   ~ 0
+Text Label 31400 17900 0    60   ~ 0
 servo-pwm
-Text Label 27300 20650 0    60   ~ 0
+Text Label 31400 19800 0    60   ~ 0
 amp-en
-Text Label 27300 20750 0    60   ~ 0
+Text Label 31400 19700 0    60   ~ 0
 sound-pwm
-Text Label 27300 20850 0    60   ~ 0
+Text Label 27700 19300 0    60   ~ 0
 sound-dac
-Text Label 26550 19450 0    60   ~ 0
+Text Label 31400 19500 0    60   ~ 0
 dist-trig
-Text Label 26550 19600 0    60   ~ 0
+Text Label 31400 19400 0    60   ~ 0
 dist-echo
-Text Label 26800 21100 0    60   ~ 0
+Text Label 31400 19300 0    60   ~ 0
 led-en
-Text Label 26800 21550 0    60   ~ 0
+Text Label 28050 19000 0    60   ~ 0
 1w-en
-Text Label 26800 21700 0    60   ~ 0
+Text Label 28050 19200 0    60   ~ 0
 1w-rx
-Text Label 26800 21850 0    60   ~ 0
+Text Label 28050 19100 0    60   ~ 0
 1w-tx
-Text Label 26800 22250 0    60   ~ 0
+Text Label 27900 18500 0    60   ~ 0
 adapter-volt
-Text Label 26800 22350 0    60   ~ 0
+Text Label 27900 18600 0    60   ~ 0
 battery-volt
-Text Label 27800 21350 0    60   ~ 0
+Text Label 31450 18100 0    60   ~ 0
 btn-1
-Text Label 27800 21450 0    60   ~ 0
+Text Label 31450 18200 0    60   ~ 0
 btn-2
-Text Label 27800 21550 0    60   ~ 0
+Text Label 31450 18300 0    60   ~ 0
 btn-3
-Text Label 27800 21650 0    60   ~ 0
+Text Label 29650 21500 1    60   ~ 0
 btn-4
-Text Label 27800 21750 0    60   ~ 0
+Text Label 29750 21500 1    60   ~ 0
 btn-5
+Text Label 27400 17700 0    60   ~ 0
+from-discovery-3.3v
+Text Label 31450 17700 0    60   ~ 0
+from-discovery-5v
+Wire Wire Line
+	31250 17500 31250 17300
+Wire Wire Line
+	31250 17300 31450 17300
+Wire Wire Line
+	31450 17300 31450 17400
+$Comp
+L GND #PWR?
+U 1 1 53042B2C
+P 31450 17400
+F 0 "#PWR?" H 31450 17400 30  0001 C CNN
+F 1 "GND" H 31450 17330 30  0001 C CNN
+F 2 "" H 31450 17400 60  0001 C CNN
+F 3 "" H 31450 17400 60  0001 C CNN
+	1    31450 17400
+	1    0    0    -1  
+$EndComp
+NoConn ~ 28550 17600
+NoConn ~ 31250 17600
+Text Notes 27600 19200 0    60   ~ 0
+USART2
+Text Notes 27700 19550 0    60   ~ 0
+SPI1
+Text Notes 29900 21800 0    60   ~ 0
+SPI2
+NoConn ~ 28000 19500
+Wire Wire Line
+	28500 20200 28500 20250
+$Comp
+L GND #PWR?
+U 1 1 53048320
+P 28500 20250
+F 0 "#PWR?" H 28500 20250 30  0001 C CNN
+F 1 "GND" H 28500 20180 30  0001 C CNN
+F 2 "" H 28500 20250 60  0001 C CNN
+F 3 "" H 28500 20250 60  0001 C CNN
+	1    28500 20250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	31250 20200 31250 20250
+$Comp
+L GND #PWR?
+U 1 1 53048327
+P 31250 20250
+F 0 "#PWR?" H 31250 20250 30  0001 C CNN
+F 1 "GND" H 31250 20180 30  0001 C CNN
+F 2 "" H 31250 20250 60  0001 C CNN
+F 3 "" H 31250 20250 60  0001 C CNN
+	1    31250 20250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	28550 17500 28550 17300
+Wire Wire Line
+	28550 17300 28350 17300
+Wire Wire Line
+	28350 17300 28350 17400
+$Comp
+L GND #PWR?
+U 1 1 5304849A
+P 28350 17400
+F 0 "#PWR?" H 28350 17400 30  0001 C CNN
+F 1 "GND" H 28350 17330 30  0001 C CNN
+F 2 "" H 28350 17400 60  0001 C CNN
+F 3 "" H 28350 17400 60  0001 C CNN
+	1    28350 17400
+	1    0    0    -1  
+$EndComp
+NoConn ~ 28550 18400
+NoConn ~ 28550 18300
+NoConn ~ 28550 18200
+NoConn ~ 28550 18100
+NoConn ~ 28550 18000
+NoConn ~ 28550 17900
+NoConn ~ 28550 17800
+NoConn ~ 28550 18700
+NoConn ~ 28550 18800
+NoConn ~ 28550 18900
+NoConn ~ 28550 20000
+NoConn ~ 28550 20100
+NoConn ~ 31250 20100
+NoConn ~ 31250 20000
+NoConn ~ 31250 19900
+NoConn ~ 31250 19200
+NoConn ~ 31250 19100
+NoConn ~ 31250 19000
+NoConn ~ 31250 18700
+NoConn ~ 31250 18600
+NoConn ~ 31250 18500
+NoConn ~ 31250 18400
+NoConn ~ 31250 18000
+NoConn ~ 31250 17800
 $EndSCHEMATC
