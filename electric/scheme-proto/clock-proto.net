@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/z80/projects/clock.git/electric/scheme-proto/clock-proto.sch)
-    (date "Fri 21 Feb 2014 09:29:29 AM MSK")
+    (date "Fri 21 Feb 2014 10:35:38 PM MSK")
     (tool "eeschema (2013-07-07 BZR 4022)-stable"))
   (components
     (comp (ref Q5)
@@ -812,6 +812,21 @@
         (pin (num 4) (name 4) (type passive))
         (pin (num 5) (name 5) (type passive))
         (pin (num 6) (name 6) (type passive))))
+    (libpart (lib my_comps) (part 3310-LCD)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) 3310-LCD)
+        (field (name Footprint) ~)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name Vdd) (type power_in))
+        (pin (num 2) (name SCLK) (type input))
+        (pin (num 3) (name SDIN) (type input))
+        (pin (num 4) (name D/~C~) (type input))
+        (pin (num 5) (name ~SCE~) (type input))
+        (pin (num 6) (name Gnd) (type passive))
+        (pin (num 7) (name Vout) (type passive))
+        (pin (num 8) (name ~Rst~) (type input))))
     (libpart (lib ad8607_2) (part AD8607_2)
       (fields
         (field (name Reference) U)
@@ -913,22 +928,7 @@
       (pins
         (pin (num 1) (name gnd) (type passive))
         (pin (num 2) (name dq) (type BiDi))
-        (pin (num 3) (name vdd) (type passive))))
-    (libpart (lib my_comps) (part 3310-LCD)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) 3310-LCD)
-        (field (name Footprint) ~)
-        (field (name Datasheet) ~))
-      (pins
-        (pin (num 1) (name Vdd) (type power_in))
-        (pin (num 2) (name SCLK) (type input))
-        (pin (num 3) (name SDIN) (type input))
-        (pin (num 4) (name D/~C~) (type input))
-        (pin (num 5) (name ~SCE~) (type input))
-        (pin (num 6) (name Gnd) (type passive))
-        (pin (num 7) (name Vout) (type passive))
-        (pin (num 8) (name ~Rst~) (type input)))))
+        (pin (num 3) (name vdd) (type passive)))))
   (libraries
     (library (logical device)
       (uri /home/z80/programs/kicad/share/library/device.lib))
