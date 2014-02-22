@@ -52,7 +52,7 @@ $Descr A1 33110 23386
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "21 feb 2014"
+Date "22 feb 2014"
 Rev ""
 Comp ""
 Comment1 ""
@@ -484,26 +484,6 @@ F 3 "" H 8550 7300 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	8550 6300 8550 6700
-$Comp
-L C C8
-U 1 1 52FFCDCA
-P 8900 6900
-F 0 "C8" H 8900 7000 40  0000 L CNN
-F 1 "4u7" H 8906 6815 40  0000 L CNN
-F 2 "~" H 8938 6750 30  0000 C CNN
-F 3 "~" H 8900 6900 60  0000 C CNN
-	1    8900 6900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8900 6700 8900 6600
-Wire Wire Line
-	8900 6600 8550 6600
-Connection ~ 8550 6600
-Wire Wire Line
-	8900 7100 8900 7200
-Wire Wire Line
-	8900 7200 8550 7200
 Connection ~ 6300 13050
 Wire Wire Line
 	3900 12750 5100 12750
@@ -2498,7 +2478,7 @@ gnd
 Text Label 31000 17600 0    60   ~ 0
 nc2
 Text Label 31000 17700 0    60   ~ 0
-5v
+5v_
 Text Label 31000 17800 0    60   ~ 0
 pb9
 Text Label 31000 17900 0    60   ~ 0
@@ -3431,9 +3411,6 @@ F 3 "" H 21450 5100 60  0000 C CNN
 $EndComp
 Text Notes 15200 6450 0    60   ~ 0
 This resistances ratio \nconverts 3.3V to 5V range.
-Wire Wire Line
-	15850 4500 15850 2750
-Connection ~ 15850 2750
 $Comp
 L C C13
 U 1 1 53040698
@@ -3767,7 +3744,6 @@ F 3 "" H 19300 20200 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	8550 7100 8550 7300
-Connection ~ 8550 7200
 Wire Wire Line
 	9800 6700 9800 6500
 $Comp
@@ -3799,10 +3775,6 @@ F 3 "~" H 15950 8500 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	14550 8300 15150 8300
-Text Label 16100 2750 0    60   ~ 0
-amp-vdd
-Text Label 15900 7800 0    60   ~ 0
-amp-vdd
 Wire Wire Line
 	15850 8000 15850 7800
 Wire Wire Line
@@ -3835,9 +3807,44 @@ F 3 "" H 15000 8850 60  0000 C CNN
 	1    15000 8850
 	1    0    0    -1  
 $EndComp
-Text Label 14600 8300 0    60   ~ 0
-amp-vdd
 Text Notes 14400 7950 0    60   ~ 0
 This is unused OpAmp part.
 NoConn ~ 16550 8500
+Text Label 15900 7800 0    60   ~ 0
+filter-vdd
+Text Label 15950 3550 0    60   ~ 0
+filter-vdd
+Wire Wire Line
+	15850 3550 15850 4500
+Wire Wire Line
+	15850 3550 16850 3550
+$Comp
+L C C8
+U 1 1 5308DBDC
+P 16650 3950
+F 0 "C8" H 16650 4050 40  0000 L CNN
+F 1 "100n" H 16656 3865 40  0000 L CNN
+F 2 "~" H 16688 3800 30  0000 C CNN
+F 3 "~" H 16650 3950 60  0000 C CNN
+	1    16650 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR085
+U 1 1 5308DBE2
+P 16650 4350
+F 0 "#PWR085" H 16650 4350 30  0001 C CNN
+F 1 "GND" H 16650 4280 30  0001 C CNN
+F 2 "" H 16650 4350 60  0000 C CNN
+F 3 "" H 16650 4350 60  0000 C CNN
+	1    16650 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16650 4150 16650 4350
+Wire Wire Line
+	16650 3750 16650 3550
+Connection ~ 16650 3550
+Text Label 14650 8300 0    60   ~ 0
+filter-vdd
 $EndSCHEMATC
