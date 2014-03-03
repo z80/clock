@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = Sat 22 Feb 2014 09:36:07 PM MSK
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = Mon 03 Mar 2014 12:54:51 PM MSK
 
 BeginCmp
 TimeStamp = /53011988;
@@ -199,7 +199,7 @@ EndCmp
 BeginCmp
 TimeStamp = /5302D406;
 Reference = D5;
-ValeurCmp = DIODESCH;
+ValeurCmp = 1N5819;
 IdModule  = D3;
 EndCmp
 

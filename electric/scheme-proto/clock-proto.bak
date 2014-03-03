@@ -2477,8 +2477,6 @@ Text Label 31000 17500 0    60   ~ 0
 gnd
 Text Label 31000 17600 0    60   ~ 0
 nc2
-Text Label 31000 17700 0    60   ~ 0
-5v_
 Text Label 31000 17800 0    60   ~ 0
 pb9
 Text Label 31000 17900 0    60   ~ 0
