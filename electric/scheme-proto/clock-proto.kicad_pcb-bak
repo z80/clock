@@ -3,7 +3,7 @@
   (general
     (links 258)
     (no_connects 0)
-    (area 118.449999 58.01106 181.550001 149.050001)
+    (area 119.449999 58.01106 180.050001 149.050001)
     (thickness 1.6)
     (drawings 9)
     (tracks 1178)
@@ -32,7 +32,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.254)
     (user_trace_width 0.4)
     (user_trace_width 0.6)
     (trace_clearance 0.254)
@@ -4757,7 +4757,7 @@
     (fp_text reference D5 (at 0 0 270) (layer F.SilkS)
       (effects (font (size 1.016 1.016) (thickness 0.2032)))
     )
-    (fp_text value DIODESCH (at 0 0 270) (layer F.SilkS) hide
+    (fp_text value 1N5819 (at 0 0 270) (layer F.SilkS) hide
       (effects (font (size 1.016 1.016) (thickness 0.2032)))
     )
     (fp_line (start 3.81 0) (end 3.048 0) (layer F.SilkS) (width 0.3048))
