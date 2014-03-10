@@ -6,7 +6,7 @@ numer: true;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Vin: 3.3/2;
+Vin: 4.5/2;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -14,11 +14,11 @@ Vout: 4.5/2;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Rin: 20e3;
+Rin: 4.3e3;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Rfb: 20e3;
+Rfb: 5.1e3;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -34,11 +34,11 @@ kill( all );
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Vref2: 1.65;
+Vref2: 1.92;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Vref1: 1.95;
+Vref1: 2.25;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
