@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = Sat 08 Mar 2014 11:40:50 AM MSK
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 3/9/2014 7:16:32 PM
 
 BeginCmp
 TimeStamp = /53011988;
@@ -24,7 +24,7 @@ EndCmp
 BeginCmp
 TimeStamp = /531B0A9C;
 Reference = C4;
-ValeurCmp = 54u;
+ValeurCmp = 47u;
 IdModule  = C2V10;
 EndCmp
 
@@ -32,6 +32,34 @@ BeginCmp
 TimeStamp = /531B0AA3;
 Reference = C5;
 ValeurCmp = 4u7;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D2BD4;
+Reference = C6;
+ValeurCmp = 4n;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D2DA2;
+Reference = C7;
+ValeurCmp = 1n;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D3CD8;
+Reference = C8;
+ValeurCmp = 68n;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D3CE0;
+Reference = C9;
+ValeurCmp = 1n;
 IdModule  = SM0805;
 EndCmp
 
@@ -150,20 +178,6 @@ EndCmp
 BeginCmp
 TimeStamp = /5302D406;
 Reference = D5;
-ValeurCmp = 1N5819;
-IdModule  = D3;
-EndCmp
-
-BeginCmp
-TimeStamp = /531B13AD;
-Reference = D6;
-ValeurCmp = 1N5819;
-IdModule  = D3;
-EndCmp
-
-BeginCmp
-TimeStamp = /531B0F26;
-Reference = D7;
 ValeurCmp = 1N5819;
 IdModule  = D3;
 EndCmp
@@ -365,6 +379,13 @@ IdModule  = SOT23EBC;
 EndCmp
 
 BeginCmp
+TimeStamp = /531D3F04;
+Reference = Q10;
+ValeurCmp = bc857;
+IdModule  = SOT23EBC;
+EndCmp
+
+BeginCmp
 TimeStamp = /53016F9A;
 Reference = Q11;
 ValeurCmp = bc847;
@@ -375,6 +396,13 @@ BeginCmp
 TimeStamp = /53016F7C;
 Reference = Q12;
 ValeurCmp = bc857;
+IdModule  = SOT23EBC;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D40F1;
+Reference = Q13;
+ValeurCmp = bc847;
 IdModule  = SOT23EBC;
 EndCmp
 
@@ -463,9 +491,16 @@ IdModule  = SM0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /531B1A73;
+TimeStamp = /531D1F91;
 Reference = R9;
-ValeurCmp = 100;
+ValeurCmp = 20k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D1DBB;
+Reference = R10;
+ValeurCmp = 10k;
 IdModule  = SM0805;
 EndCmp
 
@@ -484,6 +519,13 @@ IdModule  = SM0805;
 EndCmp
 
 BeginCmp
+TimeStamp = /531D2DAF;
+Reference = R13;
+ValeurCmp = 20k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
 TimeStamp = /5300D01A;
 Reference = R14;
 ValeurCmp = 0;
@@ -498,9 +540,65 @@ IdModule  = SM0805;
 EndCmp
 
 BeginCmp
+TimeStamp = /531D3CC3;
+Reference = R16;
+ValeurCmp = 2k7;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D3CBC;
+Reference = R17;
+ValeurCmp = 1k3;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D3CE6;
+Reference = R18;
+ValeurCmp = 2k7;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D6989;
+Reference = R19;
+ValeurCmp = 15k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
 TimeStamp = /53019019;
 Reference = R20;
 ValeurCmp = 100;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D6B87;
+Reference = R21;
+ValeurCmp = 1k8;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D6F82;
+Reference = R22;
+ValeurCmp = 1k8;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D42DF;
+Reference = R23;
+ValeurCmp = 3k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D48AC;
+Reference = R24;
+ValeurCmp = 3k;
 IdModule  = SM0805;
 EndCmp
 
@@ -719,6 +817,13 @@ TimeStamp = /5306E2C6;
 Reference = U1;
 ValeurCmp = 3310-LCD;
 IdModule  = my_nokia-3310-lcd;
+EndCmp
+
+BeginCmp
+TimeStamp = /531D7E61;
+Reference = U2;
+ValeurCmp = AD8607_2;
+IdModule  = SO8E;
 EndCmp
 
 BeginCmp

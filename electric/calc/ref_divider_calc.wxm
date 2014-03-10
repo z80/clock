@@ -1,0 +1,69 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+numer: true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vin: 3.3/2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vout: 4.5/2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Rin: 20e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Rfb: 20e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq: (Vr-Vin)/Rin + (Vr-Vout)/Rfb = 0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve( [eq], [Vr] );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill( all );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vref2: 1.65;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vref1: 1.95;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Vcc: 4.5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+R3: 10e3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq1: Vref1 = (R2+R3)/(R1+R2+R3)*Vcc;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq2: Vref2 = R3/(R1+R2+R3)*Vcc;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve( [eq1, eq2], [R1, R2] );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+16+32+64+128;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
