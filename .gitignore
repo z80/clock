@@ -17,4 +17,9 @@
 *.app
 
 _temp
+.cproject
+.project
+*.o.d
+*.lst
+
 
