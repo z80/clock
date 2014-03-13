@@ -16,9 +16,10 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "test.h"
+//#include "test.h"
 
 #include "dac.h"
+#include "playback.h"
 
 /*
  * Red LED blinker thread, times are in milliseconds.

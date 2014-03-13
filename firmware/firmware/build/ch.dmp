@@ -24,29 +24,29 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   3 .bss          00000410  20000800  08006a88  00008800  2**3
                   ALLOC
-  4 .debug_abbrev 00006b61  00000000  00000000  00006a88  2**0
+  4 .debug_abbrev 000054e4  00000000  00000000  00006a88  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0001be9c  00000000  00000000  0000d5e9  2**0
+  5 .debug_info   00015a72  00000000  00000000  0000bf6c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   0000a7c9  00000000  00000000  00029485  2**0
+  6 .debug_line   0000852c  00000000  00000000  000219de  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_loc    0000a265  00000000  00000000  00033c4e  2**0
+  7 .debug_loc    000073d0  00000000  00000000  00029f0a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_pubnames 00001b3f  00000000  00000000  0003deb3  2**0
+  8 .debug_pubnames 000016d1  00000000  00000000  000312da  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_pubtypes 000044bf  00000000  00000000  0003f9f2  2**0
+  9 .debug_pubtypes 000035dd  00000000  00000000  000329ab  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00001240  00000000  00000000  00043eb1  2**0
+ 10 .debug_aranges 00000d98  00000000  00000000  00035f88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00001e70  00000000  00000000  000450f1  2**0
+ 11 .debug_ranges 00001890  00000000  00000000  00036d20  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_str    00003e31  00000000  00000000  00046f61  2**0
+ 12 .debug_str    0000370f  00000000  00000000  000385b0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .comment      0000002a  00000000  00000000  0004ad92  2**0
+ 13 .comment      0000002a  00000000  00000000  0003bcbf  2**0
                   CONTENTS, READONLY
- 14 .ARM.attributes 00000031  00000000  00000000  0004adbc  2**0
+ 14 .ARM.attributes 00000031  00000000  00000000  0003bce9  2**0
                   CONTENTS, READONLY
- 15 .debug_frame  00002ea0  00000000  00000000  0004adf0  2**2
+ 15 .debug_frame  00002118  00000000  00000000  0003bd1c  2**2
                   CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 08005000 l    d  startup	00000000 startup
@@ -133,18 +133,6 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 chmsg.c
 00000000 l    df *ABS*	00000000 chmboxes.c
 00000000 l    df *ABS*	00000000 chmempools.c
-00000000 l    df *ABS*	00000000 test.c
-00000000 l    df *ABS*	00000000 testthd.c
-00000000 l    df *ABS*	00000000 testsem.c
-00000000 l    df *ABS*	00000000 testmtx.c
-00000000 l    df *ABS*	00000000 testmsg.c
-00000000 l    df *ABS*	00000000 testmbox.c
-00000000 l    df *ABS*	00000000 testevt.c
-00000000 l    df *ABS*	00000000 testheap.c
-00000000 l    df *ABS*	00000000 testpools.c
-00000000 l    df *ABS*	00000000 testdyn.c
-00000000 l    df *ABS*	00000000 testqueues.c
-00000000 l    df *ABS*	00000000 testbmk.c
 00000000 l    df *ABS*	00000000 can.c
 00000000 l    df *ABS*	00000000 ext.c
 00000000 l    df *ABS*	00000000 gpt.c
@@ -169,6 +157,7 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 usb_lld.c
 00000000 l    df *ABS*	00000000 evtimer.c
 00000000 l    df *ABS*	00000000 syscalls.c
+00000000 l    df *ABS*	00000000 playback.c
 00000000 l    df *ABS*	00000000 memset.c
 08006a40 g     O .text	0000003c pal_default_config
 080052e0  w    F .text	00000002 Vector58
@@ -257,6 +246,7 @@ SYMBOL TABLE:
 08005ca0 g     F .text	00000028 _core_init
 080066f0 g     F .text	0000002c pwm_lld_init
 080052e0  w    F .text	00000002 VectorE4
+00000000         *UND*	00000000 f_read
 080052e0  w    F .text	00000002 VectorC0
 080053e0 g     F .text	00000010 _port_switch
 00002000 g       *ABS*	00000000 __ram_size__
@@ -286,6 +276,7 @@ SYMBOL TABLE:
 080052e0  w    F .text	00000002 VectorC4
 08006050 g     F .text	00000028 Vector7C
 08006500 g     F .text	00000038 rtc_lld_set_prescaler
+00000000         *UND*	00000000 f_mount
 08005960 g     F .text	0000000a chMtxInit
 08005480 g     F .text	00000014 _idle_thread
 08005c10 g     F .text	00000086 chOQWriteTimeout
@@ -325,6 +316,7 @@ SYMBOL TABLE:
 080052e0 g     F .text	00000002 _unhandled_exception
 08005e70 g     F .text	00000040 sdObjectInit
 080052e0  w    F .text	00000002 Vector88
+00000000         *UND*	00000000 f_open
 20000400 g       .stacks	00000000 __main_thread_stack_base__
 080050ec g       startup	00000000 __init_array_start
 08005810 g     F .text	00000040 _thread_init
