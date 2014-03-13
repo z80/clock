@@ -1,0 +1,10 @@
+The files in this directory are originally released by Sun Microsystems, Inc. 
+The source code has been modified by simplifying the ADPCM algorithm to increase 
+running speed.
+
+Here, the quantizer scale factor, y(k), is determined by "unlocked" factor
+yu(k) only. The factor yl(k) and speed-contral factor al(k) are ignored.
+
+--Chengxiang Lu (CMU   lu+@cs.cmu.edu)
+
+  Nov. 11, 1994
