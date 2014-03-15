@@ -82,7 +82,9 @@ CSRC = $(PORTSRC) \
        $(CHIBIOS)/os/various/syscalls.c \
        src/main.c \
        src/dac.c \
-       src/playback.c
+       src/playback.c \
+       src/3310.c \
+       src/3310_backend.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
