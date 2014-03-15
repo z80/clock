@@ -1,6 +1,5 @@
 
 #include "3310.h"
-#include "stm32f10x.h"
 
 
 /*--------------------------------------------------------------------------------------------------
@@ -8,7 +7,7 @@
 
              This table defines the standard ASCII characters in a 5x7 dot format.
 --------------------------------------------------------------------------------------------------*/
-static const BYTE FontLookup [][5] =
+static const uint8_t FontLookup [][5] =
 {
     { 0x00, 0x00, 0x00, 0x00, 0x00 },  // sp
     { 0x00, 0x00, 0x2f, 0x00, 0x00 },   // !
@@ -135,12 +134,12 @@ static const BYTE FontLookup [][5] =
 /*--------------------------------------------------------------------------------------------------
                                       Global Variables
 --------------------------------------------------------------------------------------------------*/
-static BYTE  g_LcdCache[ LCD_CACHE_SIZE ];
+static uint8_t  g_LcdCache[ LCD_CACHE_SIZE ];
 
 static int   LcdCacheIdx;
-BYTE         UpdateLcd;
+uint8_t      UpdateLcd;
 
-static void lcdSend( BYTE data );
+static void lcdSend( uint8_t data );
 
 /*--------------------------------------------------------------------------------------------------
 
@@ -155,7 +154,7 @@ static void lcdSend( BYTE data );
   Notes        :  Power ON or OFF LCD
 
 --------------------------------------------------------------------------------------------------*/
-void lcdPower( BYTE stat )
+void lcdPower( uint8_t stat )
 {
     if (stat) 
     {
@@ -204,9 +203,9 @@ void lcdPower( BYTE stat )
 --------------------------------------------------------------------------------------------------*/
 void lcdInit( void )
 {
-    static BYTE FirstInit = BTRUE;
+    static uint8_t FirstInit = BTRUE;
 	
-    init3310( g_LcdCache, LCD_CACHE_SIZE );
+    init3310();
     //  Toggle display reset pin.
     delay3310( 65536 * 4 );
     /* Deselect the display Chip Select high */
@@ -267,7 +266,7 @@ void lcdInit( void )
   Notes        :  No change visible at ambient temperature.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdContrast( BYTE contrast )
+void lcdContrast( uint8_t contrast )
 {
     setModeCmd3310();
     
@@ -313,7 +312,7 @@ void lcdClear( void )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdGotoXy( BYTE x, BYTE y )
+void lcdGotoXy( uint8_t x, uint8_t y )
 {
     LcdCacheIdx = (x - 1) * 6 + (y - 1) * 84;
 }
@@ -330,10 +329,10 @@ void lcdGotoXy( BYTE x, BYTE y )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdChr( LcdFontSize size, BYTE ch )
+void lcdChr( LcdFontSize size, uint8_t ch )
 {
-    BYTE i, c;
-    BYTE b1, b2;
+    uint8_t i, c;
+    uint8_t b1, b2;
     int  tmpIdx;
 
     if (ch < 0x20) 
@@ -420,7 +419,7 @@ void lcdChr( LcdFontSize size, BYTE ch )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdStr( LcdFontSize size, BYTE * dataPtr )
+void lcdStr( LcdFontSize size, uint8_t * dataPtr )
 {
     while( *dataPtr )
         lcdChr( size, *dataPtr++ );
@@ -457,11 +456,11 @@ void lcdStrConst( LcdFontSize size, const char * dataPtr )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdPixel( BYTE x, BYTE y, LcdPixelMode mode )
+void lcdPixel( uint8_t x, uint8_t y, LcdPixelMode mode )
 {
-    WORD  index;
-    BYTE  offset;
-    BYTE  data;
+    uint16_t  index;
+    uint8_t  offset;
+    uint8_t  data;
     
     if ( x > LCD_X_RES ) return;
     if ( y > LCD_Y_RES ) return;
@@ -501,7 +500,7 @@ void lcdPixel( BYTE x, BYTE y, LcdPixelMode mode )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-void lcdLine( BYTE x1, BYTE y1, BYTE x2, BYTE y2, LcdPixelMode mode )
+void lcdLine( uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, LcdPixelMode mode )
 {
     int dx, dy, stepx, stepy, fraction;
 
@@ -615,7 +614,7 @@ void lcdUpdate( void )
   Return value :  None.
 
 --------------------------------------------------------------------------------------------------*/
-static void lcdSend( BYTE data )
+static void lcdSend( uint8_t data )
 {
     sendByte3310( data );
 /*
@@ -645,18 +644,18 @@ static void lcdSend( BYTE data )
 */
 }
 
-static void lcdCmd( BYTE cmd )
+static void lcdCmd( uint8_t cmd )
 {
 	csLow();
 	setModeCmd3310();
 	sendByte3310( cmd );
 }
 
-void lcdFuncSet( BYTE powerDown,
+void lcdFuncSet( uint8_t powerDown,
 		         LcdAddressing addr,
 		         TInstructionSet instSet )
 {
-	BYTE val = (1 << 5);
+	uint8_t val = (1 << 5);
 	if ( powerDown )
 		val |= (1 << 2);
 	if ( addr == TVertical )
@@ -668,7 +667,7 @@ void lcdFuncSet( BYTE powerDown,
 
 void lcdDispCtrl( TDisplayCtrl ctrl )
 {
-	BYTE val = (1 << 3);
+	uint8_t val = (1 << 3);
 	if ( ctrl == TNormalMode )
 		val |= ( 1 << 2 );
 	else if ( ctrl == TAllOn )
@@ -678,37 +677,37 @@ void lcdDispCtrl( TDisplayCtrl ctrl )
 	lcdCmd( val );
 }
 
-void lcdYAddr( BYTE y )
+void lcdYAddr( uint8_t y )
 {
-    BYTE val = (1 << 6);
+    uint8_t val = (1 << 6);
     val |= y & 0x07;
     lcdCmd( val );
 }
 
-void lcdXAddr( BYTE x )
+void lcdXAddr( uint8_t x )
 {
-    BYTE val = (1 << 7);
+    uint8_t val = (1 << 7);
     val |= x & 0x7F;
     lcdCmd( val );
 }
 
 void lcdTempCtrl( TTempCoef t )
 {
-	BYTE val = (1 << 2);
+	uint8_t val = (1 << 2);
 	val |= (t & 0x03);
 	lcdCmd( val );
 }
 
-void lcdBias( BYTE bias )
+void lcdBias( uint8_t bias )
 {
-	BYTE val = (1 << 4);
+	uint8_t val = (1 << 4);
 	val |= ( bias & 0x07);
 	lcdCmd( val );
 }
 
-void lcdVop( BYTE vop )
+void lcdVop( uint8_t vop )
 {
-	BYTE val = (1 << 7);
+	uint8_t val = (1 << 7);
 	val |= (vop & 0x7F);
 }
 

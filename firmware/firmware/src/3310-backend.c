@@ -5,28 +5,26 @@
 #define SPI_3310  SPID1
 
 #define PORT_CS   GPIOC
-#define PIN_CS    4
+#define PAD_CS    4
 
 #define PORT_DC   GPIOB
-#define PIN_DC    0
+#define PAD_DC    0
 
 #define PORT_RST  GPIOC
-#define PIN_RST   5
+#define PAD_RST   5
 
 #define PORT_SCK  GPIOA
-#define PIN_SCK   5
+#define PAD_SCK   5
 
 #define PORT_MOSI GPIOA
-#define PIN_MOSI  7
+#define PAD_MOSI  7
 
-#define DC_LOW()    palResetPad( PORT_DC, PIN_DC )
-#define DC_HIGH()   palSetPad(   PORT_DC, PIN_DC )
-#define CS_LOW()    palResetPad( PORT_CS, PIN_CS )
-#define CS_HIGH()   palSetPad(   PORT_CS, PIN_CS )
-#define RST_LOW()   palResetPad( PORT_RST, PIN_RST )
-#define RST_HIGH()  palSetPad(   PORT_RST, PIN_RST )
-
-BYTE g_dmaStarted = 0;
+#define DC_LOW()    palClearPad( PORT_DC, PAD_DC )
+#define DC_HIGH()   palSetPad(   PORT_DC, PAD_DC )
+#define CS_LOW()    palClearPad( PORT_CS, PAD_CS )
+#define CS_HIGH()   palSetPad(   PORT_CS, PAD_CS )
+#define RST_LOW()   palClearPad( PORT_RST, PAD_RST )
+#define RST_HIGH()  palSetPad(   PORT_RST, PAD_RST )
 
 void delay3310( int cnt )
 {
@@ -35,55 +33,25 @@ void delay3310( int cnt )
         ;
 }
 
-static void initDma( BYTE * mem, int cnt );
-
 //static SPIConfig spicfg = {NULL, GPIOB, 12, 0};
 static SPIConfig spicfg = {NULL, GPIOB, 12,
                               SPI_CR1_BR_2 | SPI_CR1_BR_1};
 
-void init3310( BYTE * data, int cnt )
+void init3310( void )
 {
+    palSetPad( PORT_CS, PAD_CS ); // Set CS high
+    palSetPadMode( PORT_SCK,  PAD_SCK,  PAL_MODE_STM32_ALTERNATE_PUSHPULL );    // SCK
+    palSetPadMode( PORT_MOSI, PAD_MOSI, PAL_MODE_STM32_ALTERNATE_PUSHPULL );    // MISO
+    palSetPadMode( PORT_CS,   PAD_CS,   PAL_MODE_OUTPUT_PUSHPULL );             // CS
+
     CS_HIGH();
     DC_HIGH();
     RST_HIGH();
+    palSetPadMode( PORT_DC,  PAD_DC,  PAL_MODE_OUTPUT_PUSHPULL );
+    palSetPadMode( PORT_CS,  PAD_CS,  PAL_MODE_OUTPUT_PUSHPULL );
+    palSetPadMode( PORT_RST, PAD_RST, PAL_MODE_OUTPUT_PUSHPULL );
 
-    GPIO_InitTypeDef GPIO_InitStructure;
-    
-    // Enable SPI1 and GPIO clocks */
-    RCC_APB2PeriphClockCmd( RCC_APB2Periph_SPI1,  ENABLE );
-    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE );
-    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );
-    
-    GPIO_InitStructure.GPIO_Pin = PIN_CS | PIN_DC | PIN_RST;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-    GPIO_Init( PORT_CS, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = PIN_PWR;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-    GPIO_Init( PORT_PWR, &GPIO_InitStructure);
- 
-    /* Configure SPI1 pins: SCK and MOSI only to their Alternative (SPI) function */
-    GPIO_InitStructure.GPIO_Pin = PIN_SCK | PIN_MOSI;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init( PORT_CS, &GPIO_InitStructure );
- 
-    // To prevent powering from data lines.
-    RST_HIGH();
-    CS_HIGH();
-    DC_HIGH();
-    // Turn power on.
-    PWR_HIGH();
     delay3310( 100000 );
-
-
-    /* Enable SPI1 */
-    SPI_Cmd( SPI_3310, ENABLE );
-    //SPI_SSOutputCmd( SPI_3310, ENABLE );
-
-    //initDma( data, cnt );
 }
 
 void finit3310( void )
@@ -91,7 +59,6 @@ void finit3310( void )
     CS_HIGH();
     RST_HIGH();
     DC_HIGH();
-    SPI_Cmd( SPI_3310, DISABLE );
     delay3310( 100000 );
 }
 
@@ -102,29 +69,26 @@ void finit3310( void )
     */ 
 void sendByte3310( uint8_t byte )
 {
-    //SPI_I2S_ReceiveData( SPI_3310 );
-    /* Loop while DR register in not emplty */
-    while ( SPI_I2S_GetFlagStatus( SPI_3310, SPI_I2S_FLAG_BSY ) == SET )
-        ;
-    /* Send byte through the SPI_3310 peripheral */
-    SPI_I2S_SendData( SPI_3310, byte );
-    /* Wait to receive a byte */
-    //while ( SPI_I2S_GetFlagStatus( SPI_3310, SPI_I2S_FLAG_RXNE ) == RESET )
-    //    ;
-    /* Return the byte read from the SPI bus */
-    //return SPI_I2S_ReceiveData( SPI_3310 );
+    spiAcquireBus( &SPI_3310 );     // Acquire ownership of the bus.
+    spiStart( &SPI_3310, &spicfg ); // Setup transfer parameters.
+    spiSelect( &SPI_3310 );         // Slave Select assertion.
+    spiStartSend( &SPI_3310, 1, &byte );
+    //spiExchange( &SPI_3310, 512,
+    //             txbuf, rxbuf );  // Atomic transfer operations.
+    spiUnselect( &SPI_3310 );       // Slave Select de-assertion.
+    spiReleaseBus( &SPI_3310 );     // Ownership release.
 }
 
 void sendArray3310( uint8_t * data, int cnt )
 {
-    spiAcquireBus( &SPID1 );              /* Acquire ownership of the bus.    */
-    spiStart( &SPID1, &spicfg );       /* Setup transfer parameters.       */
-    spiSelect( &SPID1 );                  /* Slave Select assertion.          */
-    spiExchange( &SPID1, 512,
-                txbuf, rxbuf );          /* Atomic transfer operations.      */
-    spiUnselect( &SPID1 );                /* Slave Select de-assertion.       */
-    spiReleaseBus( &SPID1 );              /* Ownership release.               */
-
+    spiAcquireBus( &SPID1 );     // Acquire ownership of the bus.
+    spiStart( &SPID1, &spicfg ); // Setup transfer parameters.
+    spiSelect( &SPID1 );         // Slave Select assertion.
+    //spiExchange( &SPID1, 512,
+    //            txbuf, rxbuf );  // Atomic transfer operations.
+    spiStartSend( &SPI_3310, cnt, data );
+    spiUnselect( &SPID1 );       // Slave Select de-assertion.
+    spiReleaseBus( &SPID1 );     // Ownership release.
 }
 
 void setModeCmd3310( void )

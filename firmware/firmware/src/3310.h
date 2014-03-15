@@ -5,8 +5,8 @@
 #include "3310-backend.h"
 
 #define NULL                       0
-#define BFALSE                      0
-#define BTRUE                       1
+#define BFALSE                     0
+#define BTRUE                      1
 
 #define LCD_X_RES                  84
 #define LCD_Y_RES                  48
@@ -35,16 +35,16 @@ typedef enum
 } LcdFontSize;
 
 void lcdInit       ( void );
-void lcdPower 	   ( BYTE en );
-void lcdContrast   ( BYTE contrast );
+void lcdPower 	   ( uint8_t en );
+void lcdContrast   ( uint8_t contrast );
 void lcdClear      ( void );
 void lcdUpdate     ( void );
-void lcdGotoXy     ( BYTE x, BYTE y );
-void lcdChr        ( LcdFontSize size, BYTE ch );
-void lcdStr        ( LcdFontSize size, BYTE * dataPtr );
+void lcdGotoXy     ( uint8_t x, uint8_t y );
+void lcdChr        ( LcdFontSize size, uint8_t ch );
+void lcdStr        ( LcdFontSize size, uint8_t * dataPtr );
 void lcdStrConst   ( LcdFontSize size, const char * dataPtr );
-void lcdPixel      ( BYTE x, BYTE y, LcdPixelMode mode );
-void lcdLine       ( BYTE x1, BYTE y1, BYTE x2, BYTE y2, LcdPixelMode mode );
+void lcdPixel      ( uint8_t x, uint8_t y, LcdPixelMode mode );
+void lcdLine       ( uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, LcdPixelMode mode );
 
 typedef enum
 {
@@ -75,15 +75,15 @@ typedef enum
 }  TTempCoef;
 
 // Display tuning routines.
-void lcdFuncSet( BYTE powerDown,
+void lcdFuncSet( uint8_t powerDown,
 		         LcdAddressing addr,
 		         TInstructionSet instSet );
 void lcdDispCtrl( TDisplayCtrl ctrl );
-void lcdYAddr( BYTE y );
-void lcdXAddr( BYTE x );
+void lcdYAddr( uint8_t y );
+void lcdXAddr( uint8_t x );
 void lcdTempCtrl( TTempCoef t );
-void lcdBias( BYTE bias );
-void lcdVop( BYTE vop ); // Contrast
+void lcdBias( uint8_t bias );
+void lcdVop( uint8_t vop ); // Contrast
 
 #endif
 

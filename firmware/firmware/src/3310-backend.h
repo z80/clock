@@ -9,7 +9,7 @@
 
 void delay3310( int cnt );
 
-void init3310( uint8_t * data, int cnt );
+void init3310( void );
 void finit3310(void);
 void sendByte3310( uint8_t byte );
 void sendArray3310( uint8_t * data, int cnt );
