@@ -16,9 +16,10 @@
 
 #define STM32F103_MCUCONF
 
-#if !defined(CORTEX_VTOR_INIT) || defined(__DOXYGEN__)
-#define CORTEX_VTOR_INIT                0x00005000
-#endif
+// For the first attempt don't use bootloader.
+//#if !defined(CORTEX_VTOR_INIT) || defined(__DOXYGEN__)
+//#define CORTEX_VTOR_INIT                0x00005000
+//#endif
 
 /*
  * STM32F103 drivers configuration.

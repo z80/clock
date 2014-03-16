@@ -20,24 +20,8 @@
 
 #include "dac.h"
 #include "playback.h"
+#include "3310.h"
 
-/*
- * Red LED blinker thread, times are in milliseconds.
- */
-static WORKING_AREA(waThread1, 128);
-static msg_t Thread1(void *arg) {
-
-  (void)arg;
-  chRegSetThreadName( "blinker" );
-  palSetPadMode( GPIOA, 6, PAL_MODE_OUTPUT_PUSHPULL );
-  while (TRUE) {
-    palClearPad(GPIOA, 6 );
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOA, 6 );
-    chThdSleepMilliseconds(500);
-  }
-  return 0;
-}
 
 /*
  * Application entry point.
@@ -54,20 +38,26 @@ int main(void) {
   halInit();
   chSysInit();
 
-  /*
-   * Activates the serial driver 2 using the driver default configuration.
-   */
-  //sdStart(&SD2, NULL);
-
-  /*
-   * Creates the blinker thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
+
+  playbackInit();
+
+  lcdInit();
+  lcdClear();
+  lcdGotoXy( 0, 0 );
+  lcdStrConst( FONT_1X, "Hi!" );
+  while ( TRUE )
+  {
+    play( "0:anthem01.raw" );
+  }
+
+
+
+  /*
   int val = 0;
   dacInit();
   while (TRUE) {
@@ -81,4 +71,5 @@ int main(void) {
     }
     val = 0;
   }
+  */
 }
