@@ -166,7 +166,7 @@ int main(void) {
   halInit();
   chSysInit();
 
-  init3310();
+  /*init3310();
   while ( TRUE )
   {
       lcdClear();
@@ -181,7 +181,7 @@ int main(void) {
       lcdStrConst( FONT_1X, "Hi!" );
       lcdUpdate();
       chThdSleepSeconds( 1 );
-  }
+  }*/
 
 
   // SPI setup.
