@@ -1,207 +1,271 @@
-/*
-    ChibiOS/RT - Copyright (C) 2006-2013 Giovanni Di Sirio
+/******************** (C) COPYRIGHT 2011 STMicroelectronics ********************
+* File Name          : main.c
+* Author             : MCD Application Team
+* Version            : V3.3.0
+* Date               : 21-March-2011
+* Description        : Mass Storage demo main file
+********************************************************************************
+* THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+* WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
+* AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
+* INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
+* CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
+* INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+*******************************************************************************/
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+/* Includes ------------------------------------------------------------------*/
+#ifdef STM32L1XX_MD
+ #include "stm32l1xx.h"
+#else
+ #include "stm32f10x.h"
+#endif /* STM32L1XX_MD */
+ 
+#include "usb_lib.h"
+#include "hw_config.h"
+#include "usb_pwr.h"
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
-#include "ch.h"
-#include "hal.h"
-
-//#include "shell.h"
-//#include "chprintf.h"
-//#include "chrtclib.h"
+#include "diskio.h"
+#include "dfu_config.h"
 #include "ff.h"
+#include "flash_if.h"
 
-#include "3310.h"
+static void    switchesInit( void );
+static uint8_t diskMode( void );
+static uint8_t dfuMode( void );
+static void    dfu( void );
+static void    reportFailure( const char * stri );
 
+typedef void (*pFunction)(void);
+pFunction Jump_To_Application;
+uint32_t JumpAddress;
 
-/**
- * @brief FS object.
- */
-FATFS MMC_FS;
+uint8_t do_report_failure = 0;
 
-/**
- * MMC driver instance.
- */
-MMCDriver MMCD1;
-
-/* FS mounted and ready.*/
-static bool_t fs_ready = FALSE;
-
-/* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
-static SPIConfig hs_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS, 0};
-
-/* Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).*/
-static SPIConfig ls_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS,
-                              SPI_CR1_BR_2 | SPI_CR1_BR_1};
-
-/* MMC/SD over SPI driver configuration.*/
-static MMCConfig mmccfg = {&SPID2, &ls_spicfg, &hs_spicfg};
-
-/**
- *
- */
-bool_t mmc_lld_is_write_protected(MMCDriver *sdcp) {
-  (void)sdcp;
-  return FALSE;
-}
-
-/**
- *
- */
-bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
-  (void)sdcp;
-  return TRUE;
-}
-
-/**
- *
- */
-void cmd_sdiotest( void )
+int main(void)
 {
-  FRESULT err;
-  uint32_t clusters;
-  FATFS *fsp;
-  FIL FileObject;
-  //FILINFO FileInfo;
-  size_t bytes_written;
-  struct tm timp;
+    switchesInit();
+    uint8_t do_disk = diskMode();
+    uint8_t do_dfu  = dfuMode();
+    //while ( 1 )
+    //{
+    //}
 
+    if ( do_disk )
+    {
+jump_to_application_failure:
+        // Initialize disk drive.
+        disk_initialize( 0 );
+        if ( do_report_failure )
+        {
+            // It is done here but not just before jump because 
+            // it works only after "disk_initialize( 0 );" :)
+            reportFailure( _T( "Failed to start regular firmware\n" ) );
+        }
+        else
+        {
+            if ( do_dfu )
+            {
+                // Overwrite image from disk.
+                dfu();
+            }
+        }
+        // After dfu initialize USB disk.
+        Set_USBClock();
+        Led_Config();
+        USB_Interrupts_Config();
+        USB_Init();
+        while (bDeviceState != CONFIGURED);
 
-  if (!mmcConnect(&MMCD1)) {
-    err = f_mount(0, &MMC_FS);
-    if (err != FR_OK){
-      chSysHalt();
+        USB_Configured_LED();
+
+        while (1)
+        {
+        }
     }
-    else{
-      fs_ready = TRUE;
+    else
+    {
+        if ( ( (*(__IO uint32_t *)FIRMWARE_START_ADDRESS) & 0x2FFE0000 ) == 0x20000000 )
+        {
+            JumpAddress = *(__IO uint32_t *)(FIRMWARE_START_ADDRESS + 4);
+            Jump_To_Application = (pFunction)JumpAddress;
+            __set_MSP( *(__IO uint32_t *)FIRMWARE_START_ADDRESS );
+            Jump_To_Application();
+        }
+        // On jump failure or on if condition failure will jump 
+        // to Usb FLASH disk initialization routine.
+        // Clear probable reflash flag.
+        do_report_failure = 1;
+        goto jump_to_application_failure;
+    }
+}
+
+#ifdef USE_FULL_ASSERT
+/*******************************************************************************
+* Function Name  : assert_failed
+* Description    : Reports the name of the source file and the source line number
+*                  where the assert_param error has occurred.
+* Input          : - file: pointer to the source file name
+*                  - line: assert_param error line source number
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void assert_failed(uint8_t* file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
+  /* Infinite loop */
+  while (1)
+  {}
+}
+#endif
+
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+
+static void switchesInit( void )
+{
+    RCC_APB2PeriphClockCmd( PIN_CLK, ENABLE );
+    GPIO_InitTypeDef s;
+    s.GPIO_Pin   = PIN_FLASH_MODE | PIN_OP_MODE;
+    s.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
+    s.GPIO_Speed = GPIO_Speed_10MHz;
+    GPIO_Init( PIN_PORT, &s );
+}
+
+static uint8_t diskMode( void )
+{
+    if ( GPIO_ReadInputDataBit( PIN_PORT, PIN_FLASH_MODE ) )
+        return 0;
+    return 1;
+}
+
+static uint8_t dfuMode( void )
+{
+    if ( GPIO_ReadInputDataBit( PIN_PORT, PIN_OP_MODE ) )
+        return 0;
+    return 1;
+}
+
+static void    dfu( void )
+{
+    FRESULT rc;
+    FATFS fatfs;
+    FIL   fil;
+    // FILINFO info;
+    UINT br;
+    // UINT bw, i;
+    rc = f_mount( 0, &fatfs );
+    if ( rc != FR_OK )
+        goto dfu_end;
+
+    rc = f_open( &fil, DFU_FILE_NAME, FA_READ );
+    if ( rc != FR_OK )
+    {
+        reportFailure( _T( "No firmware.bin file to reflash the MCU\n" ) );
+        goto dfu_end;
     }
 
-    chThdSleepMilliseconds(100);
-    err = f_getfree("/", &clusters, &fsp);
-    if (err != FR_OK) {
-      chSysHalt();
+    FLASH_If_Init();
+    uint8_t buffer[ FLASH_SECTOR_SIZE ];
+    uint32_t flashPtr = FIRMWARE_START_ADDRESS;
+    uint8_t * flashData;
+    uint32_t ttt;
+    uint8_t doReflash = 0;
+    // First compare flash content with file content.
+    // To check if reflash is really necessary.
+    do {
+        rc = f_read( &fil, buffer, sizeof(buffer), &br );
+        if ( rc != FR_OK )
+            goto dfu_end;
+        flashData = FLASH_If_Read( flashPtr );
+        for ( ttt=0; ttt<br; ttt++ )
+        {
+            if ( buffer[ttt] != flashData[ttt] )
+            {
+                doReflash = 1;
+                break;
+            }
+        }
+        if ( doReflash )
+            break;
+        flashPtr += FLASH_SECTOR_SIZE;
+    } while ( br > 0 );
+    f_close( &fil );
+    
+    if ( !doReflash )
+    {
+        reportFailure( _T( "Firmwre is the same, no need in reflashing the MCU\n" ) );
+        goto dfu_end;
     }
 
-    //rtcGetTimeTm(&RTCD1, &timp);
-
-    chThdSleepMilliseconds(100);
-    err = f_open(&FileObject, "0:tmstmp.tst", FA_WRITE | FA_OPEN_ALWAYS);
-    if (err != FR_OK) {
-      chSysHalt();
+    // Reflash routine itself.
+    rc = f_open( &fil, DFU_FILE_NAME, FA_READ );
+    if ( rc != FR_OK )
+    {
+        reportFailure( _T( "Failed to open firmware.bin file in second time to reflash the MCU\n" ) );
+        goto dfu_end;
     }
 
-    chThdSleepMilliseconds(100);
-    err = f_write(&FileObject, "tst", sizeof("tst"), (void *)&bytes_written);
-    if (err != FR_OK) {
-      chSysHalt();
-    }
+    flashPtr = FIRMWARE_START_ADDRESS;
+    do {
+        rc = f_read( &fil, buffer, sizeof(buffer), &br );
+        if ( rc != FR_OK )
+            goto dfu_end;
 
-    chThdSleepMilliseconds(100);
-    err = f_close(&FileObject);
-    if (err != FR_OK) {
-      chSysHalt();
-    }
+        // Erase sector.
+        FLASH_If_Erase( flashPtr );
+        // Write the data in "buffer" to FLASH memory of the controller.
+        FLASH_If_Write( flashPtr, buffer, br );
+        // Increment flashPtr to pint to another sector.
+        flashPtr += FLASH_SECTOR_SIZE;
+    } while ( br > 0 );
+    f_close( &fil );
+ 
+    // May be write a brief report about flashing.
+    reportFailure( _T( "Firmware upgraded\n" ) );
 
-//    chprintf(chp, "Obtaining file info ... ");
-//    chThdSleepMilliseconds(100);
-//    err = f_stat("0:tmstmp.tst", &FileInfo);
-//    if (err != FR_OK) {
-//      chSysHalt();
-//    }
-//    else{
-//      chprintf(chp, "OK\r\n");
-//      chprintf(chp, "    Timestamp: %u-%u-%u %u:%u:%u\r\n",
-//                         ((FileInfo.fdate >> 9) & 127) + 1980,
-//                         (FileInfo.fdate >> 5) & 15,
-//                         FileInfo.fdate & 31,
-//                         (FileInfo.ftime >> 11) & 31,
-//                         (FileInfo.ftime >> 5) & 63,
-//                         (FileInfo.ftime & 31) * 2);
-//    }
+dfu_end:
+    FLASH_If_Finit();
+    f_mount( 0, NULL );
+}
 
-    f_mount(0, NULL);
+static void    reportFailure( const char * stri )
+{
+    FRESULT rc;
+    FATFS fatfs;
+    FIL   fil;
+    // FILINFO info;
+    // UINT br;
+    // UINT bw;
+ 
+    rc = f_mount( 0, &fatfs );
+    if ( rc != FR_OK )
+        goto report_end;
 
-    chThdSleepMilliseconds(100);
-    if (mmcDisconnect(&MMCD1))
-      chSysHalt();
-    chThdSleepMilliseconds(100);
-  }
-  else{
-    chSysHalt();
-  }
+   rc = f_open( &fil, DFU_REPORT_NAME, FA_WRITE | FA_OPEN_ALWAYS );
+    if ( rc != FR_OK )
+        goto report_end;
+    rc = f_lseek( &fil, fil.fsize );
+    if ( rc != FR_OK )
+        goto report_end;
+    rc = f_puts( stri, &fil );
+    //if ( rc != FR_OK )
+    //    goto report_end;
+
+report_end:
+    f_close( &fil );
+    f_mount( 0, NULL );
 }
 
 
-/*===========================================================================*/
-/* Generic code.                                                             */
-/*===========================================================================*/
-
-/*
- * Application entry point.
- */
-int main(void) {
-
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
-  halInit();
-  chSysInit();
-
-  /*init3310();
-  while ( TRUE )
-  {
-      lcdClear();
-      //lcdLine( 40, 40, 40, 0, PIXEL_ON );
-      lcdGotoXy( 1, 1 );
-      lcdStrConst( FONT_1X, "Hello!" );
-      lcdUpdate();
-      chThdSleepSeconds( 1 );
-
-      lcdClear();
-      lcdGotoXy( 1, 1 );
-      lcdStrConst( FONT_1X, "Hi!" );
-      lcdUpdate();
-      chThdSleepSeconds( 1 );
-  }*/
-
-
-  // SPI setup.
-  palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
-  palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
-  palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
-  palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
-  palSetPad( GPIOB, 12 ); // Set CS high
-
-  /*
-   * Initializes the SDIO drivers.
-   */
-  mmcObjectInit(&MMCD1);
-  mmcStart(&MMCD1, &mmccfg);
-
-  while (TRUE)
-  {
-      cmd_sdiotest();
-      chThdSleepSeconds( 5 );
-  }
+DWORD get_fattime (void)
+{
+    return ((DWORD)(2010 - 1980) << 25)	/* Fixed to Jan. 1, 2010 */
+           | ((DWORD)1 << 21)
+           | ((DWORD)1 << 16)
+           | ((DWORD)0 << 11)
+           | ((DWORD)0 << 5)
+           | ((DWORD)0 >> 1);
 }
 
 
