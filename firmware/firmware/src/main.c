@@ -46,13 +46,15 @@ int main(void) {
 
   playbackInit();
 
-  lcdInit();
-  lcdClear();
-  lcdGotoXy( 0, 0 );
-  lcdStrConst( FONT_1X, "Hi!" );
+  //lcdInit();
+  //lcdClear();
+  //lcdGotoXy( 0, 0 );
+  //lcdStrConst( FONT_1X, "Hi!" );
+  //lcdUpdate();
   while ( TRUE )
   {
-    play( "0:anthem01.raw" );
+    //play( "0:anthem01.raw" );
+    play( "anthem01.raw" );
   }
 
 

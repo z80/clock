@@ -47,14 +47,14 @@ MMCDriver MMCD1;
 //static bool_t fs_ready = FALSE;
 
 /* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
-static SPIConfig hs_spicfg = {NULL, GPIOB, 12, 0};
+static SPIConfig hs_spicfg = { NULL, GPIOB, 12, 0 };
 
 /* Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).*/
-static SPIConfig ls_spicfg = {NULL, GPIOB, 12,
-                              SPI_CR1_BR_2 | SPI_CR1_BR_1};
+static SPIConfig ls_spicfg = { NULL, GPIOB, 12,
+                               SPI_CR1_BR_2 | SPI_CR1_BR_1 };
 
 /* MMC/SD over SPI driver configuration.*/
-static MMCConfig mmccfg = {&SPID2, &ls_spicfg, &hs_spicfg};
+static MMCConfig mmccfg = { &SPID2, &ls_spicfg, &hs_spicfg };
 
 
 
@@ -69,31 +69,34 @@ void playbackInit( void )
 {
     chMBInit( &mailbox, &message, 1 );
     // SPI setup.
-    palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     // SCK
-    palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     // MISO
-    palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     // MOSI
-    palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL);              // CS
+    palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
+    palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
+    palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
+    palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
     palSetPad( GPIOB, 12 ); // Set CS high
 
     // PWM pad.
     palSetPadMode( GPIOA, 8, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
+
+    mmcObjectInit( &MMCD1 );
 }
 
 static int playbackStart( void )
 {
     // Access to SD flash.
-    mmcObjectInit( &MMCD1 );
     mmcStart( &MMCD1, &mmccfg );
-    if ( !mmcConnect( &MMCD1 ) )
+    bool_t res = mmcConnect( &MMCD1 );
+    if ( res )
     {
-        FRESULT err = f_mount(0, &MMC_FS);
-        if (err != FR_OK)
+        FRESULT err = f_mount( 0, &MMC_FS );
+        if ( err != FR_OK )
         {
-            return 1;
+            return 2;
         }
+        return 0;
     }
 
-    return 0;
+    return 1;
 }
 
 static void playbackStop( void )
