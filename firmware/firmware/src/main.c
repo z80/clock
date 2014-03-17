@@ -14,14 +14,142 @@
     limitations under the License.
 */
 
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
 #include "ch.h"
 #include "hal.h"
-//#include "test.h"
 
-#include "dac.h"
-#include "playback.h"
+//#include "shell.h"
+//#include "chprintf.h"
+//#include "chrtclib.h"
+#include "ff.h"
+
 #include "3310.h"
 
+
+/**
+ * @brief FS object.
+ */
+FATFS MMC_FS;
+
+/**
+ * MMC driver instance.
+ */
+MMCDriver MMCD1;
+
+/* FS mounted and ready.*/
+static bool_t fs_ready = FALSE;
+
+/* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
+static SPIConfig hs_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS, 0};
+
+/* Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).*/
+static SPIConfig ls_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS,
+                              SPI_CR1_BR_2 | SPI_CR1_BR_1};
+
+/* MMC/SD over SPI driver configuration.*/
+static MMCConfig mmccfg = {&SPID2, &ls_spicfg, &hs_spicfg};
+
+/**
+ *
+ */
+bool_t mmc_lld_is_write_protected(MMCDriver *sdcp) {
+  (void)sdcp;
+  return FALSE;
+}
+
+/**
+ *
+ */
+bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
+  (void)sdcp;
+  return TRUE;
+}
+
+/**
+ *
+ */
+void cmd_sdiotest( void )
+{
+  FRESULT err;
+  uint32_t clusters;
+  FATFS *fsp;
+  FIL FileObject;
+  //FILINFO FileInfo;
+  size_t bytes_written;
+  struct tm timp;
+
+
+  if (!mmcConnect(&MMCD1)) {
+    err = f_mount(0, &MMC_FS);
+    if (err != FR_OK){
+      chSysHalt();
+    }
+    else{
+      fs_ready = TRUE;
+    }
+
+    chThdSleepMilliseconds(100);
+    err = f_getfree("/", &clusters, &fsp);
+    if (err != FR_OK) {
+      chSysHalt();
+    }
+
+    //rtcGetTimeTm(&RTCD1, &timp);
+
+    chThdSleepMilliseconds(100);
+    err = f_open(&FileObject, "0:tmstmp.tst", FA_WRITE | FA_OPEN_ALWAYS);
+    if (err != FR_OK) {
+      chSysHalt();
+    }
+
+    chThdSleepMilliseconds(100);
+    err = f_write(&FileObject, "tst", sizeof("tst"), (void *)&bytes_written);
+    if (err != FR_OK) {
+      chSysHalt();
+    }
+
+    chThdSleepMilliseconds(100);
+    err = f_close(&FileObject);
+    if (err != FR_OK) {
+      chSysHalt();
+    }
+
+//    chprintf(chp, "Obtaining file info ... ");
+//    chThdSleepMilliseconds(100);
+//    err = f_stat("0:tmstmp.tst", &FileInfo);
+//    if (err != FR_OK) {
+//      chSysHalt();
+//    }
+//    else{
+//      chprintf(chp, "OK\r\n");
+//      chprintf(chp, "    Timestamp: %u-%u-%u %u:%u:%u\r\n",
+//                         ((FileInfo.fdate >> 9) & 127) + 1980,
+//                         (FileInfo.fdate >> 5) & 15,
+//                         FileInfo.fdate & 31,
+//                         (FileInfo.ftime >> 11) & 31,
+//                         (FileInfo.ftime >> 5) & 63,
+//                         (FileInfo.ftime & 31) * 2);
+//    }
+
+    f_mount(0, NULL);
+
+    chThdSleepMilliseconds(100);
+    if (mmcDisconnect(&MMCD1))
+      chSysHalt();
+    chThdSleepMilliseconds(100);
+  }
+  else{
+    chSysHalt();
+  }
+}
+
+
+/*===========================================================================*/
+/* Generic code.                                                             */
+/*===========================================================================*/
 
 /*
  * Application entry point.
@@ -38,40 +166,32 @@ int main(void) {
   halInit();
   chSysInit();
 
+  lcdInit();
+  lcdClear();
+  lcdGotoXy( 0, 0 );
+  lcdStrConst( FONT_1X, "Hi!" );
+  lcdUpdate();
+
+
+
+  // SPI setup.
+  palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
+  palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
+  palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
+  palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
+  palSetPad( GPIOB, 12 ); // Set CS high
 
   /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state.
+   * Initializes the SDIO drivers.
    */
+  mmcObjectInit(&MMCD1);
+  mmcStart(&MMCD1, &mmccfg);
 
-  playbackInit();
-
-  //lcdInit();
-  //lcdClear();
-  //lcdGotoXy( 0, 0 );
-  //lcdStrConst( FONT_1X, "Hi!" );
-  //lcdUpdate();
-  while ( TRUE )
+  while (TRUE)
   {
-    //play( "0:anthem01.raw" );
-    play( "anthem01.raw" );
+      cmd_sdiotest();
+      chThdSleepSeconds( 5 );
   }
-
-
-
-  /*
-  int val = 0;
-  dacInit();
-  while (TRUE) {
-    while (val < (1<<12))
-    {
-    	DacCfg d;
-    	d.dac1 = val;
-    	d.dac2 = val;
-    	dacSet( &d );
-        chThdSleepMilliseconds(1);
-    }
-    val = 0;
-  }
-  */
 }
+
+

@@ -82,7 +82,6 @@ CSRC = $(PORTSRC) \
        $(FATFSSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/various/syscalls.c \
-       $(CHIBIOS)/os/various/chrtclib.c \
        src/main.c \
        src/dac.c \
        src/playback.c \

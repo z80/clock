@@ -36,12 +36,12 @@ static int do_exit_pwm = 0;
 /**
  * @brief FS object.
  */
-FATFS MMC_FS_01;
+FATFS MMC_FS;
 
 /**
  * MMC driver instance.
  */
-MMCDriver MMCD01;
+MMCDriver MMCD1;
 
 /* FS mounted and ready.*/
 //static bool_t fs_ready = FALSE;
@@ -78,17 +78,17 @@ void playbackInit( void )
     // PWM pad.
     palSetPadMode( GPIOA, 8, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
 
-    mmcObjectInit( &MMCD01 );
+    mmcObjectInit( &MMCD1 );
 }
 
 static int playbackStart( void )
 {
     // Access to SD flash.
-    mmcStart( &MMCD01, &mmccfg );
-    bool_t res = mmcConnect( &MMCD01 );
+    mmcStart( &MMCD1, &mmccfg );
+    bool_t res = mmcConnect( &MMCD1 );
     if ( res )
     {
-        FRESULT err = f_mount( 0, &MMC_FS_01 );
+        FRESULT err = f_mount( 0, &MMC_FS );
         if ( err != FR_OK )
         {
             return 2;
@@ -102,7 +102,7 @@ static int playbackStart( void )
 static void playbackStop( void )
 {
     f_mount(0, NULL);
-    if ( mmcDisconnect( &MMCD01 ) )
+    if ( mmcDisconnect( &MMCD1 ) )
     {
         //sysHalt();
         ;
