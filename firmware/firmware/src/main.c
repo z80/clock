@@ -43,60 +43,9 @@ uint8_t do_report_failure = 0;
 
 int main(void)
 {
-    switchesInit();
-    uint8_t do_disk = diskMode();
-    uint8_t do_dfu  = dfuMode();
-    //while ( 1 )
-    //{
-    //}
-
-    if ( do_disk )
-    {
-jump_to_application_failure:
-        // Initialize disk drive.
-        disk_initialize( 0 );
-        if ( do_report_failure )
-        {
-            // It is done here but not just before jump because 
-            // it works only after "disk_initialize( 0 );" :)
-            reportFailure( _T( "Failed to start regular firmware\n" ) );
-        }
-        else
-        {
-            if ( do_dfu )
-            {
-                // Overwrite image from disk.
-                dfu();
-            }
-        }
-        // After dfu initialize USB disk.
-        Set_USBClock();
-        Led_Config();
-        USB_Interrupts_Config();
-        USB_Init();
-        while (bDeviceState != CONFIGURED);
-
-        USB_Configured_LED();
-
-        while (1)
-        {
-        }
-    }
-    else
-    {
-        if ( ( (*(__IO uint32_t *)FIRMWARE_START_ADDRESS) & 0x2FFE0000 ) == 0x20000000 )
-        {
-            JumpAddress = *(__IO uint32_t *)(FIRMWARE_START_ADDRESS + 4);
-            Jump_To_Application = (pFunction)JumpAddress;
-            __set_MSP( *(__IO uint32_t *)FIRMWARE_START_ADDRESS );
-            Jump_To_Application();
-        }
-        // On jump failure or on if condition failure will jump 
-        // to Usb FLASH disk initialization routine.
-        // Clear probable reflash flag.
-        do_report_failure = 1;
-        goto jump_to_application_failure;
-    }
+    dfu();
+    while ( 1 )
+        ;
 }
 
 #ifdef USE_FULL_ASSERT
