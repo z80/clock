@@ -8,10 +8,9 @@
 #
 ###############################################################################
 
-OPTIMIZATION = s
-CROSS_PATH   = c:/programs/yagarto
-#CROSS_PATH   = c:/programs/codesourcery/arm-2011.03-41
-#CROSS_PATH   = ~/programs/code-sourcery/2011.03-42
+OPTIMIZATION = 0
+#CROSS_PATH   = c:/programs/yagarto
+CROSS_PATH   = ~/programs/code-sourcery/2011.03-42
 #CROSS_PREFIX = arm-none-linux-gnueabi-
 CROSS_PREFIX = arm-none-eabi-
 LINKER_LD    = cmsis/linker/stm32_flash.ld
