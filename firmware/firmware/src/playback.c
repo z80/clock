@@ -47,7 +47,8 @@ MMCDriver MMCD01;
 //static bool_t fs_ready = FALSE;
 
 /* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
-static SPIConfig hs_spicfg = { NULL, GPIOB, 12, 0 };
+//static SPIConfig hs_spicfg = { NULL, GPIOB, 12, 0 };
+static SPIConfig hs_spicfg = { NULL, GPIOB, 12,  SPI_CR1_BR_2 | SPI_CR1_BR_1 };
 
 /* Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).*/
 static SPIConfig ls_spicfg = { NULL, GPIOB, 12,
