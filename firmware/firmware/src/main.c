@@ -59,11 +59,11 @@ int main(void) {
   /* MMC/SD over SPI driver configuration.*/
   static MMCConfig mmccfg = {&SPID1, &ls_spicfg, &hs_spicfg};
 
-  palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
-  palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
-  palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
-  palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
-  palSetPad( GPIOB, 12 ); // Set CS high
+  //palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
+  //palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
+  //palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
+  //palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
+  //palSetPad( GPIOB, 12 ); // Set CS high
 
   mmcObjectInit(&MMCD1);
   mmcStart(&MMCD1, &mmccfg);
