@@ -17,11 +17,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-#include "usb_lib.h"
-#include "usb_istr.h"
-#include "usb_pwr.h"
+//#include "usb_lib.h"
+//#include "usb_istr.h"
+//#include "usb_pwr.h"
 #if defined(STM32F10X_HD) || defined(STM32F10X_XL) 
- #include "stm32_eval_sdio_sd.h"
+ //#include "stm32_eval_sdio_sd.h"
 #endif /* STM32F10X_HD | STM32F10X_XL*/
 
 /* Private typedef -----------------------------------------------------------*/
@@ -165,7 +165,7 @@ void SysTick_Handler(void)
 *******************************************************************************/
 void USB_HP_CAN1_TX_IRQHandler(void)
 {
-  CTR_HP();
+  //CTR_HP();
 }
 
 /*******************************************************************************
@@ -178,7 +178,7 @@ void USB_HP_CAN1_TX_IRQHandler(void)
 *******************************************************************************/
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-  USB_Istr();
+  //USB_Istr();
 }
 #endif /* STM32F10X_CL */
 
@@ -194,7 +194,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 void SDIO_IRQHandler(void)
 { 
   /* Process All SDIO Interrupt Sources */
-  SD_ProcessIRQSrc();
+  //SD_ProcessIRQSrc();
   
 }
 #endif /* STM32F10X_HD | STM32F10X_XL*/
@@ -210,7 +210,7 @@ void SDIO_IRQHandler(void)
 *******************************************************************************/
 void OTG_FS_IRQHandler(void)
 {
-  STM32_PCD_OTG_ISR_Handler(); 
+  //STM32_PCD_OTG_ISR_Handler();
 }
 #endif /* STM32F10X_CL */
 

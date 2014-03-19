@@ -15,7 +15,7 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x20002800;    /* end of RAM */
+_estack = 0x20002000;    /* end of RAM */
 
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size  = 0x0;      /* required amount of heap  */
@@ -24,8 +24,8 @@ _Min_Stack_Size = 0x80; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-  FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 64K
-  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 10K
+  FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 128K
+  RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 8K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
 }
 
@@ -150,3 +150,13 @@ SECTIONS
     libgcc.a ( * )
   }
 }
+
+
+
+
+
+
+
+
+
+
