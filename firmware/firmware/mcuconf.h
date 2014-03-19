@@ -16,11 +16,14 @@
 
 #define STM32F103_MCUCONF
 
+<<<<<<< HEAD
 // For the first attempt don't use bootloader.
 //#if !defined(CORTEX_VTOR_INIT) || defined(__DOXYGEN__)
 //#define CORTEX_VTOR_INIT                0x00005000
 //#endif
 
+=======
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 /*
  * STM32F103 drivers configuration.
  * The following settings override the default settings present in
@@ -46,13 +49,22 @@
 #define STM32_SW                            STM32_SW_PLL
 #define STM32_PLLSRC                        STM32_PLLSRC_HSE
 #define STM32_PLLXTPRE                      STM32_PLLXTPRE_DIV1
+<<<<<<< HEAD
 #define STM32_PLLMUL_VALUE                  3
+=======
+#define STM32_PLLMUL_VALUE                  9
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_HPRE                          STM32_HPRE_DIV1
 #define STM32_PPRE1                         STM32_PPRE1_DIV2
 #define STM32_PPRE2                         STM32_PPRE2_DIV2
 #define STM32_ADCPRE                        STM32_ADCPRE_DIV4
+<<<<<<< HEAD
 #define STM32_USB_CLOCK_REQUIRED            FALSE
 #define STM32_USBPRE                        STM32_USBPRE_DIV1
+=======
+#define STM32_USB_CLOCK_REQUIRED            TRUE
+#define STM32_USBPRE                        STM32_USBPRE_DIV1P5
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_MCOSEL                        STM32_MCOSEL_NOCLOCK
 #define STM32_RTCSEL                        STM32_RTCSEL_HSEDIV
 #define STM32_PVD_ENABLE                    FALSE
@@ -61,7 +73,11 @@
 /*
  * ADC driver system settings.
  */
+<<<<<<< HEAD
 #define STM32_ADC_USE_ADC1                  TRUE   // Adapter volt, battery volt
+=======
+#define STM32_ADC_USE_ADC1                  FALSE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_ADC_ADC1_DMA_PRIORITY         2
 #define STM32_ADC_ADC1_IRQ_PRIORITY         6
 
@@ -134,10 +150,17 @@
  * PWM driver system settings.
  */
 #define STM32_PWM_USE_ADVANCED              FALSE
+<<<<<<< HEAD
 #define STM32_PWM_USE_TIM1                  TRUE   // TIM1_CH1 sound PWM
 #define STM32_PWM_USE_TIM2                  FALSE
 #define STM32_PWM_USE_TIM3                  FALSE
 #define STM32_PWM_USE_TIM4                  TRUE   // Servo PWM
+=======
+#define STM32_PWM_USE_TIM1                  FALSE
+#define STM32_PWM_USE_TIM2                  FALSE
+#define STM32_PWM_USE_TIM3                  FALSE
+#define STM32_PWM_USE_TIM4                  FALSE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_PWM_USE_TIM5                  FALSE
 #define STM32_PWM_USE_TIM8                  FALSE
 #define STM32_PWM_TIM1_IRQ_PRIORITY         7
@@ -156,7 +179,11 @@
  * SERIAL driver system settings.
  */
 #define STM32_SERIAL_USE_USART1             FALSE
+<<<<<<< HEAD
 #define STM32_SERIAL_USE_USART2             TRUE   // 1-Wire temperature measure
+=======
+#define STM32_SERIAL_USE_USART2             TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_SERIAL_USE_USART3             FALSE
 #define STM32_SERIAL_USE_UART4              FALSE
 #define STM32_SERIAL_USE_UART5              FALSE
@@ -169,8 +196,13 @@
 /*
  * SPI driver system settings.
  */
+<<<<<<< HEAD
 #define STM32_SPI_USE_SPI1                  TRUE  // LCD screen.
 #define STM32_SPI_USE_SPI2                  TRUE  // SD card
+=======
+#define STM32_SPI_USE_SPI1                  FALSE
+#define STM32_SPI_USE_SPI2                  TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_SPI_USE_SPI3                  FALSE
 #define STM32_SPI_SPI1_DMA_PRIORITY         1
 #define STM32_SPI_SPI2_DMA_PRIORITY         1
@@ -197,7 +229,11 @@
 /*
  * USB driver system settings.
  */
+<<<<<<< HEAD
 #define STM32_USB_USE_USB1                  FALSE
+=======
+#define STM32_USB_USE_USB1                  TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #define STM32_USB_LOW_POWER_ON_SUSPEND      FALSE
 #define STM32_USB_USB1_HP_IRQ_PRIORITY      13
 #define STM32_USB_USB1_LP_IRQ_PRIORITY      14

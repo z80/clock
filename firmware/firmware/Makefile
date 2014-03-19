@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 ##############################################################################
 # Build global options
 # NOTE: Can be overridden externally.
@@ -6,8 +9,12 @@
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
+<<<<<<< HEAD
   #USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
   USE_OPT = -O0 -g -ggdb -fomit-frame-pointer -falign-functions=16
+=======
+  USE_OPT = -O0 -ggdb -fomit-frame-pointer -falign-functions=16
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 endif
 
 # C specific options here (added to USE_OPT).
@@ -67,7 +74,10 @@ include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F1xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
 include $(CHIBIOS)/os/various/fatfs_bindings/fatfs.mk
+<<<<<<< HEAD
 #include $(CHIBIOS)/test/test.mk
+=======
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 
 # Define linker script file here
 LDSCRIPT= linker/STM32F103.ld
@@ -83,11 +93,18 @@ CSRC = $(PORTSRC) \
        $(FATFSSRC) \
        $(CHIBIOS)/os/various/evtimer.c \
        $(CHIBIOS)/os/various/syscalls.c \
+<<<<<<< HEAD
        src/main.c \
        src/dac.c \
        src/playback.c \
        src/3310.c \
        src/3310-backend.c
+=======
+       $(CHIBIOS)/os/various/shell.c \
+       $(CHIBIOS)/os/various/chprintf.c \
+       $(CHIBIOS)/os/various/chrtclib.c \
+       main.c
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -118,8 +135,12 @@ ASMSRC = $(PORTASM)
 
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
+<<<<<<< HEAD
          $(CHIBIOS)/os/various $(FATFSINC) \
          src
+=======
+         $(CHIBIOS)/os/various $(FATFSINC) 
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 
 #
 # Project, sources and paths
@@ -216,6 +237,7 @@ ifeq ($(USE_FWLIB),yes)
 endif
 
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/rules.mk
+<<<<<<< HEAD
 
 
 
@@ -361,3 +383,5 @@ $(OBJECT_DIR)/%.o: %.S
 
 
 >>>>>>> parent of b886b3f... Just compiled old file.
+=======
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d

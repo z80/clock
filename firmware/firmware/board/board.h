@@ -145,6 +145,7 @@
 #define VAL_GPIOECRH            0x88888888      /* PE15...PE8 */
 #define VAL_GPIOEODR            0xFFFFFFFF
 
+<<<<<<< HEAD
 /*
  * USB bus activation macro, required by the USB driver.
  */
@@ -154,6 +155,9 @@
  * USB bus de-activation macro, required by the USB driver.
  */
 #define usb_lld_disconnect_bus(usbp) palSetPad(GPIOC, GPIOC_USB_DISC)
+=======
+
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus

@@ -43,7 +43,7 @@
 /* To enable string functions, set _USE_STRFUNC to 1 or 2. */
 
 
-#define	_USE_MKFS		0	/* 0:Disable or 1:Enable */
+#define	_USE_MKFS		1	/* 0:Disable or 1:Enable */
 /* To enable f_mkfs function, set _USE_MKFS to 1 and set _FS_READONLY to 0 */
 
 
@@ -146,7 +146,7 @@
 / is tied to the partitions listed in VolToPart[]. */
 
 
-#define	_USE_ERASE	0	/* 0:Disable or 1:Enable */
+#define	_USE_ERASE	1	/* 0:Disable or 1:Enable */
 /* To enable sector erase feature, set _USE_ERASE to 1. CTRL_ERASE_SECTOR command
 /  should be added to the disk_ioctl functio. */
 

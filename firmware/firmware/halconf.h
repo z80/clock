@@ -48,7 +48,11 @@
  * @brief   Enables the ADC subsystem.
  */
 #if !defined(HAL_USE_ADC) || defined(__DOXYGEN__)
+<<<<<<< HEAD
 #define HAL_USE_ADC                 TRUE
+=======
+#define HAL_USE_ADC                 FALSE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #endif
 
 /**
@@ -104,7 +108,11 @@
  * @brief   Enables the PWM subsystem.
  */
 #if !defined(HAL_USE_PWM) || defined(__DOXYGEN__)
+<<<<<<< HEAD
 #define HAL_USE_PWM                 TRUE
+=======
+#define HAL_USE_PWM                 FALSE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #endif
 
 /**
@@ -132,7 +140,11 @@
  * @brief   Enables the SERIAL over USB subsystem.
  */
 #if !defined(HAL_USE_SERIAL_USB) || defined(__DOXYGEN__)
+<<<<<<< HEAD
 #define HAL_USE_SERIAL_USB          FALSE
+=======
+#define HAL_USE_SERIAL_USB          TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #endif
 
 /**
@@ -153,7 +165,11 @@
  * @brief   Enables the USB subsystem.
  */
 #if !defined(HAL_USE_USB) || defined(__DOXYGEN__)
+<<<<<<< HEAD
 #define HAL_USE_USB                 FALSE
+=======
+#define HAL_USE_USB                 TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #endif
 
 /*===========================================================================*/
@@ -229,7 +245,11 @@
  *          use a DMA channel and heavily loads the CPU.
  */
 #if !defined(MMC_NICE_WAITING) || defined(__DOXYGEN__)
+<<<<<<< HEAD
 #define MMC_NICE_WAITING            FASLE //TRUE
+=======
+#define MMC_NICE_WAITING            TRUE
+>>>>>>> c65b57c53bc00e21cc481ead2b26aa7cbbfabd0d
 #endif
 
 /*===========================================================================*/
