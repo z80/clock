@@ -87,6 +87,49 @@ static void interface_speed( enum speed_setting speed )
 }
 
 /*-----------------------------------------------------------------------*/
+/* Transmit/Receive a byte to MMC via SPI  (Platform dependent)          */
+/*-----------------------------------------------------------------------*/
+static BYTE stm32_spi_rw( BYTE out )
+{
+    /* Loop while DR register in not empty */
+    /// not needed: while (SPI_I2S_GetFlagStatus(SPI_SD, SPI_I2S_FLAG_TXE) == RESET) { ; }
+
+    /* Send byte through the SPI peripheral */
+    //SPI_I2S_SendData(SPI_SD, out);
+    spiSend( MMCD1.config.spip, 1, &out );
+
+    /* Wait to receive a byte */
+    //while (SPI_I2S_GetFlagStatus(SPI_SD, SPI_I2S_FLAG_RXNE) == RESET) { ; }
+
+    /* Return the byte read from the SPI bus */
+    BYTE res;
+    spiReceive( MMCD1.config.spip, 1, &res );
+    //return SPI_I2S_ReceiveData(SPI_SD);
+    return res;
+}
+
+
+
+/*-----------------------------------------------------------------------*/
+/* Transmit a byte to MMC via SPI  (Platform dependent)                  */
+/*-----------------------------------------------------------------------*/
+
+#define xmit_spi(dat)  stm32_spi_rw(dat)
+
+/*-----------------------------------------------------------------------*/
+/* Receive a byte from MMC via SPI  (Platform dependent)                 */
+/*-----------------------------------------------------------------------*/
+
+static
+BYTE rcvr_spi (void)
+{
+    return stm32_spi_rw(0xff);
+}
+
+/* Alternative macro to receive data fast */
+#define rcvr_spi_m(dst)  *(dst)=stm32_spi_rw(0xff)
+
+/*-----------------------------------------------------------------------*/
 /* Wait for card ready                                                   */
 /*-----------------------------------------------------------------------*/
 
@@ -103,6 +146,17 @@ BYTE wait_ready (void)
     while ((res != 0xFF) && Timer2);
 
     return res;
+}
+
+/*-----------------------------------------------------------------------*/
+/* Deselect the card and release SPI bus                                 */
+/*-----------------------------------------------------------------------*/
+
+static
+void release_spi (void)
+{
+    DESELECT();
+    rcvr_spi();
 }
 
 
@@ -152,6 +206,38 @@ BYTE send_cmd (
     while ((res & 0x80) && --n);
 
     return res;         /* Return with the response value */
+}
+
+/*-----------------------------------------------------------------------*/
+/* Receive a data packet from MMC                                        */
+/*-----------------------------------------------------------------------*/
+
+static
+BOOL rcvr_datablock (
+    BYTE *buff,         /* Data buffer to store received data */
+    UINT btr            /* Byte count (must be multiple of 4) */
+)
+{
+    BYTE token;
+
+
+    Timer1 = 10;
+    do {                            /* Wait for data packet in timeout of 100ms */
+        token = rcvr_spi();
+    } while ((token == 0xFF) && Timer1);
+    if(token != 0xFE) return FALSE; /* If not valid data token, return with error */
+
+    do {                            /* Receive the data block into buffer */
+        rcvr_spi_m(buff++);
+        rcvr_spi_m(buff++);
+        rcvr_spi_m(buff++);
+        rcvr_spi_m(buff++);
+    } while (btr -= 4);
+
+    rcvr_spi();                     /* Discard CRC */
+    rcvr_spi();
+
+    return TRUE;                    /* Return with success */
 }
 
 
@@ -216,30 +302,8 @@ DSTATUS disk_status (
     BYTE drv        /* Physical drive nmuber (0..) */
 )
 {
-  DSTATUS stat;
-
-  switch (drv) {
-#if HAL_USE_MMC_SPI
-  case MMC:
-    stat = 0;
-    /* It is initialized externally, just reads the status.*/
-    if (blkGetDriverState(&MMCD1) != BLK_READY)
-      stat |= STA_NOINIT;
-    if (mmcIsWriteProtected(&MMCD1))
-      stat |= STA_PROTECT;
-    return stat;
-#else
-  case SDC:
-    stat = 0;
-    /* It is initialized externally, just reads the status.*/
-    if (blkGetDriverState(&SDCD1) != BLK_READY)
-      stat |= STA_NOINIT;
-    if (sdcIsWriteProtected(&SDCD1))
-      stat |= STA_PROTECT;
-    return stat;
-#endif
-  }
-  return STA_NODISK;
+    if (drv) return STA_NOINIT;     /* Supports only single drive */
+    return Stat;
 }
 
 
@@ -254,32 +318,32 @@ DRESULT disk_read (
     BYTE count        /* Number of sectors to read (1..255) */
 )
 {
-  switch (drv) {
-#if HAL_USE_MMC_SPI
-  case MMC:
-    if (blkGetDriverState(&MMCD1) != BLK_READY)
-      return RES_NOTRDY;
-    if (mmcStartSequentialRead(&MMCD1, sector))
-      return RES_ERROR;
-    while (count > 0) {
-      if (mmcSequentialRead(&MMCD1, buff))
-        return RES_ERROR;
-      buff += MMCSD_BLOCK_SIZE;
-      count--;
+    if (drv || !count) return RES_PARERR;
+    if (Stat & STA_NOINIT) return RES_NOTRDY;
+
+    if (!(CardType & CT_BLOCK)) sector *= 512;  /* Convert to byte address if needed */
+
+    if (count == 1) {   /* Single block read */
+        if (send_cmd(CMD17, sector) == 0)   { /* READ_SINGLE_BLOCK */
+            if (rcvr_datablock(buff, 512)) {
+                count = 0;
+            }
+        }
     }
-    if (mmcStopSequentialRead(&MMCD1))
-        return RES_ERROR;
-    return RES_OK;
-#else
-  case SDC:
-    if (blkGetDriverState(&SDCD1) != BLK_READY)
-      return RES_NOTRDY;
-    if (sdcRead(&SDCD1, sector, buff, count))
-      return RES_ERROR;
-    return RES_OK;
-#endif
-  }
-  return RES_PARERR;
+    else {              /* Multiple block read */
+        if (send_cmd(CMD18, sector) == 0) { /* READ_MULTIPLE_BLOCK */
+            do {
+                if (!rcvr_datablock(buff, 512)) {
+                    break;
+                }
+                buff += 512;
+            } while (--count);
+            send_cmd(CMD12, 0);             /* STOP_TRANSMISSION */
+        }
+    }
+    release_spi();
+
+    return count ? RES_ERROR : RES_OK;
 }
 
 
