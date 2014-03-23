@@ -72,11 +72,8 @@ bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
 void cmd_sdiotest( void )
 {
     FRESULT err;
-    uint32_t clusters;
-    FATFS *fsp;
     FIL FileObject;
     //FILINFO FileInfo;
-    size_t bytes_written;
     struct tm timp;
 
     // To not go into FatFS until debugger is running.
@@ -95,24 +92,15 @@ void cmd_sdiotest( void )
     }
 
     chThdSleepMilliseconds(100);
-    err = f_getfree("/", &clusters, &fsp);
-    if (err != FR_OK) {
-      chSysHalt();
-    }
 
     rtcGetTimeTm(&RTCD1, &timp);
 
     chThdSleepMilliseconds(100);
-    err = f_open(&FileObject, "0:tmstmp.tst", FA_WRITE | FA_OPEN_ALWAYS);
+    err = f_open(&FileObject, "0:tmstmp.tst", FA_READ );
     if (err != FR_OK) {
       chSysHalt();
     }
 
-    chThdSleepMilliseconds(100);
-    err = f_write(&FileObject, "tst", sizeof("tst"), (void *)&bytes_written);
-    if (err != FR_OK) {
-      chSysHalt();
-    }
 
     chThdSleepMilliseconds(100);
     err = f_close(&FileObject);

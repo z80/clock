@@ -433,7 +433,7 @@ DRESULT disk_read (
 /*-----------------------------------------------------------------------*/
 /* Write Sector(s)                                                       */
 
-#if _READONLY == 0
+#if _FS_READONLY == 0
 DRESULT disk_write (
     BYTE drv,            /* Physical drive nmuber (0..) */
     const BYTE *buff,    /* Data to be written */

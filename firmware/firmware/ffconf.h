@@ -17,19 +17,19 @@
 / Functions and Buffer Configurations
 /----------------------------------------------------------------------------*/
 
-#define	_FS_TINY		0	/* 0:Normal or 1:Tiny */
+#define	_FS_TINY		1	/* 0:Normal or 1:Tiny */
 /* When _FS_TINY is set to 1, FatFs uses the sector buffer in the file system
 /  object instead of the sector buffer in the individual file object for file
 /  data transfer. This reduces memory consumption 512 bytes each file object. */
 
 
-#define _FS_READONLY	0	/* 0:Read/Write or 1:Read only */
+#define _FS_READONLY	1	/* 0:Read/Write or 1:Read only */
 /* Setting _FS_READONLY to 1 defines read only configuration. This removes
 /  writing functions, f_write, f_sync, f_unlink, f_mkdir, f_chmod, f_rename,
 /  f_truncate and useless f_getfree. */
 
 
-#define _FS_MINIMIZE	0	/* 0 to 3 */
+#define _FS_MINIMIZE	3	/* 0 to 3 */
 /* The _FS_MINIMIZE option defines minimization level to remove some functions.
 /
 /   0: Full function.
@@ -43,7 +43,7 @@
 /* To enable string functions, set _USE_STRFUNC to 1 or 2. */
 
 
-#define	_USE_MKFS		1	/* 0:Disable or 1:Enable */
+#define	_USE_MKFS		0	/* 0:Disable or 1:Enable */
 /* To enable f_mkfs function, set _USE_MKFS to 1 and set _FS_READONLY to 0 */
 
 
@@ -93,7 +93,7 @@
 */
 
 
-#define	_USE_LFN	1		/* 0 to 3 */
+#define	_USE_LFN	0		/* 0 to 3 */
 #define	_MAX_LFN	255		/* Maximum LFN length to handle (12 to 255) */
 /* The _USE_LFN option switches the LFN support.
 /
@@ -146,7 +146,7 @@
 / is tied to the partitions listed in VolToPart[]. */
 
 
-#define	_USE_ERASE	1	/* 0:Disable or 1:Enable */
+#define	_USE_ERASE	0	/* 0:Disable or 1:Enable */
 /* To enable sector erase feature, set _USE_ERASE to 1. CTRL_ERASE_SECTOR command
 /  should be added to the disk_ioctl functio. */
 
@@ -156,7 +156,7 @@
 / System Configurations
 /----------------------------------------------------------------------------*/
 
-#define _WORD_ACCESS	1	/* 0 or 1 */
+#define _WORD_ACCESS	0	/* 0 or 1 */
 /* Set 0 first and it is always compatible with all platforms. The _WORD_ACCESS
 /  option defines which access method is used to the word data on the FAT volume.
 /
