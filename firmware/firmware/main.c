@@ -60,9 +60,8 @@ bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
 void cmd_sdiotest( void )
 {
     FRESULT err;
-    FIL FileObject;
     //FILINFO FileInfo;
-    struct tm timp;
+    struct tm;
 
     // To not go into FatFS until debugger is running.
     int i = 1;
@@ -80,46 +79,28 @@ void cmd_sdiotest( void )
       fs_ready = TRUE;
     }
 
-    chThdSleepMilliseconds(100);
+    FRESULT rc;
+    FIL   fil;
+    // FILINFO info;
+    UINT br;
+    // UINT bw, i;
 
-    rtcGetTimeTm(&RTCD1, &timp);
+    rc = f_open( &fil, "anthem01.raw", FA_READ );
+    if ( rc != FR_OK )
+        return;
 
-    chThdSleepMilliseconds(100);
-    err = f_open(&FileObject, "anthem01.raw", FA_READ );
-    if (err != FR_OK) {
-      chSysHalt();
-    }
+    uint8_t buffer[ 512 ];
+    // First compare flash content with file content.
+    // To check if reflash is really necessary.
+    do {
+        rc = f_read( &fil, buffer, sizeof(buffer), &br );
+        if ( rc != FR_OK )
+            return;
+    } while ( br > 0 );
+    f_close( &fil );
 
+    f_mount( 0, 0 );
 
-    chThdSleepMilliseconds(100);
-    err = f_close(&FileObject);
-    if (err != FR_OK) {
-      chSysHalt();
-    }
-
-//    chprintf(chp, "Obtaining file info ... ");
-//    chThdSleepMilliseconds(100);
-//    err = f_stat("0:tmstmp.tst", &FileInfo);
-//    if (err != FR_OK) {
-//      chSysHalt();
-//    }
-//    else{
-//      chprintf(chp, "OK\r\n");
-//      chprintf(chp, "    Timestamp: %u-%u-%u %u:%u:%u\r\n",
-//                         ((FileInfo.fdate >> 9) & 127) + 1980,
-//                         (FileInfo.fdate >> 5) & 15,
-//                         FileInfo.fdate & 31,
-//                         (FileInfo.ftime >> 11) & 31,
-//                         (FileInfo.ftime >> 5) & 63,
-//                         (FileInfo.ftime & 31) * 2);
-//    }
-
-    f_mount(0, NULL);
-
-    chThdSleepMilliseconds(100);
-    if (mmcDisconnect(&MMCD1))
-      chSysHalt();
-    chThdSleepMilliseconds(100);
 }
 
 
