@@ -85,8 +85,8 @@ extern RTCDriver RTCD1;
 #define SDC     0
 
 /* Card-Select Controls  (Platform dependent) */
-#define SELECT()        spiSelect( MMCD1.config->spip )    /* MMC CS = L */
-#define DESELECT()      spiUnselect( MMCD1.config->spip )  /* MMC CS = H */
+#define SELECT()        palClearPad( GPIOB, 12 ) //spiSelect( MMCD1.config->spip )    /* MMC CS = L */
+#define DESELECT()      palSetPad( GPIOB, 12 )   //spiUnselect( MMCD1.config->spip )  /* MMC CS = H */
 
 #define power_on()      {}
 #define power_off()     {}
@@ -123,15 +123,15 @@ static BYTE stm32_spi_rw( BYTE out )
 
     /* Send byte through the SPI peripheral */
     //SPI_I2S_SendData(SPI_SD, out);
-    spiSend( MMCD1.config->spip, 1, &out );
 
     /* Wait to receive a byte */
     //while (SPI_I2S_GetFlagStatus(SPI_SD, SPI_I2S_FLAG_RXNE) == RESET) { ; }
 
     /* Return the byte read from the SPI bus */
-    BYTE res;
-    spiReceive( MMCD1.config->spip, 1, &res );
     //return SPI_I2S_ReceiveData(SPI_SD);
+
+    BYTE res;
+    spiExchange( MMCD1.config->spip, 1, &out, &res );
     return res;
 }
 
@@ -344,9 +344,8 @@ DSTATUS disk_initialize (
         if (send_cmd(CMD8, 0x1AA) == 1) {   /* SDHC */
             for (n = 0; n < 4; n++) ocr[n] = rcvr_spi();        /* Get trailing return value of R7 response */
             if (ocr[2] == 0x01 && ocr[3] == 0xAA) {             /* The card can work at VDD range of 2.7-3.6V */
-                t1 = t0;
-                while ( ((t1 - t0) < 1000) && send_cmd(ACMD41, 1UL << 30));  /* Wait for leaving idle state (ACMD41 with HCS bit) */
-                if (Timer1 && send_cmd(CMD58, 0) == 0) {        /* Check CCS bit in the OCR */
+                while ( ((currentTime() - t0) < 1000) && send_cmd(ACMD41, 1UL << 30));  /* Wait for leaving idle state (ACMD41 with HCS bit) */
+                if ( ((currentTime() - t0) < 1000) && send_cmd(CMD58, 0) == 0) {        /* Check CCS bit in the OCR */
                     for (n = 0; n < 4; n++) ocr[n] = rcvr_spi();
                     ty = (ocr[0] & 0x40) ? CT_SD2 | CT_BLOCK : CT_SD2;
                 }

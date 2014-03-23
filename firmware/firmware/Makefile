@@ -6,6 +6,7 @@
 # Compiler options here.
 ifeq ($(USE_OPT),)
   USE_OPT = -O0 -ggdb -fomit-frame-pointer -falign-functions=16
+   #-Wl --gc-sections
 endif
 
 # C specific options here (added to USE_OPT).
@@ -19,11 +20,13 @@ ifeq ($(USE_CPPOPT),)
 endif
 
 # Enable this if you want the linker to remove unused code and data
+USE_LINK_GC = yes
 ifeq ($(USE_LINK_GC),)
   USE_LINK_GC = yes
 endif
 
 # If enabled, this option allows to compile the application in THUMB mode.
+USE_THUMB = yes
 ifeq ($(USE_THUMB),)
   USE_THUMB = yes
 endif

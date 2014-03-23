@@ -14,15 +14,13 @@
     limitations under the License.
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
+//#include <stdio.h>
+//#include <string.h>
+//#include <time.h>
 
 #include "ch.h"
 #include "hal.h"
 
-//#include "shell.h"
-//#include "chprintf.h"
 #include "chrtclib.h"
 #include "ff.h"
 
@@ -32,43 +30,33 @@
  */
 FATFS MMC_FS;
 
-/**
- * MMC driver instance.
- */
+
 MMCDriver MMCD1;
 
-/* FS mounted and ready.*/
+// FS mounted and ready.
 static bool_t fs_ready = FALSE;
 
-/* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
+// Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).
 static SPIConfig hs_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS, 0};
 
-/* Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).*/
+// Low speed SPI configuration (281.250kHz, CPHA=0, CPOL=0, MSb first).
 static SPIConfig ls_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS,
                               SPI_CR1_BR_2 | SPI_CR1_BR_1};
 
-/* MMC/SD over SPI driver configuration.*/
+// MMC/SD over SPI driver configuration.
 static MMCConfig mmccfg = {&SPID2, &ls_spicfg, &hs_spicfg};
 
-/**
- *
- */
 bool_t mmc_lld_is_write_protected(MMCDriver *sdcp) {
   (void)sdcp;
   return FALSE;
 }
 
-/**
- *
- */
 bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
   (void)sdcp;
   return TRUE;
 }
 
-/**
- *
- */
+
 void cmd_sdiotest( void )
 {
     FRESULT err;
@@ -80,6 +68,7 @@ void cmd_sdiotest( void )
     int i = 1;
     while ( i )
         chThdSleepSeconds( 1 );
+
 
     err = f_mount(0, &MMC_FS);
     if (err != FR_OK)
@@ -96,7 +85,7 @@ void cmd_sdiotest( void )
     rtcGetTimeTm(&RTCD1, &timp);
 
     chThdSleepMilliseconds(100);
-    err = f_open(&FileObject, "0:tmstmp.tst", FA_READ );
+    err = f_open(&FileObject, "anthem01.raw", FA_READ );
     if (err != FR_OK) {
       chSysHalt();
     }
@@ -154,16 +143,27 @@ int main(void) {
   chSysInit();
 
 
+  // SPI setup.
+  palSetPadMode( GPIOB, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // SCK
+  palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
+  palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
+  palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
+  palSetPad( GPIOB, 12 ); // Set CS high
+
   /*
    * Initializes the SDIO drivers.
    */
   mmcObjectInit(&MMCD1);
   mmcStart(&MMCD1, &mmccfg);
 
-  while (TRUE)
+  //int i = 0;
+  for (;;)
   {
       cmd_sdiotest();
       chThdSleepSeconds( 5 );
+      //i += 1;
+      //i += 2;
+      //i += 3;
   }
 }
 
