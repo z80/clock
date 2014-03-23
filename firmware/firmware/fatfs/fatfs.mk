@@ -1,10 +1,10 @@
 # FATFS files.
-FATFSSRC = fatfs/fatfs_diskio.c \
-           fatfs/fatfs_syscall.c \
-           fatfs/src/ff.c #\
+FATFSSRC = fatfs/sd_spi_stm32.c \
+           fatfs/ff.c #\
+           #fatfs/fatfs_syscall.c \
            #fatfs/src/option/ccsbcs.c
 
-FATFSINC = fatfs/src
+FATFSINC = fatfs
 
 
 

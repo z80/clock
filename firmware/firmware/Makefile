@@ -86,6 +86,11 @@ CSRC = $(PORTSRC) \
        $(CHIBIOS)/os/various/shell.c \
        $(CHIBIOS)/os/various/chprintf.c \
        $(CHIBIOS)/os/various/chrtclib.c \
+       stdperiph/core_cm3.c \
+       stdperiph/misc.c \
+       stdperiph/stm32f10x_spi.c \
+       stdperiph/stm32f10x_gpio.c \
+       stdperiph/stm32f10x_rcc.c \
        main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -117,7 +122,7 @@ ASMSRC = $(PORTASM)
 
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
-         $(CHIBIOS)/os/various $(FATFSINC) 
+         $(CHIBIOS)/os/various $(FATFSINC) stdperiph
 
 #
 # Project, sources and paths
