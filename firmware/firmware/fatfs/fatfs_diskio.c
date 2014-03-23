@@ -29,11 +29,33 @@
 #define CMD55   (0x40+55)   /* APP_CMD */
 #define CMD58   (0x40+58)   /* READ_OCR */
 
+/* Martin Thomas begin */
+
+/* Card type flags (CardType) */
+#define CT_MMC              0x01
+#define CT_SD1              0x02
+#define CT_SD2              0x04
+#define CT_SDC              (CT_SD1|CT_SD2)
+#define CT_BLOCK            0x08
 
 /* Manley EK-STM32F board does not offer socket contacts -> dummy values: */
 #define SOCKPORT    1           /* Socket contact port */
 #define SOCKWP      0           /* Write protect switch (PB5) */
 #define SOCKINS     0           /* Card detect switch (PB4) */
+
+
+static const DWORD socket_state_mask_cp = (1 << 0);
+static const DWORD socket_state_mask_wp = (1 << 1);
+
+static volatile
+DSTATUS Stat = STA_NOINIT;  /* Disk status */
+
+static volatile
+DWORD Timer1, Timer2;   /* 100Hz decrement timers */
+
+static
+BYTE CardType;          /* Card type flags */
+
 
 enum speed_setting { INTERFACE_SLOW, INTERFACE_FAST };
 
@@ -63,12 +85,15 @@ extern RTCDriver RTCD1;
 #define SDC     0
 
 /* Card-Select Controls  (Platform dependent) */
-#define SELECT()        spiSelect( MMCD1.config.spip )    /* MMC CS = L */
-#define DESELECT()      spiUnselect( MMCD1.config.spip )  /* MMC CS = H */
+#define SELECT()        spiSelect( MMCD1.config->spip )    /* MMC CS = L */
+#define DESELECT()      spiUnselect( MMCD1.config->spip )  /* MMC CS = H */
 
 #define power_on()      {}
-#define power_off       {}
-
+#define power_off()     {}
+static int chk_power(void)
+{
+    return 1; /* fake powered */
+}
 
 static void interface_speed( enum speed_setting speed )
 {
@@ -76,13 +101,15 @@ static void interface_speed( enum speed_setting speed )
     //MMCD1.config.lscfg
     //MMCD1.config.hscfg
 
-    tmp = SPI_SD->CR1;
-    if ( speed == INTERFACE_SLOW ) {
+    if ( speed == INTERFACE_SLOW )
+    {
         /* Set slow clock (100k-400k) */
-        spiStart( MMCD1.config.spip, MMCD1.config.lscfg );
-    } else {
+        spiStart( MMCD1.config->spip, MMCD1.config->lscfg );
+    }
+    else
+    {
         /* Set fast clock (depends on the CSD) */
-        spiStart( MMCD1.config.spip, MMCD1.config.hscfg );
+        spiStart( MMCD1.config->spip, MMCD1.config->hscfg );
     }
 }
 
@@ -96,14 +123,14 @@ static BYTE stm32_spi_rw( BYTE out )
 
     /* Send byte through the SPI peripheral */
     //SPI_I2S_SendData(SPI_SD, out);
-    spiSend( MMCD1.config.spip, 1, &out );
+    spiSend( MMCD1.config->spip, 1, &out );
 
     /* Wait to receive a byte */
     //while (SPI_I2S_GetFlagStatus(SPI_SD, SPI_I2S_FLAG_RXNE) == RESET) { ; }
 
     /* Return the byte read from the SPI bus */
     BYTE res;
-    spiReceive( MMCD1.config.spip, 1, &res );
+    spiReceive( MMCD1.config->spip, 1, &res );
     //return SPI_I2S_ReceiveData(SPI_SD);
     return res;
 }
@@ -132,18 +159,28 @@ BYTE rcvr_spi (void)
 /*-----------------------------------------------------------------------*/
 /* Wait for card ready                                                   */
 /*-----------------------------------------------------------------------*/
+static uint32_t currentTime( void )
+{
+    RTCTime t;
+    rtcGetTime( &RTCD1, &t );
+    uint32_t result = t.tv_sec*1000 + t.tv_msec;
+    return result;
+}
 
 static
 BYTE wait_ready (void)
 {
     BYTE res;
 
-
-    Timer2 = 50;    /* Wait for ready in timeout of 500ms */
+    uint32_t t0, t1;
+    t0 = currentTime();
+    //Timer2 = 50;    /* Wait for ready in timeout of 500ms */
     rcvr_spi();
     do
+    {
         res = rcvr_spi();
-    while ((res != 0xFF) && Timer2);
+        t1 = currentTime();
+    } while ( (res != 0xFF) && ((t1 - t0) < 500) );
 
     return res;
 }
@@ -213,7 +250,8 @@ BYTE send_cmd (
 /*-----------------------------------------------------------------------*/
 
 static
-BOOL rcvr_datablock (
+//BOOL rcvr_datablock (
+bool_t rcvr_datablock (
     BYTE *buff,         /* Data buffer to store received data */
     UINT btr            /* Byte count (must be multiple of 4) */
 )
@@ -221,10 +259,14 @@ BOOL rcvr_datablock (
     BYTE token;
 
 
-    Timer1 = 10;
+    uint32_t t0, t1;
+    t0 = currentTime();
+    //Timer1 = 10;
     do {                            /* Wait for data packet in timeout of 100ms */
         token = rcvr_spi();
-    } while ((token == 0xFF) && Timer1);
+        t1 = currentTime();
+    } while ( (token == 0xFF) &&
+              ((t1 - t0) < 100) );
     if(token != 0xFE) return FALSE; /* If not valid data token, return with error */
 
     do {                            /* Receive the data block into buffer */
@@ -239,6 +281,43 @@ BOOL rcvr_datablock (
 
     return TRUE;                    /* Return with success */
 }
+
+/*-----------------------------------------------------------------------*/
+/* Send a data packet to MMC                                             */
+/*-----------------------------------------------------------------------*/
+
+#if _FS_READONLY == 0
+static
+//BOOL xmit_datablock (
+bool_t xmit_datablock (
+    const BYTE *buff,   /* 512 byte data block to be transmitted */
+    BYTE token          /* Data/Stop token */
+)
+{
+    BYTE resp;
+    BYTE wc;
+
+    if (wait_ready() != 0xFF) return FALSE;
+
+    xmit_spi(token);                    /* transmit data token */
+    if (token != 0xFD) {    /* Is data token */
+
+        wc = 0;
+        do {                            /* transmit the 512 byte data block to MMC */
+            xmit_spi(*buff++);
+            xmit_spi(*buff++);
+        } while (--wc);
+
+        xmit_spi(0xFF);                 /* CRC (Dummy) */
+        xmit_spi(0xFF);
+        resp = rcvr_spi();              /* Receive data response */
+        if ((resp & 0x1F) != 0x05)      /* If not accepted, return with error */
+            return FALSE;
+    }
+
+    return TRUE;
+}
+#endif /* _READONLY */
 
 
 /*-----------------------------------------------------------------------*/
@@ -259,11 +338,14 @@ DSTATUS disk_initialize (
 
     ty = 0;
     if (send_cmd(CMD0, 0) == 1) {           /* Enter Idle state */
-        Timer1 = 100;                       /* Initialization timeout of 1000 milliseconds */
+        //Timer1 = 100;                       /* Initialization timeout of 1000 milliseconds */
+        uint32_t t0, t1;
+        t0 = currentTime();
         if (send_cmd(CMD8, 0x1AA) == 1) {   /* SDHC */
             for (n = 0; n < 4; n++) ocr[n] = rcvr_spi();        /* Get trailing return value of R7 response */
             if (ocr[2] == 0x01 && ocr[3] == 0xAA) {             /* The card can work at VDD range of 2.7-3.6V */
-                while (Timer1 && send_cmd(ACMD41, 1UL << 30));  /* Wait for leaving idle state (ACMD41 with HCS bit) */
+                t1 = t0;
+                while ( ((t1 - t0) < 1000) && send_cmd(ACMD41, 1UL << 30));  /* Wait for leaving idle state (ACMD41 with HCS bit) */
                 if (Timer1 && send_cmd(CMD58, 0) == 0) {        /* Check CCS bit in the OCR */
                     for (n = 0; n < 4; n++) ocr[n] = rcvr_spi();
                     ty = (ocr[0] & 0x40) ? CT_SD2 | CT_BLOCK : CT_SD2;
@@ -275,8 +357,8 @@ DSTATUS disk_initialize (
             } else {
                 ty = CT_MMC; cmd = CMD1;    /* MMC */
             }
-            while (Timer1 && send_cmd(cmd, 0));         /* Wait for leaving idle state */
-            if (!Timer1 || send_cmd(CMD16, 512) != 0)   /* Set R/W block length to 512 */
+            while ((currentTime() - t0 < 1000) && send_cmd(cmd, 0));         /* Wait for leaving idle state */
+            if ( /*!Timer1*/ ((currentTime() - t0) >= 1000) || send_cmd(CMD16, 512) != 0)   /* Set R/W block length to 512 */
                 ty = 0;
         }
     }
@@ -359,34 +441,31 @@ DRESULT disk_write (
     BYTE count            /* Number of sectors to write (1..255) */
 )
 {
-  switch (drv) {
-#if HAL_USE_MMC_SPI
-  case MMC:
-    if (blkGetDriverState(&MMCD1) != BLK_READY)
-        return RES_NOTRDY;
-    if (mmcIsWriteProtected(&MMCD1))
-        return RES_WRPRT;
-    if (mmcStartSequentialWrite(&MMCD1, sector))
-        return RES_ERROR;
-    while (count > 0) {
-        if (mmcSequentialWrite(&MMCD1, buff))
-            return RES_ERROR;
-        buff += MMCSD_BLOCK_SIZE;
-        count--;
+    if (drv || !count) return RES_PARERR;
+    if (Stat & STA_NOINIT) return RES_NOTRDY;
+    if (Stat & STA_PROTECT) return RES_WRPRT;
+
+    if (!(CardType & CT_BLOCK)) sector *= 512;  /* Convert to byte address if needed */
+
+    if (count == 1) {   /* Single block write */
+        if ((send_cmd(CMD24, sector) == 0)  /* WRITE_BLOCK */
+            && xmit_datablock(buff, 0xFE))
+            count = 0;
     }
-    if (mmcStopSequentialWrite(&MMCD1))
-        return RES_ERROR;
-    return RES_OK;
-#else
-  case SDC:
-    if (blkGetDriverState(&SDCD1) != BLK_READY)
-      return RES_NOTRDY;
-    if (sdcWrite(&SDCD1, sector, buff, count))
-      return RES_ERROR;
-    return RES_OK;
-#endif
-  }
-  return RES_PARERR;
+    else {              /* Multiple block write */
+        if (CardType & CT_SDC) send_cmd(ACMD23, count);
+        if (send_cmd(CMD25, sector) == 0) { /* WRITE_MULTIPLE_BLOCK */
+            do {
+                if (!xmit_datablock(buff, 0xFC)) break;
+                buff += 512;
+            } while (--count);
+            if (!xmit_datablock(0, 0xFD))   /* STOP_TRAN token */
+                count = 1;
+        }
+    }
+    release_spi();
+
+    return count ? RES_ERROR : RES_OK;
 }
 #endif /* _READONLY */
 
@@ -401,56 +480,129 @@ DRESULT disk_ioctl (
     void *buff        /* Buffer to send/receive control data */
 )
 {
-  switch (drv) {
-#if HAL_USE_MMC_SPI
-  case MMC:
-    switch (ctrl) {
-    case CTRL_SYNC:
-        return RES_OK;
-    case GET_SECTOR_SIZE:
-        *((WORD *)buff) = MMCSD_BLOCK_SIZE;
-        return RES_OK;
-#if _USE_ERASE
-    case CTRL_ERASE_SECTOR:
-        mmcErase(&MMCD1, *((DWORD *)buff), *((DWORD *)buff + 1));
-        return RES_OK;
-#endif
-    default:
-        return RES_PARERR;
+    DRESULT res;
+    BYTE n, csd[16], *ptr = buff;
+    WORD csize;
+
+    if (drv) return RES_PARERR;
+
+    res = RES_ERROR;
+
+    if (ctrl == CTRL_POWER) {
+        switch (*ptr) {
+        case 0:     /* Sub control code == 0 (POWER_OFF) */
+            if (chk_power())
+                power_off();        /* Power off */
+            res = RES_OK;
+            break;
+        case 1:     /* Sub control code == 1 (POWER_ON) */
+            power_on();             /* Power on */
+            res = RES_OK;
+            break;
+        case 2:     /* Sub control code == 2 (POWER_GET) */
+            *(ptr+1) = (BYTE)chk_power();
+            res = RES_OK;
+            break;
+        default :
+            res = RES_PARERR;
+        }
     }
-#else
-  case SDC:
-    switch (ctrl) {
-    case CTRL_SYNC:
-        return RES_OK;
-    case GET_SECTOR_COUNT:
-        *((DWORD *)buff) = mmcsdGetCardCapacity(&SDCD1);
-        return RES_OK;
-    case GET_SECTOR_SIZE:
-        *((WORD *)buff) = MMCSD_BLOCK_SIZE;
-        return RES_OK;
-    case GET_BLOCK_SIZE:
-        *((DWORD *)buff) = 256; /* 512b blocks in one erase block */
-        return RES_OK;
-#if _USE_ERASE
-    case CTRL_ERASE_SECTOR:
-        sdcErase(&SDCD1, *((DWORD *)buff), *((DWORD *)buff + 1));
-        return RES_OK;
-#endif
-    default:
-        return RES_PARERR;
+    else {
+        if (Stat & STA_NOINIT) return RES_NOTRDY;
+
+        switch (ctrl) {
+        case CTRL_SYNC :        /* Make sure that no pending write process */
+            SELECT();
+            if (wait_ready() == 0xFF)
+                res = RES_OK;
+            break;
+
+        case GET_SECTOR_COUNT : /* Get number of sectors on the disk (DWORD) */
+            if ((send_cmd(CMD9, 0) == 0) && rcvr_datablock(csd, 16)) {
+                if ((csd[0] >> 6) == 1) {   /* SDC version 2.00 */
+                    csize = csd[9] + ((WORD)csd[8] << 8) + 1;
+                    *(DWORD*)buff = (DWORD)csize << 10;
+                } else {                    /* SDC version 1.XX or MMC*/
+                    n = (csd[5] & 15) + ((csd[10] & 128) >> 7) + ((csd[9] & 3) << 1) + 2;
+                    csize = (csd[8] >> 6) + ((WORD)csd[7] << 2) + ((WORD)(csd[6] & 3) << 10) + 1;
+                    *(DWORD*)buff = (DWORD)csize << (n - 9);
+                }
+                res = RES_OK;
+            }
+            break;
+
+        case GET_SECTOR_SIZE :  /* Get R/W sector size (WORD) */
+            *(WORD*)buff = 512;
+            res = RES_OK;
+            break;
+
+        case GET_BLOCK_SIZE :   /* Get erase block size in unit of sector (DWORD) */
+            if (CardType & CT_SD2) {    /* SDC version 2.00 */
+                if (send_cmd(ACMD13, 0) == 0) { /* Read SD status */
+                    rcvr_spi();
+                    if (rcvr_datablock(csd, 16)) {              /* Read partial block */
+                        for (n = 64 - 16; n; n--) rcvr_spi();   /* Purge trailing data */
+                        *(DWORD*)buff = 16UL << (csd[10] >> 4);
+                        res = RES_OK;
+                    }
+                }
+            } else {                    /* SDC version 1.XX or MMC */
+                if ((send_cmd(CMD9, 0) == 0) && rcvr_datablock(csd, 16)) {  /* Read CSD */
+                    if (CardType & CT_SD1) {    /* SDC version 1.XX */
+                        *(DWORD*)buff = (((csd[10] & 63) << 1) + ((WORD)(csd[11] & 128) >> 7) + 1) << ((csd[13] >> 6) - 1);
+                    } else {                    /* MMC */
+                        *(DWORD*)buff = ((WORD)((csd[10] & 124) >> 2) + 1) * (((csd[11] & 3) << 3) + ((csd[11] & 224) >> 5) + 1);
+                    }
+                    res = RES_OK;
+                }
+            }
+            break;
+
+        case MMC_GET_TYPE :     /* Get card type flags (1 byte) */
+            *ptr = CardType;
+            res = RES_OK;
+            break;
+
+        case MMC_GET_CSD :      /* Receive CSD as a data block (16 bytes) */
+            if (send_cmd(CMD9, 0) == 0      /* READ_CSD */
+                && rcvr_datablock(ptr, 16))
+                res = RES_OK;
+            break;
+
+        case MMC_GET_CID :      /* Receive CID as a data block (16 bytes) */
+            if (send_cmd(CMD10, 0) == 0     /* READ_CID */
+                && rcvr_datablock(ptr, 16))
+                res = RES_OK;
+            break;
+
+        case MMC_GET_OCR :      /* Receive OCR as an R3 resp (4 bytes) */
+            if (send_cmd(CMD58, 0) == 0) {  /* READ_OCR */
+                for (n = 4; n; n--) *ptr++ = rcvr_spi();
+                res = RES_OK;
+            }
+            break;
+
+        case MMC_GET_SDSTAT :   /* Receive SD status as a data block (64 bytes) */
+            if (send_cmd(ACMD13, 0) == 0) { /* SD_STATUS */
+                rcvr_spi();
+                if (rcvr_datablock(ptr, 64))
+                    res = RES_OK;
+            }
+            break;
+
+        default:
+            res = RES_PARERR;
+        }
+
+        release_spi();
     }
-#endif
-  }
-  return RES_PARERR;
+
+    return res;
 }
 
-DWORD get_fattime(void) {
-#if HAL_USE_RTC
-    return rtcGetTimeFat(&RTCD1);
-#else
-    return ((uint32_t)0 | (1 << 16)) | (1 << 21); /* wrong but valid time */
-#endif
+DWORD get_fattime(void)
+{
+    return rtcGetTimeFat( &RTCD1 );
 }
 
 

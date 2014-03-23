@@ -64,7 +64,7 @@ include $(CHIBIOS)/os/hal/platforms/STM32F1xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F1xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
-include /fatfs/fatfs.mk
+include fatfs/fatfs.mk
 
 # Define linker script file here
 LDSCRIPT= linker/STM32F103.ld

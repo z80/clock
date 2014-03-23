@@ -71,21 +71,26 @@ bool_t mmc_lld_is_card_inserted(MMCDriver *sdcp) {
  */
 void cmd_sdiotest( void )
 {
-  FRESULT err;
-  uint32_t clusters;
-  FATFS *fsp;
-  FIL FileObject;
-  //FILINFO FileInfo;
-  size_t bytes_written;
-  struct tm timp;
+    FRESULT err;
+    uint32_t clusters;
+    FATFS *fsp;
+    FIL FileObject;
+    //FILINFO FileInfo;
+    size_t bytes_written;
+    struct tm timp;
 
+    // To not go into FatFS until debugger is running.
+    int i = 1;
+    while ( i )
+        chThdSleepSeconds( 1 );
 
-  if (!mmcConnect(&MMCD1)) {
     err = f_mount(0, &MMC_FS);
-    if (err != FR_OK){
+    if (err != FR_OK)
+    {
       chSysHalt();
     }
-    else{
+    else
+    {
       fs_ready = TRUE;
     }
 
@@ -138,10 +143,6 @@ void cmd_sdiotest( void )
     if (mmcDisconnect(&MMCD1))
       chSysHalt();
     chThdSleepMilliseconds(100);
-  }
-  else{
-    chSysHalt();
-  }
 }
 
 
