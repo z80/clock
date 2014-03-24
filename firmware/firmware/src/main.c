@@ -26,7 +26,8 @@
 /*
  * Application entry point.
  */
-int main(void) {
+
+void main(void) {
 
   /*
    * System initializations.

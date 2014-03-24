@@ -85,18 +85,10 @@ static int playbackStart( void )
 {
     // Access to SD flash.
     mmcStart( &MMCD1, &mmccfg );
-    bool_t res = mmcConnect( &MMCD1 );
-    if ( res )
-    {
-        FRESULT err = f_mount( 0, &MMC_FS );
-        if ( err != FR_OK )
-        {
-            return 2;
-        }
-        return 0;
-    }
-
-    return 1;
+    FRESULT err = f_mount( 0, &MMC_FS );
+    if ( err != FR_OK )
+        return 1;
+    return 0;
 }
 
 static void playbackStop( void )
@@ -143,10 +135,10 @@ int  play( char * file )
         while ( bytesRead > 0 )
         {
             msg_t msg;
-            if ( chMBFetch( &mailbox, &msg, 0 ) == RDY_OK )
+            if ( chMBFetch( &mailbox, &msg, TIME_INFINITE ) == RDY_OK )
             {
                 if ( msg == 0 )
-                    err =  f_read( &f, sndBuf, FILE_BUF_SZ, &bytesRead );
+                    err = f_read( &f, sndBuf, FILE_BUF_SZ, &bytesRead );
                 else
                     err = f_read( &f, &sndBuf[FILE_BUF_SZ], FILE_BUF_SZ, &bytesRead );
             }
@@ -170,27 +162,55 @@ static void pwmpcb( PWMDriver * pwmp )
     (void)pwmp;
     int value = (int)sndBuf[ sndIndex++ ];
     value = value * 10000 / 255; // 8 bit sound.
+    chSysLockFromIsr();
+
     pwmEnableChannel( &PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH( &PWMD1, value ) );
     if ( sndIndex == FILE_BUF_SZ )
     {
         if ( do_exit_pwm )
+        {
             pwmDisableChannelI( &PWMD1, 0 );
+        }
         if ( is_playing == 0 )
             do_exit_pwm = 1;
         else
+        {
             chMBPostI( &mailbox, 0 );
+        }
     }
     else if ( sndIndex == 2*FILE_BUF_SZ )
     {
         if ( do_exit_pwm )
+        {
             pwmDisableChannelI( &PWMD1, 0 );
+        }
         if ( is_playing == 0 )
             do_exit_pwm = 1;
         else
+        {
             chMBPostI( &mailbox, 1 );
+        }
         sndIndex = 0;
     }
+    chSysUnlockFromIsr();
 }
+
+
+
+#if HAL_USE_MMC_SPI
+    /* Board-related functions related to the MMC_SPI driver.*/
+    bool_t mmc_lld_is_card_inserted(MMCDriver *mmcp) {
+
+        (void)mmcp;
+        return TRUE;
+    }
+
+    bool_t mmc_lld_is_write_protected(MMCDriver *mmcp) {
+
+        (void)mmcp;
+        return TRUE;
+    }
+#endif
 
 
 

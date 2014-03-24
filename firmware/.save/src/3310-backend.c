@@ -140,20 +140,6 @@ void pwrHigh(void)
 {
 }
 
-#if HAL_USE_MMC_SPI
-    /* Board-related functions related to the MMC_SPI driver.*/
-    bool_t mmc_lld_is_card_inserted(MMCDriver *mmcp) {
-
-        (void)mmcp;
-        return TRUE;
-    }
-
-    bool_t mmc_lld_is_write_protected(MMCDriver *mmcp) {
-
-        (void)mmcp;
-        return TRUE;
-    }
-#endif
 
 
 

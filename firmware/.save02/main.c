@@ -18,6 +18,7 @@
 //#include <string.h>
 //#include <time.h>
 
+/*
 #include "ch.h"
 #include "hal.h"
 
@@ -25,9 +26,6 @@
 #include "ff.h"
 
 
-/**
- * @brief FS object.
- */
 FATFS MMC_FS;
 
 
@@ -104,22 +102,8 @@ void cmd_sdiotest( void )
 }
 
 
-/*===========================================================================*/
-/* Generic code.                                                             */
-/*===========================================================================*/
-
-/*
- * Application entry point.
- */
 int main(void) {
 
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
   halInit();
   chSysInit();
 
@@ -131,9 +115,6 @@ int main(void) {
   palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
   palSetPad( GPIOB, 12 ); // Set CS high
 
-  /*
-   * Initializes the SDIO drivers.
-   */
   mmcObjectInit(&MMCD1);
   mmcStart(&MMCD1, &mmccfg);
 
@@ -147,7 +128,7 @@ int main(void) {
       //i += 3;
   }
 }
-
+*/
 
 
 
