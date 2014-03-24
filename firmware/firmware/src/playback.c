@@ -161,10 +161,10 @@ static void pwmpcb( PWMDriver * pwmp )
 {
     (void)pwmp;
     int value = (int)sndBuf[ sndIndex++ ];
-    value = value * 10000 / 255; // 8 bit sound.
+    //value = value * 10000 / 255; // 8 bit sound.
     chSysLockFromIsr();
 
-    pwmEnableChannel( &PWMD1, 0, PWM_PERCENTAGE_TO_WIDTH( &PWMD1, value ) );
+    pwmEnableChannel( &PWMD1, 0, PWM_FRACTION_TO_WIDTH( &PWMD1, 255, value ) );
     if ( sndIndex == FILE_BUF_SZ )
     {
         if ( do_exit_pwm )
