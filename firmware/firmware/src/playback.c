@@ -73,7 +73,9 @@ void playbackInit( void )
     palSetPadMode( GPIOB, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MISO
     palSetPadMode( GPIOB, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL );     // MOSI
     palSetPadMode( GPIOB, 12, PAL_MODE_OUTPUT_PUSHPULL );              // CS
-    palSetPad( GPIOB, 12 ); // Set CS high
+    palSetPadMode( GPIOC,  9, PAL_MODE_OUTPUT_PUSHPULL );              // Amp enable.
+    palSetPad( GPIOB, 12 ); // Set CS high.
+    palClearPad( GPIOC,  9 ); // Clear Amp. enable.
 
     // PWM pad.
     palSetPadMode( GPIOA, 8, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
@@ -88,6 +90,7 @@ static int playbackStart( void )
     FRESULT err = f_mount( 0, &MMC_FS );
     if ( err != FR_OK )
         return 1;
+    palSetPad( GPIOC,  9 ); // Set Amp. enable.
     return 0;
 }
 
@@ -101,6 +104,7 @@ static void playbackStop( void )
     }
     // Stop PWM driver.
     pwmStop( &PWMD1 );
+    palClearPad( GPIOC,  9 ); // Clear Amp. enable.
 }
 
 int  play( char * file )
