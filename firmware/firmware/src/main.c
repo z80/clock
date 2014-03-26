@@ -48,7 +48,7 @@ void main(void) {
   lcdInit();
   playbackInit();
 
-  while ( TRUE )
+  for (;;)
   {
     //lcdClear();
     //lcdGotoXy( 0, 0 );
