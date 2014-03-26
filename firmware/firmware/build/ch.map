@@ -762,13 +762,22 @@ Discarded input sections
  .text          0x00000000        0x0 build/obj/3310.o
  .data          0x00000000        0x0 build/obj/3310.o
  .bss           0x00000000        0x0 build/obj/3310.o
+ .rodata.FontLookup
+                0x00000000      0x258 build/obj/3310.o
+ .bss.LcdCacheIdx
+                0x00000000        0x4 build/obj/3310.o
  .text.lcdPower
                 0x00000000       0x20 build/obj/3310.o
  .text.lcdFinit
                 0x00000000       0x10 build/obj/3310.o
  .text.lcdContrast
                 0x00000000       0x40 build/obj/3310.o
+ .text.lcdGotoXy
+                0x00000000       0x50 build/obj/3310.o
+ .text.lcdChr   0x00000000      0x430 build/obj/3310.o
  .text.lcdStr   0x00000000       0x40 build/obj/3310.o
+ .text.lcdStrConst
+                0x00000000       0x40 build/obj/3310.o
  .text.lcdPixel
                 0x00000000      0x120 build/obj/3310.o
  .text.lcdLine  0x00000000      0x180 build/obj/3310.o
@@ -951,7 +960,7 @@ destructors     0x080000ec        0x0
  *(SORT(.fini_array.*))
                 0x080000ec                PROVIDE (__fini_array_end, .)
 
-.text           0x080000f0     0x7ff8
+.text           0x080000f0     0x78c0
  *(.text.startup.*)
  *(.text)
  *(.text.*)
@@ -1589,102 +1598,91 @@ destructors     0x080000ec        0x0
  .text.lcdClear
                 0x080071e0       0x40 build/obj/3310.o
                 0x080071e0                lcdClear
- .text.lcdGotoXy
-                0x08007220       0x50 build/obj/3310.o
-                0x08007220                lcdGotoXy
- .text.lcdChr   0x08007270      0x430 build/obj/3310.o
-                0x08007270                lcdChr
- .text.lcdStrConst
-                0x080076a0       0x40 build/obj/3310.o
-                0x080076a0                lcdStrConst
  .text.lcdUpdate
-                0x080076e0       0x70 build/obj/3310.o
-                0x080076e0                lcdUpdate
- .text.lcdCmd   0x08007750       0x20 build/obj/3310.o
+                0x08007220       0x70 build/obj/3310.o
+                0x08007220                lcdUpdate
+ .text.lcdCmd   0x08007290       0x20 build/obj/3310.o
  .text.lcdFuncSet
-                0x08007770       0x70 build/obj/3310.o
-                0x08007770                lcdFuncSet
+                0x080072b0       0x70 build/obj/3310.o
+                0x080072b0                lcdFuncSet
  .text.lcdDispCtrl
-                0x080077e0       0x60 build/obj/3310.o
-                0x080077e0                lcdDispCtrl
+                0x08007320       0x60 build/obj/3310.o
+                0x08007320                lcdDispCtrl
  .text.lcdYAddr
-                0x08007840       0x40 build/obj/3310.o
-                0x08007840                lcdYAddr
+                0x08007380       0x40 build/obj/3310.o
+                0x08007380                lcdYAddr
  .text.lcdXAddr
-                0x08007880       0x40 build/obj/3310.o
-                0x08007880                lcdXAddr
+                0x080073c0       0x40 build/obj/3310.o
+                0x080073c0                lcdXAddr
  .text.lcdTempCtrl
-                0x080078c0       0x40 build/obj/3310.o
-                0x080078c0                lcdTempCtrl
- .text.lcdBias  0x08007900       0x40 build/obj/3310.o
-                0x08007900                lcdBias
- .text.lcdVop   0x08007940       0x30 build/obj/3310.o
-                0x08007940                lcdVop
+                0x08007400       0x40 build/obj/3310.o
+                0x08007400                lcdTempCtrl
+ .text.lcdBias  0x08007440       0x40 build/obj/3310.o
+                0x08007440                lcdBias
+ .text.lcdVop   0x08007480       0x30 build/obj/3310.o
+                0x08007480                lcdVop
  .text.delay3310
-                0x08007970       0x20 build/obj/3310-backend.o
-                0x08007970                delay3310
+                0x080074b0       0x20 build/obj/3310-backend.o
+                0x080074b0                delay3310
  .text.init3310
-                0x08007990       0xe0 build/obj/3310-backend.o
-                0x08007990                init3310
+                0x080074d0       0xe0 build/obj/3310-backend.o
+                0x080074d0                init3310
  .text.sendByte3310
-                0x08007a70       0x60 build/obj/3310-backend.o
-                0x08007a70                sendByte3310
+                0x080075b0       0x60 build/obj/3310-backend.o
+                0x080075b0                sendByte3310
  .text.setModeCmd3310
-                0x08007ad0       0x10 build/obj/3310-backend.o
-                0x08007ad0                setModeCmd3310
+                0x08007610       0x10 build/obj/3310-backend.o
+                0x08007610                setModeCmd3310
  .text.setModeData3310
-                0x08007ae0       0x10 build/obj/3310-backend.o
-                0x08007ae0                setModeData3310
- .text.csLow    0x08007af0       0x10 build/obj/3310-backend.o
-                0x08007af0                csLow
- .text.csHigh   0x08007b00       0x10 build/obj/3310-backend.o
-                0x08007b00                csHigh
- .text.rstLow   0x08007b10       0x10 build/obj/3310-backend.o
-                0x08007b10                rstLow
- .text.rstHigh  0x08007b20       0x10 build/obj/3310-backend.o
-                0x08007b20                rstHigh
- .text.main     0x08007b30       0x50 build/obj/main.o
-                0x08007b30                main
+                0x08007620       0x10 build/obj/3310-backend.o
+                0x08007620                setModeData3310
+ .text.csLow    0x08007630       0x10 build/obj/3310-backend.o
+                0x08007630                csLow
+ .text.csHigh   0x08007640       0x10 build/obj/3310-backend.o
+                0x08007640                csHigh
+ .text.rstLow   0x08007650       0x10 build/obj/3310-backend.o
+                0x08007650                rstLow
+ .text.rstHigh  0x08007660       0x10 build/obj/3310-backend.o
+                0x08007660                rstHigh
+ .text.main     0x08007670       0x30 build/obj/main.o
+                0x08007670                main
  *(.rodata)
- .rodata        0x08007b80        0x8 build/obj/chsys.o
- *fill*         0x08007b88        0x8 00
- .rodata        0x08007b90       0x10 build/obj/ff.o
- .rodata        0x08007ba0       0x1c build/obj/main.o
+ .rodata        0x080076a0        0x8 build/obj/chsys.o
+ *fill*         0x080076a8        0x8 00
+ .rodata        0x080076b0       0x10 build/obj/ff.o
+ .rodata        0x080076c0       0x20 build/obj/main.o
  *(.rodata.*)
- *fill*         0x08007bbc        0x4 00
  .rodata.ch_debug
-                0x08007bc0       0x18 build/obj/chregistry.o
-                0x08007bc0                ch_debug
- *fill*         0x08007bd8        0x8 00
+                0x080076e0       0x18 build/obj/chregistry.o
+                0x080076e0                ch_debug
+ *fill*         0x080076f8        0x8 00
  .rodata.mmc_vmt
-                0x08007be0       0x20 build/obj/mmc_spi.o
+                0x08007700       0x20 build/obj/mmc_spi.o
  .rodata.crc7_lookup_table
-                0x08007c00      0x100 build/obj/mmc_spi.o
+                0x08007720      0x100 build/obj/mmc_spi.o
  .rodata.stop.4194
-                0x08007d00        0x4 build/obj/mmc_spi.o
- *fill*         0x08007d04        0xc 00
+                0x08007820        0x4 build/obj/mmc_spi.o
+ *fill*         0x08007824        0xc 00
  .rodata.start.4189
-                0x08007d10        0x4 build/obj/mmc_spi.o
- *fill*         0x08007d14        0xc 00
+                0x08007830        0x4 build/obj/mmc_spi.o
+ *fill*         0x08007834        0xc 00
  .rodata.stopcmd.4180
-                0x08007d20        0x8 build/obj/mmc_spi.o
- *fill*         0x08007d28        0x8 00
- .rodata.vmt    0x08007d30       0x20 build/obj/serial.o
+                0x08007840        0x8 build/obj/mmc_spi.o
+ *fill*         0x08007848        0x8 00
+ .rodata.vmt    0x08007850       0x20 build/obj/serial.o
  .rodata._stm32_dma_streams
-                0x08007d50       0x54 build/obj/stm32_dma.o
-                0x08007d50                _stm32_dma_streams
- *fill*         0x08007da4        0xc 00
+                0x08007870       0x54 build/obj/stm32_dma.o
+                0x08007870                _stm32_dma_streams
+ *fill*         0x080078c4        0xc 00
  .rodata.cfgtab.3706
-                0x08007db0       0x14 build/obj/pal_lld.o
- *fill*         0x08007dc4        0xc 00
+                0x080078d0       0x14 build/obj/pal_lld.o
+ *fill*         0x080078e4        0xc 00
  .rodata.pal_default_config
-                0x08007dd0       0x3c build/obj/board.o
-                0x08007dd0                pal_default_config
- *fill*         0x08007e0c        0x4 00
+                0x080078f0       0x3c build/obj/board.o
+                0x080078f0                pal_default_config
+ *fill*         0x0800792c        0x4 00
  .rodata.excvt.1549
-                0x08007e10       0x80 build/obj/ff.o
- .rodata.FontLookup
-                0x08007e90      0x258 build/obj/3310.o
+                0x08007930       0x80 build/obj/ff.o
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.glue_7)
@@ -1700,10 +1698,10 @@ destructors     0x080000ec        0x0
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x080080e8        0x0
-                0x080080e8                PROVIDE (__exidx_start, .)
+.ARM.exidx      0x080079b0        0x0
+                0x080079b0                PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x080080e8                PROVIDE (__exidx_end, .)
+                0x080079b0                PROVIDE (__exidx_end, .)
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -1711,11 +1709,11 @@ destructors     0x080000ec        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x080080e8        0x0
-                0x080080e8                . = ALIGN (0x8)
-                0x080080e8                . = ALIGN (0x4)
-                0x080080e8                _etext = .
-                0x080080e8                _textdata = _etext
+.textalign      0x080079b0        0x0
+                0x080079b0                . = ALIGN (0x8)
+                0x080079b0                . = ALIGN (0x4)
+                0x080079b0                _etext = .
+                0x080079b0                _textdata = _etext
 
 .stacks         0x20000000      0x800
                 0x20000000                . = ALIGN (0x8)
@@ -1732,7 +1730,7 @@ destructors     0x080000ec        0x0
                 0x20000800                __process_stack_end__ = .
                 0x20000800                __main_thread_stack_end__ = .
 
-.data           0x20000800       0x6c load address 0x080080e8
+.data           0x20000800       0x6c load address 0x080079b0
                 0x20000800                . = ALIGN (0x4)
                 0x20000800                PROVIDE (_data, .)
  *(.data)
@@ -1755,7 +1753,7 @@ destructors     0x080000ec        0x0
                 0x2000086c                . = ALIGN (0x4)
                 0x2000086c                PROVIDE (_edata, .)
 
-.bss            0x20000870      0xb80 load address 0x08008154
+.bss            0x20000870      0xb7c load address 0x08007a1c
                 0x20000870                . = ALIGN (0x4)
                 0x20000870                PROVIDE (_bss_start, .)
  *(.bss)
@@ -1822,23 +1820,21 @@ destructors     0x080000ec        0x0
                 0x200011ec                message
  .bss.g_LcdCache
                 0x200011f0      0x1f8 build/obj/3310.o
- .bss.LcdCacheIdx
-                0x200013e8        0x4 build/obj/3310.o
  .bss.UpdateLcd
-                0x200013ec        0x1 build/obj/3310.o
-                0x200013ec                UpdateLcd
-                0x200013f0                . = ALIGN (0x4)
- *fill*         0x200013ed        0x3 00
+                0x200013e8        0x1 build/obj/3310.o
+                0x200013e8                UpdateLcd
+                0x200013ec                . = ALIGN (0x4)
+ *fill*         0x200013e9        0x3 00
  *(COMMON)
-                0x200013f0                . = ALIGN (0x4)
-                0x200013f0                PROVIDE (_bss_end, .)
-                0x200013f0                PROVIDE (end, .)
-                0x200013f0                _end = .
-                0x200013f0                __heap_base__ = _end
+                0x200013ec                . = ALIGN (0x4)
+                0x200013ec                PROVIDE (_bss_end, .)
+                0x200013ec                PROVIDE (end, .)
+                0x200013ec                _end = .
+                0x200013ec                __heap_base__ = _end
                 0x20002000                __heap_end__ = __ram_end__
 OUTPUT(build/ch.elf elf32-littlearm)
 
-.debug_abbrev   0x00000000     0x62da
+.debug_abbrev   0x00000000     0x62c4
  .debug_abbrev  0x00000000       0xbe build/obj/crt0.o
  .debug_abbrev  0x000000be       0xb7 build/obj/vectors.o
  .debug_abbrev  0x00000175       0x4a build/obj/chcore.o
@@ -1916,23 +1912,23 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_abbrev  0x000054af      0x259 build/obj/playback.o
  .debug_abbrev  0x00005708      0x157 build/obj/3310.o
  .debug_abbrev  0x0000585f      0x1af build/obj/3310-backend.o
- .debug_abbrev  0x00005a0e       0x85 build/obj/main.o
- .debug_abbrev  0x00005a93       0xa5 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
- .debug_abbrev  0x00005b38       0xa5 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
- .debug_abbrev  0x00005bdd      0x145 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
- .debug_abbrev  0x00005d22      0x127 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
- .debug_abbrev  0x00005e49       0xd1 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
- .debug_abbrev  0x00005f1a       0x87 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
- .debug_abbrev  0x00005fa1       0x94 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
- .debug_abbrev  0x00006035       0x57 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
- .debug_abbrev  0x0000608c       0x5f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
- .debug_abbrev  0x000060eb       0x6c c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
- .debug_abbrev  0x00006157       0xad c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
- .debug_abbrev  0x00006204       0xae c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
- .debug_abbrev  0x000062b2       0x14 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
- .debug_abbrev  0x000062c6       0x14 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00005a0e       0x6f build/obj/main.o
+ .debug_abbrev  0x00005a7d       0xa5 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
+ .debug_abbrev  0x00005b22       0xa5 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00005bc7      0x145 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
+ .debug_abbrev  0x00005d0c      0x127 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
+ .debug_abbrev  0x00005e33       0xd1 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
+ .debug_abbrev  0x00005f04       0x87 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
+ .debug_abbrev  0x00005f8b       0x94 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
+ .debug_abbrev  0x0000601f       0x57 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
+ .debug_abbrev  0x00006076       0x5f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
+ .debug_abbrev  0x000060d5       0x6c c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
+ .debug_abbrev  0x00006141       0xad c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
+ .debug_abbrev  0x000061ee       0xae c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
+ .debug_abbrev  0x0000629c       0x14 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
+ .debug_abbrev  0x000062b0       0x14 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
 
-.debug_info     0x00000000    0x1ba51
+.debug_info     0x00000000    0x1ba3c
  .debug_info    0x00000000      0x349 build/obj/crt0.o
  .debug_info    0x00000349      0x1f7 build/obj/vectors.o
  .debug_info    0x00000540       0x95 build/obj/chcore.o
@@ -2010,23 +2006,23 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_info    0x000182bc     0x1349 build/obj/playback.o
  .debug_info    0x00019605      0x720 build/obj/3310.o
  .debug_info    0x00019d25      0x99f build/obj/3310-backend.o
- .debug_info    0x0001a6c4       0xd7 build/obj/main.o
- .debug_info    0x0001a79b      0x158 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
- .debug_info    0x0001a8f3      0x117 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
- .debug_info    0x0001aa0a      0x38a c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
- .debug_info    0x0001ad94      0x41c c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
- .debug_info    0x0001b1b0      0x15e c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
- .debug_info    0x0001b30e       0xc8 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
- .debug_info    0x0001b3d6       0xda c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
- .debug_info    0x0001b4b0       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
- .debug_info    0x0001b55a       0xc2 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
- .debug_info    0x0001b61c       0x87 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
- .debug_info    0x0001b6a3       0xe7 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
- .debug_info    0x0001b78a      0x173 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
- .debug_info    0x0001b8fd       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
- .debug_info    0x0001b9a7       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0001a6c4       0xc2 build/obj/main.o
+ .debug_info    0x0001a786      0x158 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
+ .debug_info    0x0001a8de      0x117 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
+ .debug_info    0x0001a9f5      0x38a c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
+ .debug_info    0x0001ad7f      0x41c c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
+ .debug_info    0x0001b19b      0x15e c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
+ .debug_info    0x0001b2f9       0xc8 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
+ .debug_info    0x0001b3c1       0xda c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
+ .debug_info    0x0001b49b       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
+ .debug_info    0x0001b545       0xc2 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
+ .debug_info    0x0001b607       0x87 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
+ .debug_info    0x0001b68e       0xe7 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
+ .debug_info    0x0001b775      0x173 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
+ .debug_info    0x0001b8e8       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
+ .debug_info    0x0001b992       0xaa c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
 
-.debug_line     0x00000000     0xa6f7
+.debug_line     0x00000000     0xa6de
  .debug_line    0x00000000      0x129 build/obj/crt0.o
  .debug_line    0x00000129       0xb6 build/obj/vectors.o
  .debug_line    0x000001df       0x63 build/obj/chcore.o
@@ -2104,21 +2100,21 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_line    0x00008b85      0x400 build/obj/playback.o
  .debug_line    0x00008f85      0x3ba build/obj/3310.o
  .debug_line    0x0000933f      0x360 build/obj/3310-backend.o
- .debug_line    0x0000969f       0xf4 build/obj/main.o
- .debug_line    0x00009793      0x100 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
- .debug_line    0x00009893      0x16f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
- .debug_line    0x00009a02      0x306 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
- .debug_line    0x00009d08      0x305 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
- .debug_line    0x0000a00d       0xd3 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
- .debug_line    0x0000a0e0       0xdd c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
- .debug_line    0x0000a1bd      0x121 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
- .debug_line    0x0000a2de       0x6f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
- .debug_line    0x0000a34d       0x62 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
- .debug_line    0x0000a3af       0x63 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
- .debug_line    0x0000a412       0xd1 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
- .debug_line    0x0000a4e3      0x100 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
- .debug_line    0x0000a5e3       0xa4 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
- .debug_line    0x0000a687       0x70 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000969f       0xdb build/obj/main.o
+ .debug_line    0x0000977a      0x100 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
+ .debug_line    0x0000987a      0x16f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
+ .debug_line    0x000099e9      0x306 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktime.o)
+ .debug_line    0x00009cef      0x305 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-mktm_r.o)
+ .debug_line    0x00009ff4       0xd3 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strcasecmp.o)
+ .debug_line    0x0000a0c7       0xdd c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strpbrk.o)
+ .debug_line    0x0000a1a4      0x121 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-strspn.o)
+ .debug_line    0x0000a2c5       0x6f c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzlock.o)
+ .debug_line    0x0000a334       0x62 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-tzvars.o)
+ .debug_line    0x0000a396       0x63 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-ctype_.o)
+ .debug_line    0x0000a3f9       0xd1 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-div.o)
+ .debug_line    0x0000a4ca      0x100 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-gettzinfo.o)
+ .debug_line    0x0000a5ca       0xa4 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_divsi3.o)
+ .debug_line    0x0000a66e       0x70 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/thumb/v7m\libgcc.a(_dvmd_tls.o)
 
 .debug_pubnames
                 0x00000000     0x24d2
@@ -2795,7 +2791,7 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_str     0x00004bdf       0x9e build/obj/3310-backend.o
                                 0x4c6 (size before relaxing)
  .debug_str     0x00004c7d        0xb build/obj/main.o
-                                 0xf8 (size before relaxing)
+                                 0xe8 (size before relaxing)
  .debug_str     0x00004c88       0xa1 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-lcltime_r.o)
                                 0x183 (size before relaxing)
  .debug_str     0x00004d29       0xa4 c:/programs/yagarto/bin/../lib/gcc/arm-none-eabi/4.5.0/../../../../arm-none-eabi/lib/thumb/v7m\libc.a(lib_a-memset.o)
@@ -3814,13 +3810,11 @@ isPlaying                                         build/obj/playback.o
 lcdBias                                           build/obj/3310.o
 lcdChr                                            build/obj/3310.o
 lcdClear                                          build/obj/3310.o
-                                                  build/obj/main.o
 lcdContrast                                       build/obj/3310.o
 lcdDispCtrl                                       build/obj/3310.o
 lcdFinit                                          build/obj/3310.o
 lcdFuncSet                                        build/obj/3310.o
 lcdGotoXy                                         build/obj/3310.o
-                                                  build/obj/main.o
 lcdInit                                           build/obj/3310.o
                                                   build/obj/main.o
 lcdLine                                           build/obj/3310.o
@@ -3828,10 +3822,8 @@ lcdPixel                                          build/obj/3310.o
 lcdPower                                          build/obj/3310.o
 lcdStr                                            build/obj/3310.o
 lcdStrConst                                       build/obj/3310.o
-                                                  build/obj/main.o
 lcdTempCtrl                                       build/obj/3310.o
 lcdUpdate                                         build/obj/3310.o
-                                                  build/obj/main.o
 lcdVop                                            build/obj/3310.o
 lcdXAddr                                          build/obj/3310.o
 lcdYAddr                                          build/obj/3310.o

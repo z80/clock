@@ -50,11 +50,11 @@ void main(void) {
 
   while ( TRUE )
   {
-    lcdClear();
-    lcdGotoXy( 0, 0 );
-    lcdStrConst( FONT_1X, "Anthem02" );
-    lcdUpdate();
-    //play( "anthem02.raw" );
+    //lcdClear();
+    //lcdGotoXy( 0, 0 );
+    //lcdStrConst( FONT_1X, "Anthem02" );
+    //lcdUpdate();
+    play( "anthem02.raw" );
 
     //lcdClear();
     //lcdGotoXy( 0, 0 );
