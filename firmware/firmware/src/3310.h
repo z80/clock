@@ -35,6 +35,7 @@ typedef enum
 } LcdFontSize;
 
 void lcdInit       ( void );
+void lcdFinit      ( void );
 void lcdPower 	   ( uint8_t en );
 void lcdContrast   ( uint8_t contrast );
 void lcdClear      ( void );

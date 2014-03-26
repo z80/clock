@@ -92,6 +92,8 @@ CSRC = $(PORTSRC) \
        stdperiph/stm32f10x_gpio.c \
        stdperiph/stm32f10x_rcc.c \
        src/playback.c \
+       src/3310.c \
+       src/3310-backend.c \
        src/main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

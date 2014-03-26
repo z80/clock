@@ -33,9 +33,9 @@ void delay3310( int cnt )
         ;
 }
 
-//static SPIConfig spicfg = {NULL, GPIOB, 12, 0};
-static SPIConfig spicfg = {NULL, GPIOB, 12,
-                              SPI_CR1_BR_2 | SPI_CR1_BR_1};
+static SPIConfig spicfg = {NULL, GPIOB, 12, 0};
+//static SPIConfig spicfg = {NULL, GPIOB, 12,
+//                              SPI_CR1_BR_2 | SPI_CR1_BR_1};
 
 void init3310( void )
 {
@@ -50,6 +50,8 @@ void init3310( void )
     palSetPadMode( PORT_DC,  PAD_DC,  PAL_MODE_OUTPUT_PUSHPULL );
     palSetPadMode( PORT_CS,  PAD_CS,  PAL_MODE_OUTPUT_PUSHPULL );
     palSetPadMode( PORT_RST, PAD_RST, PAL_MODE_OUTPUT_PUSHPULL );
+
+    spiStart( &SPI_3310, &spicfg ); // Setup transfer parameters.
 
     delay3310( 100000 );
 }
@@ -70,24 +72,26 @@ void finit3310( void )
 void sendByte3310( uint8_t byte )
 {
     spiAcquireBus( &SPI_3310 );     // Acquire ownership of the bus.
-    spiStart( &SPI_3310, &spicfg ); // Setup transfer parameters.
+    //spiStart( &SPI_3310, &spicfg ); // Setup transfer parameters.
     spiSelect( &SPI_3310 );         // Slave Select assertion.
-    spiStartSend( &SPI_3310, 1, &byte );
+    spiSend( &SPI_3310, 1, &byte );
     //spiExchange( &SPI_3310, 512,
     //             txbuf, rxbuf );  // Atomic transfer operations.
     spiUnselect( &SPI_3310 );       // Slave Select de-assertion.
+    //spiStop( &SPI_3310 );
     spiReleaseBus( &SPI_3310 );     // Ownership release.
 }
 
 void sendArray3310( uint8_t * data, int cnt )
 {
     spiAcquireBus( &SPID1 );     // Acquire ownership of the bus.
-    spiStart( &SPID1, &spicfg ); // Setup transfer parameters.
+    //spiStart( &SPID1, &spicfg ); // Setup transfer parameters.
     spiSelect( &SPID1 );         // Slave Select assertion.
     //spiExchange( &SPID1, 512,
     //            txbuf, rxbuf );  // Atomic transfer operations.
-    spiStartSend( &SPI_3310, cnt, data );
+    spiSend( &SPI_3310, cnt, data );
     spiUnselect( &SPID1 );       // Slave Select de-assertion.
+    //spiStop( &SPI_3310 );
     spiReleaseBus( &SPID1 );     // Ownership release.
 }
 
@@ -140,20 +144,8 @@ void pwrHigh(void)
 {
 }
 
-#if HAL_USE_MMC_SPI
-    /* Board-related functions related to the MMC_SPI driver.*/
-    bool_t mmc_lld_is_card_inserted(MMCDriver *mmcp) {
 
-        (void)mmcp;
-        return TRUE;
-    }
 
-    bool_t mmc_lld_is_write_protected(MMCDriver *mmcp) {
-
-        (void)mmcp;
-        return TRUE;
-    }
-#endif
 
 
 

@@ -45,16 +45,21 @@ void main(void) {
    * sleeping in a loop and check the button state.
    */
 
+  lcdInit();
   playbackInit();
 
-  //lcdInit();
-  //lcdClear();
-  //lcdGotoXy( 0, 0 );
-  //lcdStrConst( FONT_1X, "Hi!" );
-  //lcdUpdate();
   while ( TRUE )
   {
-    //play( "0:anthem01.raw" );
+    lcdClear();
+    lcdGotoXy( 0, 0 );
+    lcdStrConst( FONT_1X, "Anthem02" );
+    lcdUpdate();
+    //play( "anthem02.raw" );
+
+    //lcdClear();
+    //lcdGotoXy( 0, 0 );
+    //lcdStrConst( FONT_1X, "Anthem02" );
+    //lcdUpdate();
     play( "anthem01.raw" );
   }
 
