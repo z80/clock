@@ -45,22 +45,25 @@ void main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  lcdInit();
-  playbackInit();
+  lcdPower( 1 );
+  //lcdInit();
+  //playbackInit();
 
   for (;;)
   {
-    //lcdClear();
-    //lcdGotoXy( 0, 0 );
-    //lcdStrConst( FONT_1X, "Anthem02" );
-    //lcdUpdate();
-    play( "anthem02.raw" );
+    lcdClear();
+    lcdGotoXy( 1, 1 );
+    lcdStrConst( FONT_1X, "bkjgh" );
+    lcdUpdate();
+    chThdSleepSeconds( 1 );
+    //play( "anthem02.raw" );
 
-    //lcdClear();
-    //lcdGotoXy( 0, 0 );
-    //lcdStrConst( FONT_1X, "Anthem02" );
-    //lcdUpdate();
-    play( "anthem01.raw" );
+    lcdClear();
+    lcdGotoXy( 1, 1 );
+    lcdStrConst( FONT_1X, "fsdgfds" );
+    lcdUpdate();
+    chThdSleepSeconds( 1 );
+    //play( "anthem01.raw" );
   }
 
 

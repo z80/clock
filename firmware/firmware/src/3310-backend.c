@@ -46,7 +46,9 @@ static void initDma( uint8_t * mem, int cnt );
 
 void init3310()
 {
-    GPIO_SetBits( PORT_CS, PIN_CS | PIN_DC | PIN_RST );
+    GPIO_SetBits( PORT_CS,  PIN_CS );
+    GPIO_SetBits( PORT_DC,  PIN_DC );
+    GPIO_SetBits( PORT_RST, PIN_RST );
 
     GPIO_InitTypeDef GPIO_InitStructure;
     
@@ -56,10 +58,21 @@ void init3310()
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOC, ENABLE );
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA, ENABLE );
     
-    GPIO_InitStructure.GPIO_Pin = PIN_CS | PIN_DC | PIN_RST;
+    //GPIO_InitStructure.GPIO_Pin = PIN_CS | PIN_DC | PIN_RST;
+    GPIO_InitStructure.GPIO_Pin = PIN_CS;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
     GPIO_Init( PORT_CS, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = PIN_DC;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
+    GPIO_Init( PORT_DC, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = PIN_RST;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
+    GPIO_Init( PORT_RST, &GPIO_InitStructure);
 
     // Configure SPI1 pins: SCK and MOSI only to their Alternative (SPI) function
     GPIO_InitStructure.GPIO_Pin = PIN_SCK | PIN_MOSI;

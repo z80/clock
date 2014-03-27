@@ -1,6 +1,6 @@
 
 #include "3310.h"
-
+#include "stm32f10x_conf.h"
 
 /*--------------------------------------------------------------------------------------------------
                                      Character generator
@@ -168,7 +168,7 @@ void lcdPower( uint8_t stat )
     }
 
     // For debugging.
-    /*while( 1 )
+    while( 1 )
     {
         csLow();
         setModeCmd3310();
@@ -179,15 +179,17 @@ void lcdPower( uint8_t stat )
         i = i + i - i;
         csHigh();
 
+        /*
         csLow();
         setModeData3310();
         sendByte3310( 0xF0 );
-        int i=0;
+        i=0;
         while ( SPI_I2S_GetFlagStatus( SPI1, SPI_I2S_FLAG_BSY ) == SET )
             i++;
         i = i + i - i;
         csHigh();
-    }*/
+        */
+    }
 }
 
 /*--------------------------------------------------------------------------------------------------
@@ -584,7 +586,7 @@ void lcdLine( uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, LcdPixelMode mode 
 --------------------------------------------------------------------------------------------------*/
 void lcdUpdate( void )
 {
-    csHigh();
+    csLow();
 
    //  Set base address according to LoWaterMark.
     lcdFuncSet( 0, THorizontal, TBasic );
@@ -602,6 +604,7 @@ void lcdUpdate( void )
     // For debug wait ready right here.
     //waitArrayReady3310();
 
+    csHigh();
     UpdateLcd = BFALSE;
 }
 
