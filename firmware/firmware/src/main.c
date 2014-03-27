@@ -20,7 +20,7 @@
 
 #include "dac.h"
 #include "playback.h"
-#include "3310.h"
+#include "lcd3310.h"
 
 
 /*
@@ -45,23 +45,23 @@ void main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  lcdPower( 1 );
+  //palSetPad( GPIO,  )
+  lcd3310Init( &SPID1 );
   //lcdInit();
   //playbackInit();
 
   for (;;)
   {
-    lcdClear();
-    lcdGotoXy( 1, 1 );
-    lcdStrConst( FONT_1X, "bkjgh" );
-    lcdUpdate();
+    lcd3310Clear( &SPID1 );
+    lcd3310SetPosXY( &SPID1, 10, 10 );
+    lcd3310WriteText( &SPID1, (const uint8_t *)"Hello!" );
+
     chThdSleepSeconds( 1 );
     //play( "anthem02.raw" );
 
-    lcdClear();
-    lcdGotoXy( 1, 1 );
-    lcdStrConst( FONT_1X, "fsdgfds" );
-    lcdUpdate();
+    lcd3310Clear( &SPID1 );
+    lcd3310SetPosXY( &SPID1, 10, 10 );
+    lcd3310WriteText( &SPID1, (const uint8_t *)"World!" );
     chThdSleepSeconds( 1 );
     //play( "anthem01.raw" );
   }
