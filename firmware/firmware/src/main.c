@@ -27,6 +27,14 @@
  * Application entry point.
  */
 
+static const SPIConfig spicfg = {
+  NULL,
+  GPIOC,
+  4,
+  SPI_CR1_BR_2 | SPI_CR1_BR_1
+};
+
+
 void main(void) {
 
   /*
@@ -45,25 +53,31 @@ void main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  //palSetPad( GPIO,  )
+  palSetPadMode( GPIOA, 5, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
+  palSetPadMode( GPIOA, 7, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
+  palSetPadMode( GPIOC, 4, PAL_MODE_OUTPUT_PUSHPULL );
+  palSetPadMode( GPIOC, 5, PAL_MODE_OUTPUT_PUSHPULL );
+  palSetPadMode( GPIOB, 0, PAL_MODE_OUTPUT_PUSHPULL );
+  palSetPad( GPIOC, 4 ); // CS
+  palSetPad( GPIOC, 5 ); // RST
+
+  spiStart(&SPID1, &spicfg );       // Setup transfer parameters.
   lcd3310Init( &SPID1 );
-  //lcdInit();
-  //playbackInit();
+  playbackInit();
 
   for (;;)
   {
     lcd3310Clear( &SPID1 );
-    lcd3310SetPosXY( &SPID1, 10, 10 );
+    lcd3310SetPosXY( &SPID1, 5, 3 );
     lcd3310WriteText( &SPID1, (const uint8_t *)"Hello!" );
-
     chThdSleepSeconds( 1 );
-    //play( "anthem02.raw" );
+    play( "anthem02.raw" );
 
     lcd3310Clear( &SPID1 );
-    lcd3310SetPosXY( &SPID1, 10, 10 );
+    lcd3310SetPosXY( &SPID1, 40, 3 );
     lcd3310WriteText( &SPID1, (const uint8_t *)"World!" );
     chThdSleepSeconds( 1 );
-    //play( "anthem01.raw" );
+    play( "anthem01.raw" );
   }
 
 
