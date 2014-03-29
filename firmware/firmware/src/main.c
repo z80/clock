@@ -20,7 +20,7 @@
 
 #include "dac.h"
 #include "playback.h"
-#include "lcd3310.h"
+#include "display.h"
 
 
 /*
@@ -53,16 +53,6 @@ void main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  palSetPadMode( GPIOA, 5, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
-  palSetPadMode( GPIOA, 7, PAL_MODE_STM32_ALTERNATE_PUSHPULL );
-  palSetPadMode( GPIOC, 4, PAL_MODE_OUTPUT_PUSHPULL );
-  palSetPadMode( GPIOC, 5, PAL_MODE_OUTPUT_PUSHPULL );
-  palSetPadMode( GPIOB, 0, PAL_MODE_OUTPUT_PUSHPULL );
-  palSetPad( GPIOC, 4 ); // CS
-  palSetPad( GPIOC, 5 ); // RST
-
-  spiStart(&SPID1, &spicfg );       // Setup transfer parameters.
-  lcd3310Init( &SPID1 );
   playbackInit();
 
   for (;;)

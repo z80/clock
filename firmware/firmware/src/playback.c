@@ -61,8 +61,8 @@ static MMCConfig mmccfg = { &SPID2, &ls_spicfg, &hs_spicfg };
 // **************************************************************************************
 //                              Synchronization.
 // **************************************************************************************
-Mailbox  mailbox;
-msg_t    message;
+static Mailbox  mailbox;
+static msg_t    message;
 
 
 void playbackInit( void )

@@ -93,6 +93,8 @@ CSRC = $(PORTSRC) \
        stdperiph/stm32f10x_rcc.c \
        src/playback.c \
        src/lcd3310.c \
+       src/clock.c \
+       src/display.c \
        src/main.c
        #src/3310.c \
        #src/3310-backend.c \
