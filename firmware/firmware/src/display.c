@@ -1,10 +1,18 @@
 
 #include "display.h"
 #include "hal.h"
+#include "lcd3310.h"
 
 static DisplayMode mode = ModeTime;
 static Mailbox  mailbox;
 static msg_t    message;
+
+static const SPIConfig spicfg = {
+  NULL,
+  GPIOC,
+  4,
+  SPI_CR1_BR_2 | SPI_CR1_BR_1
+};
 
 
 
@@ -41,7 +49,7 @@ void setDisplayMode( DisplayMode m )
 
 static void  refresh( void )
 {
-    chMBPost( &mailbox, mode );
+    chMBPost( &mailbox, mode, TIME_INFINITE );
 }
 
 static void  refreshI( void )
@@ -55,6 +63,7 @@ static msg_t display_thd(void *arg)
   while (TRUE){
     chThdSleepMilliseconds(100);
 
+    static msg_t msg;
     if ( chMBFetch( &mailbox, &msg, TIME_INFINITE ) == RDY_OK )
         mode = msg;
 
@@ -68,10 +77,10 @@ static msg_t display_thd(void *arg)
   return 0;
 }
 
-static void  time( int * h, int * m, int * s );
+static void  time( int * h, int * m, int * s )
 {
     static RTCTime rtct;
-    rtcGetTime( &RTCD1, &t );
+    rtcGetTime( &RTCD1, &rtct );
     static int t;
     t = rtct.tv_sec;
     *h = t / 3600;
@@ -79,9 +88,9 @@ static void  time( int * h, int * m, int * s );
     *s = (t - *h * 3600 - *m*60);
 }
 
-static void  numToStr( int v, char * str )
+static void  numToStr( int v, char * stri )
 {
-    static s;
+    static int s;
     s = v / 10;
     stri[0] = s+'0';
     s = v - s * 10;
@@ -89,12 +98,25 @@ static void  numToStr( int v, char * str )
     stri[2] = '\0';
 }
 
-static void  timeStr( char * str )
+static void  timeStr( char * stri )
 {
     static int h, m, s;
     time( &h, &m, &s );
-
+    numToStr( h, stri );
+    stri[2] = ':';
+    numToStr( m, &stri[3] );
+    stri[5] = ':';
+    numToStr( s, &stri[6] );
+    stri[8] = '\0';
 }
+
+
+
+
+
+
+
+
 
 
 
