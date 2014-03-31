@@ -8,8 +8,9 @@
 #define OPT_ALARM     4
 #define OPT_SOLUTING  8
 
-static uint8_t     displayState = OPT_QUARTELY | OPT_SOLUTING;
-static DisplayMode displayMode = ModeTime;
+static uint8_t     displayState    = OPT_QUARTELY | OPT_SOLUTING;
+static DisplayMode displayMode     = ModeTime;
+static int         displayMenuItem = 0;
 static Mailbox     mailbox;
 static msg_t       message;
 
@@ -80,9 +81,8 @@ static void  refreshI( DisplayMode m )
 static msg_t display_thd(void *arg)
 {
   (void)arg;
-  while (TRUE){
-    chThdSleepMilliseconds(100);
-
+  for ( ;; )
+  {
     static msg_t msg;
     if ( chMBFetch( &mailbox, &msg, TIME_INFINITE ) == RDY_OK )
     {
@@ -93,6 +93,7 @@ static msg_t display_thd(void *arg)
                 displayTime();
             break;
         case ModeRootMenu:
+            displayRootMenu();
             break;
         }
     }
