@@ -51,6 +51,9 @@ int main(void)
 
     for ( ;; )
     {
+        play( "anthem01.raw" );
+        chThdSleepSeconds( 1 );
+        play( "anthem02.raw" );
         chThdSleepSeconds( 1 );
     }
     /*
