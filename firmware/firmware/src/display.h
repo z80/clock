@@ -24,12 +24,12 @@ void initDisplay( void );
 void setDisplayMode( DisplayMode m );
 
 // Sublevel or level up.
-void pushMenu( void );
-void popMenu( void );
+void pushMenuI( void );
+void popMenuI( void );
 
 // Up and down on the same level.
-void upMenu( void );
-void downMenu( void );
+void upMenuI( void );
+void downMenuI( void );
 
 
 #endif

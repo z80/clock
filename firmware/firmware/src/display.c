@@ -171,6 +171,32 @@ static void displayRootMenu( void )
 {
 }
 
+void pushMenuI( void )
+{
+    switch ( displayMode )
+}
+
+void popMenuI( void )
+{
+
+}
+
+void upMenuI( void )
+{
+
+}
+
+void downMenuI( void )
+{
+
+}
+
+
+
+
+
+
+
 
 
 

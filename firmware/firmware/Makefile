@@ -95,6 +95,7 @@ CSRC = $(PORTSRC) \
        src/lcd3310.c \
        src/clock.c \
        src/display.c \
+       src/buttons.c \
        src/main.c
        #src/3310.c \
        #src/3310-backend.c \
