@@ -174,6 +174,15 @@ static void displayRootMenu( void )
 void pushMenuI( void )
 {
     switch ( displayMode )
+    {
+    case ModeTime:
+        break;
+    case ModeRootMenu:
+    case ModeTimeMenu:
+    case ModeAlarmMenu:
+    case ModeNotifyMenu:
+        break;
+    }
 }
 
 void popMenuI( void )

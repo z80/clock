@@ -21,6 +21,10 @@ static int lastButtonTime = 0;
 static Button lastButton     = BtnNone;
 static VirtualTimer vtimer;
 
+static void extCb( EXTDriver *extp, expchannel_t channel );
+static void timeout( void * arg );
+
+
 static const EXTConfig extcfg =
 {
   {
@@ -43,9 +47,6 @@ static const EXTConfig extcfg =
 };
 
 
-static void extCb( EXTDriver *extp, expchannel_t channel );
-static void timeout( void * arg );
-
 void initButtons( void )
 {
     palSetPadMode( GPIOB, 5, PAL_MODE_INPUT );
@@ -60,7 +61,7 @@ static void extCb( EXTDriver *extp, expchannel_t channel )
     (void)extp;
     (void)channel;
     chSysLockFromIsr();
-    if (!chVTIsArmedI(&vt))
+    if ( !chVTIsArmedI(&vtimer) )
       chVTSetI( &vtimer, MS2ST( BUTTON_DELAY ), timeout, NULL );
     chSysUnlockFromIsr();
 }
