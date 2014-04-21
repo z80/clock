@@ -21,6 +21,7 @@
 #include "dac.h"
 #include "playback.h"
 #include "display.h"
+#include "servo.h"
 
 
 /*
@@ -48,13 +49,19 @@ int main(void)
 
     playbackInit();
     initDisplay();
+    initServo();
 
     for ( ;; )
     {
+        heilUp();
         play( "anthem01.raw" );
-        chThdSleepSeconds( 1 );
+        heilDown();
+        chThdSleepSeconds( 5 );
+
+        heilUp();
         play( "anthem02.raw" );
-        chThdSleepSeconds( 1 );
+        heilDown();
+        chThdSleepSeconds( 5 );
     }
     /*
     for (;;)

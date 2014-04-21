@@ -1,0 +1,29 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+kill( all );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+V: 30;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+A: 120;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq0: dStart = V^2/(2*A);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq1: dStop = d - dStart;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+V = A*tStart;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
