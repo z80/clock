@@ -54,16 +54,16 @@ int main(void)
     for ( ;; )
     {
         heilUp();
-        chThdSleepSeconds( 1 );
+        chThdSleepMilliseconds( 200 );
         //play( "anthem01.raw" );
         heilDown();
-        chThdSleepSeconds( 3 );
+        chThdSleepSeconds( 5 );
 
         heilUp();
-        chThdSleepSeconds( 1 );
+        chThdSleepMilliseconds( 200 );
         //play( "anthem02.raw" );
         heilDown();
-        chThdSleepSeconds( 3 );
+        chThdSleepSeconds( 5 );
     }
     /*
     for (;;)

@@ -1,3 +1,3 @@
 #!/bin/sh
-../../stlink.git/stlink-texane/flash/st-flash write ./build/ch.bin 0x08000000
+../../../stlink.git/stlink-texane/flash/st-flash write ./build/ch.bin 0x08000000
 
