@@ -5,7 +5,7 @@
 static PWMConfig pwmcfg =
 {
     24000000,                 // 24MHz PWM clock frequency.
-    48000,                    // Initial PWM freq 24MHz/48kHz = 2ms.
+    480000,                   // Initial PWM freq 24MHz/4.8kHz = 20ms.
     NULL/*pwmpcb*/,
     {
         { PWM_OUTPUT_DISABLED,    NULL },
@@ -25,15 +25,15 @@ static PWMConfig pwmcfg =
 #define HEIL_PWR_400_PORT     GPIOC
 #define HEIL_PWR_400_PAD      10
 // RPMs, accelerations, angles.
-#define HEIL_V              30000  // This is not the whole evolution but
-#define HEIL_A              120000
+#define HEIL_V              300  // Percent_over_2 per second
+#define HEIL_A              1200 // Percent_over_2 per second^2
 // Timings.
-#define HEIL_HIGH_US                      1500
-#define HEIL_LOW_US                       1000
+#define HEIL_HIGH_US                      1300
+#define HEIL_LOW_US                       1100
 // Convertions.
-#define HEIL_US_2_PERCENT_X_10( us )      ( 1000 * (us - HEIL_LOW_US) / 2000 )
-#define HEIL_PERCENT_X_10_2_US( percent ) ( 2000 * percent / 1000 + HEIL_LOW_US )
-#define HEIL_PWM( percent )               ( HEIL_US_2_PERCENT_X_10( (HEIL_HIGH_US - HEIL_LOW_US)*percent/1000 + HEIL_LOW_US ) )
+#define HEIL_US_2_PERCENT_X_10( us )      ( 1000 * ((us) - HEIL_LOW_US) / (HEIL_HIGH_US-HEIL_LOW_US) )
+#define HEIL_PERCENT_X_10_2_US( percent ) ( HEIL_LOW_US + (HEIL_HIGH_US-HEIL_LOW_US)*(percent)/1000 )
+#define HEIL_PERCENT_2_PWM( percent )     ( 1000 * (HEIL_LOW_US + (HEIL_HIGH_US-HEIL_LOW_US)*(percent)/1000 ) / 20000 )
 
 
 static void moveTo( int fromUs, int toUs );
@@ -87,30 +87,33 @@ static void moveTo( int fromUs, int toUs )
     toUs   = HEIL_US_2_PERCENT_X_10( toUs );
     uint32_t t0, t;
     t0 = rtcGetTimeFat( &RTCD1 );
-    int x;
+    int x = fromUs;
     int dStart = (HEIL_V * HEIL_V) / ( 2 * HEIL_A ) + fromUs;
-    int dStop  = HEIL_US_2_PERCENT_X_10( toUs ) - dStart;
+    int dStop  = toUs - dStart;
     if ( ( ( fromUs < toUs ) && ( dStop < dStart ) ) ||
          ( ( fromUs > toUs ) && ( dStop > dStart ) ) )
     {
         dStart = (toUs - fromUs) / 2;
         dStop  = dStart;
     }
+    int pwm;
     while ( DABS( x - fromUs ) < DABS( dStart - fromUs ) )
     {
         t = rtcGetTimeFat( &RTCD1 ) - t0;
-        x = fromUs + HEIL_A * t * t / 2;
-        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, x ) );
-        chThdSleepMilliseconds( 2 );
+        x = fromUs + HEIL_A * t * t / (2000000);
+        pwm = HEIL_PERCENT_2_PWM( x );
+        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, pwm ) );
+        chThdSleepMilliseconds( 20 );
     }
     int x0 = x;
     t0 = t;
     while ( DABS( x - fromUs ) < DABS( dStop - fromUs ) )
     {
         t = rtcGetTimeFat( &RTCD1 ) - t0;
-        x = x0 + HEIL_V * t;
-        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, x ) );
-        chThdSleepMilliseconds( 2 );
+        x = x0 + HEIL_V * t / 1000;
+        pwm = HEIL_PERCENT_2_PWM( x );
+        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, pwm ) );
+        chThdSleepMilliseconds( 20 );
     }
     x0 = x;
     t0 = t;
@@ -123,9 +126,10 @@ static void moveTo( int fromUs, int toUs )
         // to = V^2/A + c
         // c = to - V^2/A
         t = rtcGetTimeFat( &RTCD1 ) - t0;
-        x = x0 - HEIL_A*t*t + 2*HEIL_V*t + toUs - HEIL_V*HEIL_V/HEIL_A;
-        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, x ) );
-        chThdSleepMilliseconds( 2 );
+        x = x0 - HEIL_A*t*t/1000000 + 2*HEIL_V*t/1000 + toUs - HEIL_V*HEIL_V/HEIL_A;
+        pwm = HEIL_PERCENT_2_PWM( x );
+        pwmEnableChannel( &PWMD4, 2, PWM_PERCENTAGE_TO_WIDTH( &PWMD4, pwm ) );
+        chThdSleepMilliseconds( 20 );
     }
 }
 
