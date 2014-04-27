@@ -47,21 +47,23 @@ int main(void)
      * sleeping in a loop and check the button state.
      */
 
-    playbackInit();
-    initDisplay();
+    //playbackInit();
+    //initDisplay();
     initServo();
 
     for ( ;; )
     {
         heilUp();
-        play( "anthem01.raw" );
+        chThdSleepSeconds( 1 );
+        //play( "anthem01.raw" );
         heilDown();
-        chThdSleepSeconds( 5 );
+        chThdSleepSeconds( 3 );
 
         heilUp();
-        play( "anthem02.raw" );
+        chThdSleepSeconds( 1 );
+        //play( "anthem02.raw" );
         heilDown();
-        chThdSleepSeconds( 5 );
+        chThdSleepSeconds( 3 );
     }
     /*
     for (;;)
