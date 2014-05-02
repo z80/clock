@@ -31,7 +31,7 @@ static PWMConfig pwmcfg =
 #define HEIL_PWR_400_PAD      10
 // RPMs, accelerations, angles.
 #define HEIL_V              5000  // Percent_x_10 per second
-#define HEIL_A              1000  // Percent_x_10 per second^2
+#define HEIL_A              15000  // Percent_x_10 per second^2
 // Timings.
 #define HEIL_HIGH_US                      2300
 #define HEIL_LOW_US                       1200
@@ -87,7 +87,7 @@ void heilDown( void )
 
 #define DABS( x ) ( ((x) >= 0) ? (x) : (-(x)) )
 
-/*
+
 static void moveTo( int fromUs, int toUs )
 {
     fromUs = HEIL_US_2_PERCENT_X_10( fromUs );
@@ -166,10 +166,11 @@ static void moveTo( int fromUs, int toUs )
     }
     pwm = HEIL_PERCENT_2_US( toUs );
     pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
-    chThdSleepMilliseconds( 2000 );
+    chThdSleepMilliseconds( 200 );
 }
-*/
 
+
+/*
 static void moveTo( int fromUs, int toUs )
 {
     int fromPs = HEIL_US_2_PERCENT_X_10( fromUs );
@@ -195,7 +196,7 @@ static void moveTo( int fromUs, int toUs )
     pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
     chThdSleepMilliseconds( 200 );
 }
-
+*/
 
 
 
