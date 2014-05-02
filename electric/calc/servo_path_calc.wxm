@@ -1,0 +1,29 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+kill( all );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq1: x0 = c;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq2: V = b;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq3: 0 = 2*a*T + b;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq4: x1 = a*T^2 + b*T + c;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve( [eq1, eq2, eq3, eq4], [ a, b, c, T ] );
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

@@ -91,7 +91,7 @@ static void moveTo( int fromUs, int toUs )
 {
     fromUs = HEIL_US_2_PERCENT_X_10( fromUs );
     toUs   = HEIL_US_2_PERCENT_X_10( toUs );
-    uint32_t t0, t;
+    int t0, t;
     RTCTime  rtc;
     rtcGetTime( &RTCD1, &rtc );
     t0 = rtc.tv_sec * 1000 + rtc.tv_msec;
@@ -109,31 +109,29 @@ static void moveTo( int fromUs, int toUs )
         {
             dStart = fromUs - d;
             dStop  = toUs + d;
-
         }
     }
     else
     {
-        dStart = (toUs - fromUs) / 2;
+        dStart = DABS( (toUs - fromUs) / 2 );
         dStop  = dStart;
     }
     int pwm;
+    int a = ( toUs > fromUs ) ? HEIL_A : (-HEIL_A);
     while ( DABS( x - fromUs ) < DABS( dStart - fromUs ) )
     {
         rtcGetTime( &RTCD1, &rtc );
         t = rtc.tv_sec * 1000 + rtc.tv_msec - t0;
-        if ( toUs > fromUs )
-            x = fromUs + HEIL_A * t * t / (2000000);
-        else
-            x = fromUs - HEIL_A * t * t / (2000000);
+        x = fromUs + a * t / 1000 * t / 1000 / 2;
         pwm = HEIL_PERCENT_2_US( x );
         pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
         chThdSleepMilliseconds( 20 );
     }
+
     int x0 = x;
     rtcGetTime( &RTCD1, &rtc );
     t0 = rtc.tv_sec * 1000 + rtc.tv_msec;
-                    dStop = toUs;
+                    //dStop = toUs;
     while ( DABS( x - fromUs ) < DABS( dStop - fromUs ) )
     {
         rtcGetTime( &RTCD1, &rtc );
@@ -146,27 +144,28 @@ static void moveTo( int fromUs, int toUs )
         pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
         chThdSleepMilliseconds( 20 );
     }
-    /*x0 = x;
+
+    x0 = x;
+    int v = (toUs > x0) ? HEIL_V : (-HEIL_V);
+    int T = 1000*2*( toUs - x0 )/v;
+    a = -v*v/((toUs - x0)*4);
+    t = 0;
     rtcGetTime( &RTCD1, &rtc );
     t0 = rtc.tv_sec * 1000 + rtc.tv_msec;
-    while ( DABS( x - fromUs ) < DABS( toUs - fromUs ) )
+    while ( t < T )
     {
-        // x = -A*t^2 + b*t + c
-        // dx/dt(V/A) = 0 = -2*A*V/A + b
-        // b = 2*V
-        // to = -A*(V/A)^2 + 2*V*V/A + c
-        // to = V^2/A + c
-        // c = to - V^2/A
         rtcGetTime( &RTCD1, &rtc );
         t = rtc.tv_sec * 1000 + rtc.tv_msec - t0;
-        if ( toUs > fromUs )
-            x = x0 - HEIL_A*t*t/1000000 + 2*HEIL_V*t/1000 + toUs - HEIL_V*HEIL_V/HEIL_A;
-        else
-            x = x0 + HEIL_A*t*t/1000000 - 2*HEIL_V*t/1000 - toUs + HEIL_V*HEIL_V/HEIL_A;
+        x = a*t/1000*t/1000 + v*t/1000 + x0;
+        x = ( x > 0 ) ? x : 0;
+        x = ( x <= 1000 ) ? x : 1000;
         pwm = HEIL_PERCENT_2_US( x );
         pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
         chThdSleepMilliseconds( 20 );
-    }*/
+    }
+    pwm = HEIL_PERCENT_2_US( toUs );
+    pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
+    chThdSleepMilliseconds( 20 );
 }
 
 
