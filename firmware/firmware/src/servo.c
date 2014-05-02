@@ -30,11 +30,11 @@ static PWMConfig pwmcfg =
 #define HEIL_PWR_400_PORT     GPIOC
 #define HEIL_PWR_400_PAD      10
 // RPMs, accelerations, angles.
-#define HEIL_V              3000  // Percent_x_10 per second
-#define HEIL_A              6000  // Percent_x_10 per second^2
+#define HEIL_V              5000  // Percent_x_10 per second
+#define HEIL_A              1000  // Percent_x_10 per second^2
 // Timings.
-#define HEIL_HIGH_US                      1700
-#define HEIL_LOW_US                       1250
+#define HEIL_HIGH_US                      2300
+#define HEIL_LOW_US                       1200
 // Convertions.
 #define HEIL_US_2_PERCENT_X_10( us )      ( 1000 * ((us) - HEIL_LOW_US) / (HEIL_HIGH_US-HEIL_LOW_US) )
 #define HEIL_PERCENT_X_10_2_US( percent ) ( HEIL_LOW_US + (HEIL_HIGH_US-HEIL_LOW_US)*(percent)/1000 )
@@ -87,6 +87,7 @@ void heilDown( void )
 
 #define DABS( x ) ( ((x) >= 0) ? (x) : (-(x)) )
 
+/*
 static void moveTo( int fromUs, int toUs )
 {
     fromUs = HEIL_US_2_PERCENT_X_10( fromUs );
@@ -165,8 +166,38 @@ static void moveTo( int fromUs, int toUs )
     }
     pwm = HEIL_PERCENT_2_US( toUs );
     pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
-    chThdSleepMilliseconds( 20 );
+    chThdSleepMilliseconds( 2000 );
 }
+*/
+
+static void moveTo( int fromUs, int toUs )
+{
+    int fromPs = HEIL_US_2_PERCENT_X_10( fromUs );
+    int toPs   = HEIL_US_2_PERCENT_X_10( toUs );
+    int x = fromPs;
+    int v = (toPs > fromPs) ? HEIL_V : (-HEIL_V);
+    int pwm;
+    RTCTime  rtc;
+    int t0, t;
+    rtcGetTime( &RTCD1, &rtc );
+    t0 = rtc.tv_sec * 1000 + rtc.tv_msec;
+    while ( DABS( x - fromPs ) < DABS( toPs - fromPs ) )
+    {
+        rtcGetTime( &RTCD1, &rtc );
+        t = rtc.tv_sec * 1000 + rtc.tv_msec - t0;
+        x = fromPs + v * t / 1000;
+        pwm = HEIL_PERCENT_2_US( x );
+        pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
+        chThdSleepMilliseconds( 20 );
+    }
+
+    pwm = HEIL_PERCENT_2_US( toPs );
+    pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
+    chThdSleepMilliseconds( 200 );
+}
+
+
+
 
 
 

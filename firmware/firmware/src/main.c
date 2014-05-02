@@ -57,13 +57,13 @@ int main(void)
         chThdSleepMilliseconds( 200 );
         //play( "anthem01.raw" );
         heilDown();
-        chThdSleepSeconds( 5 );
+        chThdSleepSeconds( 1 );
 
         heilUp();
         chThdSleepMilliseconds( 200 );
         //play( "anthem02.raw" );
         heilDown();
-        chThdSleepSeconds( 5 );
+        chThdSleepSeconds( 1 );
     }
     /*
     for (;;)
