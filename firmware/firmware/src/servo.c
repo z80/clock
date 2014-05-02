@@ -87,7 +87,7 @@ void heilDown( void )
 
 #define DABS( x ) ( ((x) >= 0) ? (x) : (-(x)) )
 
-
+/*
 static void moveTo( int fromUs, int toUs )
 {
     fromUs = HEIL_US_2_PERCENT_X_10( fromUs );
@@ -168,9 +168,9 @@ static void moveTo( int fromUs, int toUs )
     pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
     chThdSleepMilliseconds( 200 );
 }
+*/
 
 
-/*
 static void moveTo( int fromUs, int toUs )
 {
     int fromPs = HEIL_US_2_PERCENT_X_10( fromUs );
@@ -196,7 +196,7 @@ static void moveTo( int fromUs, int toUs )
     pwmEnableChannel( &PWMD4, 2, PWM_FRACTION_TO_WIDTH( &PWMD4, HEIL_PERIOD_US, pwm ) );
     chThdSleepMilliseconds( 200 );
 }
-*/
+
 
 
 
