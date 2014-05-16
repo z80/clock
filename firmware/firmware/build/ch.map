@@ -1,33 +1,33 @@
 Archive member included because of file (symbol)
 
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
                               build/obj/chrtclib.o (localtime_r)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
                               build/obj/syscalls.o (memset)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
                               build/obj/chrtclib.o (mktime)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o) (__tzcalc_limits)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o) (__tzcalc_limits)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
                               build/obj/shell.o (strcasecmp)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
                               build/obj/shell.o (strpbrk)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
                               build/obj/shell.o (strspn)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o) (__tz_lock)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o) (_daylight)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o) (__ctype_ptr__)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o) (div)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o) (__gettzinfo)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o) (__aeabi_idiv)
-/home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
-                              /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o) (__aeabi_idiv0)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o) (__tz_lock)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o) (_daylight)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o) (__ctype_ptr__)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o) (div)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o) (__gettzinfo)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o) (__aeabi_idiv)
+c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
+                              c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o) (__aeabi_idiv0)
 
 Discarded input sections
 
@@ -883,56 +883,65 @@ Discarded input sections
  .text          0x00000000        0x0 build/obj/servo.o
  .data          0x00000000        0x0 build/obj/servo.o
  .bss           0x00000000        0x0 build/obj/servo.o
+ .text          0x00000000        0x0 build/obj/trigger.o
+ .data          0x00000000        0x0 build/obj/trigger.o
+ .bss           0x00000000        0x0 build/obj/trigger.o
+ .bss.message   0x00000000        0x4 build/obj/trigger.o
+ .rodata.extcfg
+                0x00000000       0x98 build/obj/trigger.o
+ .text.extCb    0x00000000       0x30 build/obj/trigger.o
+ .text.initTrigger
+                0x00000000       0x40 build/obj/trigger.o
  .text          0x00000000        0x0 build/obj/main.o
  .data          0x00000000        0x0 build/obj/main.o
  .bss           0x00000000        0x0 build/obj/main.o
- .text          0x00000000        0x8 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
- .text          0x00000000       0xb4 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
- .text          0x00000000      0x520 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
- .rodata        0x00000000       0x60 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
- .text          0x00000000      0x514 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
- .rodata        0x00000000       0x68 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
- .text          0x00000000       0x48 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
- .text          0x00000000       0x54 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
- .text          0x00000000       0x38 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
- .text          0x00000000        0x8 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
- .text          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
- .data          0x00000000        0x8 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
- .bss           0x00000000        0x8 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
+ .text          0x00000000        0x8 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
+ .text          0x00000000       0xb4 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
+ .text          0x00000000      0x520 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
+ .rodata        0x00000000       0x60 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
+ .text          0x00000000      0x514 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+ .rodata        0x00000000       0x68 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+ .text          0x00000000       0x48 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
+ .text          0x00000000       0x54 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
+ .text          0x00000000       0x38 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
+ .text          0x00000000        0x8 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+ .text          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+ .data          0x00000000        0x8 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+ .bss           0x00000000        0x8 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
  .rodata.str1.4
-                0x00000000        0x4 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
- .text          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
- .data          0x00000000        0x4 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
- .rodata        0x00000000      0x104 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
- .text          0x00000000       0x48 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
- .text          0x00000000        0xc /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
- .data          0x00000000       0x40 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
- .text          0x00000000      0x2b0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
- .text          0x00000000        0x4 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
- .data          0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
- .bss           0x00000000        0x0 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
+                0x00000000        0x4 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+ .text          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+ .data          0x00000000        0x4 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+ .rodata        0x00000000      0x104 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+ .text          0x00000000       0x48 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+ .text          0x00000000        0xc c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+ .data          0x00000000       0x40 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+ .text          0x00000000      0x2b0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+ .text          0x00000000        0x4 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
+ .data          0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
 
 Memory Configuration
 
@@ -1023,10 +1032,11 @@ LOAD build/obj/clock.o
 LOAD build/obj/display.o
 LOAD build/obj/buttons.o
 LOAD build/obj/servo.o
+LOAD build/obj/trigger.o
 LOAD build/obj/main.o
 START GROUP
-LOAD /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a
-LOAD /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a
+LOAD c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a
+LOAD c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a
 END GROUP
                 0x00000400                __main_stack_size__ = 0x400
                 0x00000400                __process_stack_size__ = 0x400
@@ -1053,7 +1063,7 @@ destructors     0x080000ec        0x0
  *(SORT(.fini_array.*))
                 0x080000ec                PROVIDE (__fini_array_end, .)
 
-.text           0x080000f0     0x6de0
+.text           0x080000f0     0x6e60
  *(.text.startup.*)
  *(.text)
  *(.text.*)
@@ -1712,64 +1722,68 @@ destructors     0x080000ec        0x0
                 0x08006980       0x60 build/obj/servo.o
                 0x08006980                heilDown
  .text.moveTo   0x080069e0      0x190 build/obj/servo.o
- .text.main     0x08006b70       0x50 build/obj/main.o
-                0x08006b70                main
+ .text.waitForTrigger
+                0x08006b70       0x40 build/obj/trigger.o
+                0x08006b70                waitForTrigger
+ .text.main     0x08006bb0       0x60 build/obj/main.o
+                0x08006bb0                main
  *(.rodata)
- .rodata        0x08006bc0        0x8 build/obj/chsys.o
- *fill*         0x08006bc8        0x8 00
- .rodata        0x08006bd0       0x10 build/obj/ff.o
- .rodata        0x08006be0       0x20 build/obj/main.o
- *(.rodata.*)
- .rodata.ch_debug
-                0x08006c00       0x18 build/obj/chregistry.o
-                0x08006c00                ch_debug
+ .rodata        0x08006c10        0x8 build/obj/chsys.o
  *fill*         0x08006c18        0x8 00
+ .rodata        0x08006c20       0x10 build/obj/ff.o
+ .rodata        0x08006c30       0x48 build/obj/main.o
+ *(.rodata.*)
+ *fill*         0x08006c78        0x8 00
+ .rodata.ch_debug
+                0x08006c80       0x18 build/obj/chregistry.o
+                0x08006c80                ch_debug
+ *fill*         0x08006c98        0x8 00
  .rodata.mmc_vmt
-                0x08006c20       0x20 build/obj/mmc_spi.o
+                0x08006ca0       0x20 build/obj/mmc_spi.o
  .rodata.crc7_lookup_table
-                0x08006c40      0x100 build/obj/mmc_spi.o
+                0x08006cc0      0x100 build/obj/mmc_spi.o
  .rodata.stop.6914
-                0x08006d40        0x4 build/obj/mmc_spi.o
- *fill*         0x08006d44        0xc 00
+                0x08006dc0        0x4 build/obj/mmc_spi.o
+ *fill*         0x08006dc4        0xc 00
  .rodata.start.6909
-                0x08006d50        0x4 build/obj/mmc_spi.o
- *fill*         0x08006d54        0xc 00
+                0x08006dd0        0x4 build/obj/mmc_spi.o
+ *fill*         0x08006dd4        0xc 00
  .rodata.stopcmd.6900
-                0x08006d60        0x8 build/obj/mmc_spi.o
- *fill*         0x08006d68        0x8 00
- .rodata.vmt    0x08006d70       0x20 build/obj/serial.o
+                0x08006de0        0x8 build/obj/mmc_spi.o
+ *fill*         0x08006de8        0x8 00
+ .rodata.vmt    0x08006df0       0x20 build/obj/serial.o
  .rodata._stm32_dma_streams
-                0x08006d90       0x54 build/obj/stm32_dma.o
-                0x08006d90                _stm32_dma_streams
- *fill*         0x08006de4        0xc 00
+                0x08006e10       0x54 build/obj/stm32_dma.o
+                0x08006e10                _stm32_dma_streams
+ *fill*         0x08006e64        0xc 00
  .rodata.cfgtab.6418
-                0x08006df0       0x14 build/obj/pal_lld.o
- *fill*         0x08006e04        0xc 00
+                0x08006e70       0x14 build/obj/pal_lld.o
+ *fill*         0x08006e84        0xc 00
  .rodata.pal_default_config
-                0x08006e10       0x3c build/obj/board.o
-                0x08006e10                pal_default_config
- *fill*         0x08006e4c        0x4 00
+                0x08006e90       0x3c build/obj/board.o
+                0x08006e90                pal_default_config
+ *fill*         0x08006ecc        0x4 00
  .rodata.excvt.4209
-                0x08006e50       0x80 build/obj/ff.o
+                0x08006ed0       0x80 build/obj/ff.o
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x08006ed0        0x0
+.vfp11_veneer   0x08006f50        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08006ed0        0x0
+.v4_bx          0x08006f50        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x08006ed0        0x0
-                0x08006ed0                PROVIDE (__exidx_start, .)
+.ARM.exidx      0x08006f50        0x0
+                0x08006f50                PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08006ed0                PROVIDE (__exidx_end, .)
+                0x08006f50                PROVIDE (__exidx_end, .)
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -1777,11 +1791,11 @@ destructors     0x080000ec        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x08006ed0        0x0
-                0x08006ed0                . = ALIGN (0x8)
-                0x08006ed0                . = ALIGN (0x4)
-                0x08006ed0                _etext = .
-                0x08006ed0                _textdata = _etext
+.textalign      0x08006f50        0x0
+                0x08006f50                . = ALIGN (0x8)
+                0x08006f50                . = ALIGN (0x4)
+                0x08006f50                _etext = .
+                0x08006f50                _textdata = _etext
 
 .stacks         0x20000000      0x800
                 0x20000000                . = ALIGN (0x8)
@@ -1798,7 +1812,7 @@ destructors     0x080000ec        0x0
                 0x20000800                __process_stack_end__ = .
                 0x20000800                __main_thread_stack_end__ = .
 
-.data           0x20000800       0x90 load address 0x08006ed0
+.data           0x20000800       0xa4 load address 0x08006f50
                 0x20000800                . = ALIGN (0x4)
                 0x20000800                PROVIDE (_data, .)
  *(.data)
@@ -1813,87 +1827,89 @@ destructors     0x080000ec        0x0
                 0x20000844        0xc build/obj/playback.o
  .data.mmccfg   0x20000850        0xc build/obj/playback.o
  .data.pwmcfg   0x2000085c       0x34 build/obj/servo.o
-                0x20000890                . = ALIGN (0x4)
+ .data.files    0x20000890       0x14 build/obj/main.o
+                0x200008a4                . = ALIGN (0x4)
  *(.ramtext)
-                0x20000890                . = ALIGN (0x4)
-                0x20000890                PROVIDE (_edata, .)
+                0x200008a4                . = ALIGN (0x4)
+                0x200008a4                PROVIDE (_edata, .)
 
-.bss            0x20000890      0x988 load address 0x08006f60
-                0x20000890                . = ALIGN (0x4)
-                0x20000890                PROVIDE (_bss_start, .)
+.bss            0x200008a8      0x9b0 load address 0x08006ff4
+                0x200008a8                . = ALIGN (0x4)
+                0x200008a8                PROVIDE (_bss_start, .)
  *(.bss)
-                0x20000890                . = ALIGN (0x4)
+                0x200008a8                . = ALIGN (0x4)
  *(.bss.*)
  .bss._idle_thread_wa
-                0x20000890       0xc0 build/obj/chsys.o
-                0x20000890                _idle_thread_wa
+                0x200008a8       0xc0 build/obj/chsys.o
+                0x200008a8                _idle_thread_wa
  .bss.mainthread.4642
-                0x20000950       0x48 build/obj/chsys.o
- .bss.vtlist    0x20000998       0x10 build/obj/chvt.o
-                0x20000998                vtlist
- .bss.rlist     0x200009a8       0x1c build/obj/chschd.o
-                0x200009a8                rlist
- .bss.nextmem   0x200009c4        0x4 build/obj/chmemcore.o
- .bss.endmem    0x200009c8        0x4 build/obj/chmemcore.o
- *fill*         0x200009cc        0x4 00
+                0x20000968       0x48 build/obj/chsys.o
+ .bss.vtlist    0x200009b0       0x10 build/obj/chvt.o
+                0x200009b0                vtlist
+ .bss.rlist     0x200009c0       0x1c build/obj/chschd.o
+                0x200009c0                rlist
+ .bss.nextmem   0x200009dc        0x4 build/obj/chmemcore.o
+ .bss.endmem    0x200009e0        0x4 build/obj/chmemcore.o
+ *fill*         0x200009e4        0x4 00
  .bss.default_heap
-                0x200009d0       0x20 build/obj/chheap.o
+                0x200009e8       0x20 build/obj/chheap.o
  .bss.measurement_offset
-                0x200009f0        0x4 build/obj/tm.o
+                0x20000a08        0x4 build/obj/tm.o
  .bss.dma_streams_mask
-                0x200009f4        0x4 build/obj/stm32_dma.o
+                0x20000a0c        0x4 build/obj/stm32_dma.o
  .bss.dma_isr_redir
-                0x200009f8       0x38 build/obj/stm32_dma.o
- .bss.ADCD1     0x20000a30       0x34 build/obj/adc_lld.o
-                0x20000a30                ADCD1
- .bss.EXTD1     0x20000a64        0x8 build/obj/ext_lld.o
-                0x20000a64                EXTD1
- .bss.RTCD1     0x20000a6c        0x4 build/obj/rtc_lld.o
-                0x20000a6c                RTCD1
- .bss.SPID1     0x20000a70       0x30 build/obj/spi_lld.o
-                0x20000a70                SPID1
- .bss.SPID2     0x20000aa0       0x30 build/obj/spi_lld.o
-                0x20000aa0                SPID2
- .bss.dummytx   0x20000ad0        0x2 build/obj/spi_lld.o
- .bss.dummyrx   0x20000ad2        0x2 build/obj/spi_lld.o
- .bss.PWMD1     0x20000ad4       0x14 build/obj/pwm_lld.o
-                0x20000ad4                PWMD1
- .bss.PWMD4     0x20000ae8       0x14 build/obj/pwm_lld.o
-                0x20000ae8                PWMD4
- .bss.SD2       0x20000afc       0x78 build/obj/serial_lld.o
-                0x20000afc                SD2
- .bss.Timer1    0x20000b74        0x4 build/obj/sd_spi_stm32.o
- .bss.Timer2    0x20000b78        0x4 build/obj/sd_spi_stm32.o
- .bss.CardType  0x20000b7c        0x1 build/obj/sd_spi_stm32.o
- *fill*         0x20000b7d        0x3 00
- .bss.FatFs     0x20000b80        0x4 build/obj/ff.o
- .bss.Fsid      0x20000b84        0x2 build/obj/ff.o
- *fill*         0x20000b86        0x2 00
- .bss.sndBuf    0x20000b88      0x400 build/obj/playback.o
-                0x20000b88                sndBuf
- .bss.sndIndex  0x20000f88        0x4 build/obj/playback.o
-                0x20000f88                sndIndex
+                0x20000a10       0x38 build/obj/stm32_dma.o
+ .bss.ADCD1     0x20000a48       0x34 build/obj/adc_lld.o
+                0x20000a48                ADCD1
+ .bss.EXTD1     0x20000a7c        0x8 build/obj/ext_lld.o
+                0x20000a7c                EXTD1
+ .bss.RTCD1     0x20000a84        0x4 build/obj/rtc_lld.o
+                0x20000a84                RTCD1
+ .bss.SPID1     0x20000a88       0x30 build/obj/spi_lld.o
+                0x20000a88                SPID1
+ .bss.SPID2     0x20000ab8       0x30 build/obj/spi_lld.o
+                0x20000ab8                SPID2
+ .bss.dummytx   0x20000ae8        0x2 build/obj/spi_lld.o
+ .bss.dummyrx   0x20000aea        0x2 build/obj/spi_lld.o
+ .bss.PWMD1     0x20000aec       0x14 build/obj/pwm_lld.o
+                0x20000aec                PWMD1
+ .bss.PWMD4     0x20000b00       0x14 build/obj/pwm_lld.o
+                0x20000b00                PWMD4
+ .bss.SD2       0x20000b14       0x78 build/obj/serial_lld.o
+                0x20000b14                SD2
+ .bss.Timer1    0x20000b8c        0x4 build/obj/sd_spi_stm32.o
+ .bss.Timer2    0x20000b90        0x4 build/obj/sd_spi_stm32.o
+ .bss.CardType  0x20000b94        0x1 build/obj/sd_spi_stm32.o
+ *fill*         0x20000b95        0x3 00
+ .bss.FatFs     0x20000b98        0x4 build/obj/ff.o
+ .bss.Fsid      0x20000b9c        0x2 build/obj/ff.o
+ *fill*         0x20000b9e        0x2 00
+ .bss.sndBuf    0x20000ba0      0x400 build/obj/playback.o
+                0x20000ba0                sndBuf
+ .bss.sndIndex  0x20000fa0        0x4 build/obj/playback.o
+                0x20000fa0                sndIndex
  .bss.is_playing
-                0x20000f8c        0x4 build/obj/playback.o
+                0x20000fa4        0x4 build/obj/playback.o
  .bss.do_exit_pwm
-                0x20000f90        0x4 build/obj/playback.o
- .bss.MMC_FS    0x20000f94      0x224 build/obj/playback.o
-                0x20000f94                MMC_FS
- .bss.MMCD1     0x200011b8       0x34 build/obj/playback.o
-                0x200011b8                MMCD1
- .bss.mailbox   0x200011ec       0x28 build/obj/playback.o
- .bss.message   0x20001214        0x4 build/obj/playback.o
-                0x20001218                . = ALIGN (0x4)
+                0x20000fa8        0x4 build/obj/playback.o
+ .bss.MMC_FS    0x20000fac      0x224 build/obj/playback.o
+                0x20000fac                MMC_FS
+ .bss.MMCD1     0x200011d0       0x34 build/obj/playback.o
+                0x200011d0                MMCD1
+ .bss.mailbox   0x20001204       0x28 build/obj/playback.o
+ .bss.message   0x2000122c        0x4 build/obj/playback.o
+ .bss.mailbox   0x20001230       0x28 build/obj/trigger.o
+                0x20001258                . = ALIGN (0x4)
  *(COMMON)
-                0x20001218                . = ALIGN (0x4)
-                0x20001218                PROVIDE (_bss_end, .)
-                0x20001218                PROVIDE (end, .)
-                0x20001218                _end = .
-                0x20001218                __heap_base__ = _end
+                0x20001258                . = ALIGN (0x4)
+                0x20001258                PROVIDE (_bss_end, .)
+                0x20001258                PROVIDE (end, .)
+                0x20001258                _end = .
+                0x20001258                __heap_base__ = _end
                 0x20002000                __heap_end__ = __ram_end__
 OUTPUT(build/ch.elf elf32-littlearm)
 
-.debug_abbrev   0x00000000     0x5ed8
+.debug_abbrev   0x00000000     0x6106
  .debug_abbrev  0x00000000       0xbe build/obj/crt0.o
  .debug_abbrev  0x000000be       0xae build/obj/vectors.o
  .debug_abbrev  0x0000016c       0x41 build/obj/chcore.o
@@ -1974,9 +1990,10 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_abbrev  0x0000595e      0x20f build/obj/display.o
  .debug_abbrev  0x00005b6d      0x19d build/obj/buttons.o
  .debug_abbrev  0x00005d0a      0x166 build/obj/servo.o
- .debug_abbrev  0x00005e70       0x68 build/obj/main.o
+ .debug_abbrev  0x00005e70      0x1ec build/obj/trigger.o
+ .debug_abbrev  0x0000605c       0xaa build/obj/main.o
 
-.debug_info     0x00000000    0x1c196
+.debug_info     0x00000000    0x1cadf
  .debug_info    0x00000000      0x349 build/obj/crt0.o
  .debug_info    0x00000349      0x1f4 build/obj/vectors.o
  .debug_info    0x0000053d       0x92 build/obj/chcore.o
@@ -2051,99 +2068,101 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_info    0x00017225      0x980 build/obj/stm32f10x_spi.o
  .debug_info    0x00017ba5      0x732 build/obj/stm32f10x_gpio.o
  .debug_info    0x000182d7      0x90d build/obj/stm32f10x_rcc.o
- .debug_info    0x00018be4     0x132a build/obj/playback.o
- .debug_info    0x00019f0e      0xa37 build/obj/lcd3310.o
- .debug_info    0x0001a945        0x0 build/obj/clock.o
- .debug_info    0x0001a945      0xd2e build/obj/display.o
- .debug_info    0x0001b673      0x436 build/obj/buttons.o
- .debug_info    0x0001baa9      0x614 build/obj/servo.o
- .debug_info    0x0001c0bd       0xd9 build/obj/main.o
+ .debug_info    0x00018be4     0x1324 build/obj/playback.o
+ .debug_info    0x00019f08      0xa37 build/obj/lcd3310.o
+ .debug_info    0x0001a93f        0x0 build/obj/clock.o
+ .debug_info    0x0001a93f      0xd2e build/obj/display.o
+ .debug_info    0x0001b66d      0x436 build/obj/buttons.o
+ .debug_info    0x0001baa3      0x614 build/obj/servo.o
+ .debug_info    0x0001c0b7      0x928 build/obj/trigger.o
+ .debug_info    0x0001c9df      0x100 build/obj/main.o
 
-.debug_line     0x00000000     0xb1f7
- .debug_line    0x00000000      0x15e build/obj/crt0.o
- .debug_line    0x0000015e       0xeb build/obj/vectors.o
- .debug_line    0x00000249       0x63 build/obj/chcore.o
- .debug_line    0x000002ac      0x224 build/obj/chcore_v7m.o
- .debug_line    0x000004d0      0x116 build/obj/nvic.o
- .debug_line    0x000005e6      0x1d5 build/obj/chsys.o
- .debug_line    0x000007bb       0x1d build/obj/chdebug.o
- .debug_line    0x000007d8       0x1d build/obj/chlists.o
- .debug_line    0x000007f5      0x179 build/obj/chvt.o
- .debug_line    0x0000096e      0x2c0 build/obj/chschd.o
- .debug_line    0x00000c2e      0x34d build/obj/chthreads.o
- .debug_line    0x00000f7b      0x252 build/obj/chdynamic.o
- .debug_line    0x000011cd      0x203 build/obj/chregistry.o
- .debug_line    0x000013d0      0x3ad build/obj/chsem.o
- .debug_line    0x0000177d      0x2d2 build/obj/chmtx.o
- .debug_line    0x00001a4f      0x285 build/obj/chcond.o
- .debug_line    0x00001cd4      0x33a build/obj/chevents.o
- .debug_line    0x0000200e      0x1de build/obj/chmsg.o
- .debug_line    0x000021ec      0x28a build/obj/chmboxes.o
- .debug_line    0x00002476      0x397 build/obj/chqueues.o
- .debug_line    0x0000280d      0x17c build/obj/chmemcore.o
- .debug_line    0x00002989      0x2a2 build/obj/chheap.o
- .debug_line    0x00002c2b      0x20a build/obj/chmempools.o
- .debug_line    0x00002e35      0x25c build/obj/hal.o
- .debug_line    0x00003091      0x3c4 build/obj/adc.o
- .debug_line    0x00003455       0xde build/obj/can.o
- .debug_line    0x00003533      0x22e build/obj/ext.o
- .debug_line    0x00003761       0xde build/obj/gpt.o
- .debug_line    0x0000383f       0xde build/obj/i2c.o
- .debug_line    0x0000391d       0xde build/obj/icu.o
- .debug_line    0x000039fb       0xde build/obj/mac.o
- .debug_line    0x00003ad9      0x657 build/obj/mmc_spi.o
- .debug_line    0x00004130      0x13f build/obj/mmcsd.o
- .debug_line    0x0000426f      0x1f2 build/obj/pal.o
- .debug_line    0x00004461      0x223 build/obj/pwm.o
- .debug_line    0x00004684      0x214 build/obj/rtc.o
- .debug_line    0x00004898       0xde build/obj/sdc.o
- .debug_line    0x00004976      0x3ce build/obj/serial.o
- .debug_line    0x00004d44       0xde build/obj/serial_usb.o
- .debug_line    0x00004e22      0x4a3 build/obj/spi.o
- .debug_line    0x000052c5      0x1ea build/obj/tm.o
- .debug_line    0x000054af       0xde build/obj/uart.o
- .debug_line    0x0000558d       0xde build/obj/usb.o
- .debug_line    0x0000566b      0x262 build/obj/stm32_dma.o
- .debug_line    0x000058cd      0x1d6 build/obj/hal_lld.o
- .debug_line    0x00005aa3      0x362 build/obj/adc_lld.o
- .debug_line    0x00005e05      0x29f build/obj/ext_lld_isr.o
- .debug_line    0x000060a4       0xde build/obj/can_lld.o
- .debug_line    0x00006182      0x209 build/obj/ext_lld.o
- .debug_line    0x0000638b       0xde build/obj/mac_lld.o
- .debug_line    0x00006469       0xde build/obj/sdc_lld.o
- .debug_line    0x00006547      0x1b8 build/obj/pal_lld.o
- .debug_line    0x000066ff       0xde build/obj/i2c_lld.o
- .debug_line    0x000067dd      0x2d0 build/obj/rtc_lld.o
- .debug_line    0x00006aad      0x423 build/obj/spi_lld.o
- .debug_line    0x00006ed0       0xde build/obj/gpt_lld.o
- .debug_line    0x00006fae       0xde build/obj/icu_lld.o
- .debug_line    0x0000708c      0x2b1 build/obj/pwm_lld.o
- .debug_line    0x0000733d      0x395 build/obj/serial_lld.o
- .debug_line    0x000076d2       0xde build/obj/uart_lld.o
- .debug_line    0x000077b0       0xde build/obj/usb_lld.o
- .debug_line    0x0000788e      0x14c build/obj/board.o
- .debug_line    0x000079da      0x457 build/obj/sd_spi_stm32.o
- .debug_line    0x00007e31      0x516 build/obj/ff.o
- .debug_line    0x00008347      0x1be build/obj/evtimer.o
- .debug_line    0x00008505      0x1de build/obj/syscalls.o
- .debug_line    0x000086e3      0x3eb build/obj/shell.o
- .debug_line    0x00008ace      0x2d3 build/obj/chprintf.o
- .debug_line    0x00008da1      0x278 build/obj/chrtclib.o
- .debug_line    0x00009019      0x262 build/obj/core_cm3.o
- .debug_line    0x0000927b      0x26b build/obj/misc.o
- .debug_line    0x000094e6      0x381 build/obj/stm32f10x_spi.o
- .debug_line    0x00009867      0x30c build/obj/stm32f10x_gpio.o
- .debug_line    0x00009b73      0x423 build/obj/stm32f10x_rcc.o
- .debug_line    0x00009f96      0x44c build/obj/playback.o
- .debug_line    0x0000a3e2      0x35e build/obj/lcd3310.o
- .debug_line    0x0000a740        0x0 build/obj/clock.o
- .debug_line    0x0000a740      0x410 build/obj/display.o
- .debug_line    0x0000ab50      0x263 build/obj/buttons.o
- .debug_line    0x0000adb3      0x2e1 build/obj/servo.o
- .debug_line    0x0000b094      0x163 build/obj/main.o
+.debug_line     0x00000000     0xb2ee
+ .debug_line    0x00000000      0x15a build/obj/crt0.o
+ .debug_line    0x0000015a       0xe7 build/obj/vectors.o
+ .debug_line    0x00000241       0x63 build/obj/chcore.o
+ .debug_line    0x000002a4      0x220 build/obj/chcore_v7m.o
+ .debug_line    0x000004c4      0x112 build/obj/nvic.o
+ .debug_line    0x000005d6      0x1d1 build/obj/chsys.o
+ .debug_line    0x000007a7       0x1d build/obj/chdebug.o
+ .debug_line    0x000007c4       0x1d build/obj/chlists.o
+ .debug_line    0x000007e1      0x175 build/obj/chvt.o
+ .debug_line    0x00000956      0x2bc build/obj/chschd.o
+ .debug_line    0x00000c12      0x345 build/obj/chthreads.o
+ .debug_line    0x00000f57      0x24a build/obj/chdynamic.o
+ .debug_line    0x000011a1      0x1fb build/obj/chregistry.o
+ .debug_line    0x0000139c      0x3a9 build/obj/chsem.o
+ .debug_line    0x00001745      0x2ce build/obj/chmtx.o
+ .debug_line    0x00001a13      0x281 build/obj/chcond.o
+ .debug_line    0x00001c94      0x336 build/obj/chevents.o
+ .debug_line    0x00001fca      0x1da build/obj/chmsg.o
+ .debug_line    0x000021a4      0x286 build/obj/chmboxes.o
+ .debug_line    0x0000242a      0x38f build/obj/chqueues.o
+ .debug_line    0x000027b9      0x174 build/obj/chmemcore.o
+ .debug_line    0x0000292d      0x29a build/obj/chheap.o
+ .debug_line    0x00002bc7      0x202 build/obj/chmempools.o
+ .debug_line    0x00002dc9      0x258 build/obj/hal.o
+ .debug_line    0x00003021      0x3bc build/obj/adc.o
+ .debug_line    0x000033dd       0xda build/obj/can.o
+ .debug_line    0x000034b7      0x22a build/obj/ext.o
+ .debug_line    0x000036e1       0xda build/obj/gpt.o
+ .debug_line    0x000037bb       0xda build/obj/i2c.o
+ .debug_line    0x00003895       0xda build/obj/icu.o
+ .debug_line    0x0000396f       0xda build/obj/mac.o
+ .debug_line    0x00003a49      0x64f build/obj/mmc_spi.o
+ .debug_line    0x00004098      0x13b build/obj/mmcsd.o
+ .debug_line    0x000041d3      0x1ee build/obj/pal.o
+ .debug_line    0x000043c1      0x21f build/obj/pwm.o
+ .debug_line    0x000045e0      0x210 build/obj/rtc.o
+ .debug_line    0x000047f0       0xda build/obj/sdc.o
+ .debug_line    0x000048ca      0x3c6 build/obj/serial.o
+ .debug_line    0x00004c90       0xda build/obj/serial_usb.o
+ .debug_line    0x00004d6a      0x49b build/obj/spi.o
+ .debug_line    0x00005205      0x1e6 build/obj/tm.o
+ .debug_line    0x000053eb       0xda build/obj/uart.o
+ .debug_line    0x000054c5       0xda build/obj/usb.o
+ .debug_line    0x0000559f      0x25e build/obj/stm32_dma.o
+ .debug_line    0x000057fd      0x1d2 build/obj/hal_lld.o
+ .debug_line    0x000059cf      0x35a build/obj/adc_lld.o
+ .debug_line    0x00005d29      0x29b build/obj/ext_lld_isr.o
+ .debug_line    0x00005fc4       0xda build/obj/can_lld.o
+ .debug_line    0x0000609e      0x205 build/obj/ext_lld.o
+ .debug_line    0x000062a3       0xda build/obj/mac_lld.o
+ .debug_line    0x0000637d       0xda build/obj/sdc_lld.o
+ .debug_line    0x00006457      0x1b4 build/obj/pal_lld.o
+ .debug_line    0x0000660b       0xda build/obj/i2c_lld.o
+ .debug_line    0x000066e5      0x2cc build/obj/rtc_lld.o
+ .debug_line    0x000069b1      0x41b build/obj/spi_lld.o
+ .debug_line    0x00006dcc       0xda build/obj/gpt_lld.o
+ .debug_line    0x00006ea6       0xda build/obj/icu_lld.o
+ .debug_line    0x00006f80      0x2ad build/obj/pwm_lld.o
+ .debug_line    0x0000722d      0x38d build/obj/serial_lld.o
+ .debug_line    0x000075ba       0xda build/obj/uart_lld.o
+ .debug_line    0x00007694       0xda build/obj/usb_lld.o
+ .debug_line    0x0000776e      0x148 build/obj/board.o
+ .debug_line    0x000078b6      0x453 build/obj/sd_spi_stm32.o
+ .debug_line    0x00007d09      0x516 build/obj/ff.o
+ .debug_line    0x0000821f      0x1ba build/obj/evtimer.o
+ .debug_line    0x000083d9      0x1d6 build/obj/syscalls.o
+ .debug_line    0x000085af      0x3e3 build/obj/shell.o
+ .debug_line    0x00008992      0x2cb build/obj/chprintf.o
+ .debug_line    0x00008c5d      0x270 build/obj/chrtclib.o
+ .debug_line    0x00008ecd      0x25e build/obj/core_cm3.o
+ .debug_line    0x0000912b      0x267 build/obj/misc.o
+ .debug_line    0x00009392      0x37d build/obj/stm32f10x_spi.o
+ .debug_line    0x0000970f      0x308 build/obj/stm32f10x_gpio.o
+ .debug_line    0x00009a17      0x41f build/obj/stm32f10x_rcc.o
+ .debug_line    0x00009e36      0x444 build/obj/playback.o
+ .debug_line    0x0000a27a      0x35a build/obj/lcd3310.o
+ .debug_line    0x0000a5d4        0x0 build/obj/clock.o
+ .debug_line    0x0000a5d4      0x40c build/obj/display.o
+ .debug_line    0x0000a9e0      0x25f build/obj/buttons.o
+ .debug_line    0x0000ac3f      0x2dd build/obj/servo.o
+ .debug_line    0x0000af1c      0x2bb build/obj/trigger.o
+ .debug_line    0x0000b1d7      0x117 build/obj/main.o
 
 .debug_pubnames
-                0x00000000     0x245f
+                0x00000000     0x2494
  .debug_pubnames
                 0x00000000       0x56 build/obj/crt0.o
  .debug_pubnames
@@ -2265,10 +2284,12 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_pubnames
                 0x0000240c       0x38 build/obj/servo.o
  .debug_pubnames
-                0x00002444       0x1b build/obj/main.o
+                0x00002444       0x35 build/obj/trigger.o
+ .debug_pubnames
+                0x00002479       0x1b build/obj/main.o
 
 .debug_pubtypes
-                0x00000000     0x44cd
+                0x00000000     0x46ae
  .debug_pubtypes
                 0x00000000       0x44 build/obj/crt0.o
  .debug_pubtypes
@@ -2428,9 +2449,11 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_pubtypes
                 0x00004352      0x142 build/obj/servo.o
  .debug_pubtypes
-                0x00004494       0x39 build/obj/main.o
+                0x00004494      0x1fc build/obj/trigger.o
+ .debug_pubtypes
+                0x00004690       0x1e build/obj/main.o
 
-.debug_aranges  0x00000000     0x1698
+.debug_aranges  0x00000000     0x16c8
  .debug_aranges
                 0x00000000       0x38 build/obj/crt0.o
  .debug_aranges
@@ -2552,9 +2575,11 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_aranges
                 0x00001640       0x38 build/obj/servo.o
  .debug_aranges
-                0x00001678       0x20 build/obj/main.o
+                0x00001678       0x30 build/obj/trigger.o
+ .debug_aranges
+                0x000016a8       0x20 build/obj/main.o
 
-.debug_ranges   0x00000000     0x1300
+.debug_ranges   0x00000000     0x1320
  .debug_ranges  0x00000000       0x28 build/obj/crt0.o
  .debug_ranges  0x00000028       0x10 build/obj/vectors.o
  .debug_ranges  0x00000038       0x10 build/obj/chcore.o
@@ -2615,169 +2640,172 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_ranges  0x00001210       0x98 build/obj/display.o
  .debug_ranges  0x000012a8       0x20 build/obj/buttons.o
  .debug_ranges  0x000012c8       0x28 build/obj/servo.o
- .debug_ranges  0x000012f0       0x10 build/obj/main.o
+ .debug_ranges  0x000012f0       0x20 build/obj/trigger.o
+ .debug_ranges  0x00001310       0x10 build/obj/main.o
 
-.debug_str      0x00000000     0x4e3e
- .debug_str     0x00000000      0x1d4 build/obj/crt0.o
-                                0x208 (size before relaxing)
- .debug_str     0x000001d4      0x147 build/obj/vectors.o
-                                0x22f (size before relaxing)
- .debug_str     0x0000031b       0x38 build/obj/chcore.o
-                                0x102 (size before relaxing)
- .debug_str     0x00000353      0x293 build/obj/chcore_v7m.o
-                                0x38d (size before relaxing)
- .debug_str     0x000005e6       0xc6 build/obj/nvic.o
-                                0x1f9 (size before relaxing)
- .debug_str     0x000006ac      0x1ce build/obj/chsys.o
-                                0x44f (size before relaxing)
- .debug_str     0x0000087a       0x29 build/obj/chdebug.o
-                                 0xf3 (size before relaxing)
- .debug_str     0x000008a3       0x29 build/obj/chlists.o
-                                 0xf3 (size before relaxing)
- .debug_str     0x000008cc       0x4a build/obj/chvt.o
-                                0x182 (size before relaxing)
- .debug_str     0x00000916      0x102 build/obj/chschd.o
-                                0x3c3 (size before relaxing)
- .debug_str     0x00000a18       0xf7 build/obj/chthreads.o
-                                0x3dd (size before relaxing)
- .debug_str     0x00000b0f       0xf7 build/obj/chdynamic.o
-                                0x37e (size before relaxing)
- .debug_str     0x00000c06       0x4d build/obj/chregistry.o
-                                0x3c5 (size before relaxing)
- .debug_str     0x00000c53       0xd3 build/obj/chsem.o
-                                0x37b (size before relaxing)
- .debug_str     0x00000d26       0x9c build/obj/chmtx.o
-                                0x331 (size before relaxing)
- .debug_str     0x00000dc2       0xbb build/obj/chcond.o
-                                0x351 (size before relaxing)
- .debug_str     0x00000e7d      0x1c4 build/obj/chevents.o
-                                0x44d (size before relaxing)
- .debug_str     0x00001041       0x48 build/obj/chmsg.o
-                                0x2da (size before relaxing)
- .debug_str     0x00001089       0xed build/obj/chmboxes.o
-                                0x34a (size before relaxing)
- .debug_str     0x00001176      0x124 build/obj/chqueues.o
-                                0x3d3 (size before relaxing)
- .debug_str     0x0000129a       0x86 build/obj/chmemcore.o
-                                0x16d (size before relaxing)
- .debug_str     0x00001320       0x75 build/obj/chheap.o
-                                0x32d (size before relaxing)
- .debug_str     0x00001395       0x77 build/obj/chmempools.o
-                                0x1bb (size before relaxing)
- .debug_str     0x0000140c      0x104 build/obj/hal.o
-                                0x1ec (size before relaxing)
- .debug_str     0x00001510      0x29d build/obj/adc.o
-                                0x565 (size before relaxing)
- .debug_str     0x000017ad       0x22 build/obj/can.o
-                                0x101 (size before relaxing)
- .debug_str     0x000017cf       0xfa build/obj/ext.o
+.debug_str      0x00000000     0x4e70
+ .debug_str     0x00000000      0x1d1 build/obj/crt0.o
                                 0x205 (size before relaxing)
- .debug_str     0x000018c9       0x22 build/obj/gpt.o
-                                0x101 (size before relaxing)
- .debug_str     0x000018eb       0x22 build/obj/i2c.o
-                                0x101 (size before relaxing)
- .debug_str     0x0000190d       0x22 build/obj/icu.o
-                                0x101 (size before relaxing)
- .debug_str     0x0000192f       0x22 build/obj/mac.o
-                                0x101 (size before relaxing)
- .debug_str     0x00001951      0x401 build/obj/mmc_spi.o
-                                0x706 (size before relaxing)
- .debug_str     0x00001d52       0x66 build/obj/mmcsd.o
-                                0x159 (size before relaxing)
- .debug_str     0x00001db8       0x7c build/obj/pal.o
-                                0x197 (size before relaxing)
- .debug_str     0x00001e34      0x15a build/obj/pwm.o
-                                0x285 (size before relaxing)
- .debug_str     0x00001f8e      0x109 build/obj/rtc.o
-                                0x200 (size before relaxing)
- .debug_str     0x00002097       0x22 build/obj/sdc.o
-                                0x101 (size before relaxing)
- .debug_str     0x000020b9      0x10a build/obj/serial.o
-                                0x49d (size before relaxing)
- .debug_str     0x000021c3       0x29 build/obj/serial_usb.o
-                                0x108 (size before relaxing)
- .debug_str     0x000021ec       0xed build/obj/spi.o
-                                0x53f (size before relaxing)
- .debug_str     0x000022d9       0x74 build/obj/tm.o
-                                0x1b6 (size before relaxing)
- .debug_str     0x0000234d       0x23 build/obj/uart.o
-                                0x102 (size before relaxing)
- .debug_str     0x00002370       0x22 build/obj/usb.o
-                                0x101 (size before relaxing)
- .debug_str     0x00002392      0x419 build/obj/stm32_dma.o
-                                0x5a0 (size before relaxing)
- .debug_str     0x000027ab       0xd7 build/obj/hal_lld.o
-                                0x24b (size before relaxing)
- .debug_str     0x00002882       0xc0 build/obj/adc_lld.o
-                                0x596 (size before relaxing)
- .debug_str     0x00002942       0xe8 build/obj/ext_lld_isr.o
-                                0x522 (size before relaxing)
- .debug_str     0x00002a2a       0x32 build/obj/can_lld.o
-                                0x111 (size before relaxing)
- .debug_str     0x00002a5c       0xad build/obj/ext_lld.o
-                                0x25e (size before relaxing)
- .debug_str     0x00002b09       0x32 build/obj/mac_lld.o
-                                0x111 (size before relaxing)
- .debug_str     0x00002b3b       0x32 build/obj/sdc_lld.o
-                                0x111 (size before relaxing)
- .debug_str     0x00002b6d       0x64 build/obj/pal_lld.o
-                                0x221 (size before relaxing)
- .debug_str     0x00002bd1       0x38 build/obj/i2c_lld.o
-                                0x117 (size before relaxing)
- .debug_str     0x00002c09      0x143 build/obj/rtc_lld.o
-                                0x652 (size before relaxing)
- .debug_str     0x00002d4c      0x12d build/obj/spi_lld.o
-                                0x5c7 (size before relaxing)
- .debug_str     0x00002e79       0x38 build/obj/gpt_lld.o
-                                0x117 (size before relaxing)
- .debug_str     0x00002eb1       0x38 build/obj/icu_lld.o
-                                0x117 (size before relaxing)
- .debug_str     0x00002ee9       0xd3 build/obj/pwm_lld.o
-                                0x31b (size before relaxing)
- .debug_str     0x00002fbc       0x95 build/obj/serial_lld.o
-                                0x505 (size before relaxing)
- .debug_str     0x00003051       0x3b build/obj/uart_lld.o
-                                0x11a (size before relaxing)
- .debug_str     0x0000308c       0x38 build/obj/usb_lld.o
-                                0x117 (size before relaxing)
- .debug_str     0x000030c4       0x18 build/obj/board.o
-                                0x160 (size before relaxing)
- .debug_str     0x000030dc      0x3a1 build/obj/sd_spi_stm32.o
-                                0x542 (size before relaxing)
- .debug_str     0x0000347d      0x2ce build/obj/ff.o
-                                0x3e6 (size before relaxing)
- .debug_str     0x0000374b       0x5d build/obj/evtimer.o
-                                0x327 (size before relaxing)
- .debug_str     0x000037a8      0x496 build/obj/syscalls.o
-                                0x5dc (size before relaxing)
- .debug_str     0x00003c3e      0x18e build/obj/shell.o
-                                0x4f8 (size before relaxing)
- .debug_str     0x00003dcc       0xb8 build/obj/chprintf.o
-                                0x225 (size before relaxing)
- .debug_str     0x00003e84       0x91 build/obj/chrtclib.o
-                                0x276 (size before relaxing)
- .debug_str     0x00003f15      0x141 build/obj/core_cm3.o
-                                0x237 (size before relaxing)
- .debug_str     0x00004056      0x19c build/obj/misc.o
-                                0x343 (size before relaxing)
- .debug_str     0x000041f2      0x32a build/obj/stm32f10x_spi.o
-                                0x56a (size before relaxing)
- .debug_str     0x0000451c      0x214 build/obj/stm32f10x_gpio.o
-                                0x486 (size before relaxing)
- .debug_str     0x00004730      0x378 build/obj/stm32f10x_rcc.o
-                                0x587 (size before relaxing)
- .debug_str     0x00004aa8       0xf4 build/obj/playback.o
-                                0x964 (size before relaxing)
- .debug_str     0x00004b9c       0xa3 build/obj/lcd3310.o
-                                0x4c8 (size before relaxing)
- .debug_str     0x00004c3f      0x127 build/obj/display.o
-                                0x67b (size before relaxing)
- .debug_str     0x00004d66       0x88 build/obj/buttons.o
+ .debug_str     0x000001d1      0x147 build/obj/vectors.o
+                                0x22c (size before relaxing)
+ .debug_str     0x00000318       0x38 build/obj/chcore.o
+                                 0xff (size before relaxing)
+ .debug_str     0x00000350      0x293 build/obj/chcore_v7m.o
+                                0x38a (size before relaxing)
+ .debug_str     0x000005e3       0xc6 build/obj/nvic.o
+                                0x1f6 (size before relaxing)
+ .debug_str     0x000006a9      0x1ce build/obj/chsys.o
+                                0x44c (size before relaxing)
+ .debug_str     0x00000877       0x29 build/obj/chdebug.o
+                                 0xf0 (size before relaxing)
+ .debug_str     0x000008a0       0x29 build/obj/chlists.o
+                                 0xf0 (size before relaxing)
+ .debug_str     0x000008c9       0x4a build/obj/chvt.o
+                                0x17f (size before relaxing)
+ .debug_str     0x00000913      0x102 build/obj/chschd.o
+                                0x3c0 (size before relaxing)
+ .debug_str     0x00000a15       0xf7 build/obj/chthreads.o
+                                0x3da (size before relaxing)
+ .debug_str     0x00000b0c       0xf7 build/obj/chdynamic.o
+                                0x37b (size before relaxing)
+ .debug_str     0x00000c03       0x4d build/obj/chregistry.o
+                                0x3c2 (size before relaxing)
+ .debug_str     0x00000c50       0xd3 build/obj/chsem.o
+                                0x378 (size before relaxing)
+ .debug_str     0x00000d23       0x9c build/obj/chmtx.o
+                                0x32e (size before relaxing)
+ .debug_str     0x00000dbf       0xbb build/obj/chcond.o
+                                0x34e (size before relaxing)
+ .debug_str     0x00000e7a      0x1c4 build/obj/chevents.o
+                                0x44a (size before relaxing)
+ .debug_str     0x0000103e       0x48 build/obj/chmsg.o
+                                0x2d7 (size before relaxing)
+ .debug_str     0x00001086       0xed build/obj/chmboxes.o
+                                0x347 (size before relaxing)
+ .debug_str     0x00001173      0x124 build/obj/chqueues.o
+                                0x3d0 (size before relaxing)
+ .debug_str     0x00001297       0x86 build/obj/chmemcore.o
+                                0x16a (size before relaxing)
+ .debug_str     0x0000131d       0x75 build/obj/chheap.o
+                                0x32a (size before relaxing)
+ .debug_str     0x00001392       0x77 build/obj/chmempools.o
+                                0x1b8 (size before relaxing)
+ .debug_str     0x00001409      0x104 build/obj/hal.o
+                                0x1e9 (size before relaxing)
+ .debug_str     0x0000150d      0x29d build/obj/adc.o
+                                0x562 (size before relaxing)
+ .debug_str     0x000017aa       0x22 build/obj/can.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x000017cc       0xfa build/obj/ext.o
+                                0x202 (size before relaxing)
+ .debug_str     0x000018c6       0x22 build/obj/gpt.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x000018e8       0x22 build/obj/i2c.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x0000190a       0x22 build/obj/icu.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x0000192c       0x22 build/obj/mac.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x0000194e      0x401 build/obj/mmc_spi.o
+                                0x703 (size before relaxing)
+ .debug_str     0x00001d4f       0x66 build/obj/mmcsd.o
+                                0x156 (size before relaxing)
+ .debug_str     0x00001db5       0x7c build/obj/pal.o
+                                0x194 (size before relaxing)
+ .debug_str     0x00001e31      0x15a build/obj/pwm.o
                                 0x282 (size before relaxing)
- .debug_str     0x00004dee       0x45 build/obj/servo.o
-                                0x2cf (size before relaxing)
- .debug_str     0x00004e33        0xb build/obj/main.o
-                                0x102 (size before relaxing)
+ .debug_str     0x00001f8b      0x109 build/obj/rtc.o
+                                0x1fd (size before relaxing)
+ .debug_str     0x00002094       0x22 build/obj/sdc.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x000020b6      0x10a build/obj/serial.o
+                                0x49a (size before relaxing)
+ .debug_str     0x000021c0       0x29 build/obj/serial_usb.o
+                                0x105 (size before relaxing)
+ .debug_str     0x000021e9       0xed build/obj/spi.o
+                                0x53c (size before relaxing)
+ .debug_str     0x000022d6       0x74 build/obj/tm.o
+                                0x1b3 (size before relaxing)
+ .debug_str     0x0000234a       0x23 build/obj/uart.o
+                                 0xff (size before relaxing)
+ .debug_str     0x0000236d       0x22 build/obj/usb.o
+                                 0xfe (size before relaxing)
+ .debug_str     0x0000238f      0x419 build/obj/stm32_dma.o
+                                0x59d (size before relaxing)
+ .debug_str     0x000027a8       0xd7 build/obj/hal_lld.o
+                                0x248 (size before relaxing)
+ .debug_str     0x0000287f       0xc0 build/obj/adc_lld.o
+                                0x593 (size before relaxing)
+ .debug_str     0x0000293f       0xe8 build/obj/ext_lld_isr.o
+                                0x51f (size before relaxing)
+ .debug_str     0x00002a27       0x32 build/obj/can_lld.o
+                                0x10e (size before relaxing)
+ .debug_str     0x00002a59       0xad build/obj/ext_lld.o
+                                0x25b (size before relaxing)
+ .debug_str     0x00002b06       0x32 build/obj/mac_lld.o
+                                0x10e (size before relaxing)
+ .debug_str     0x00002b38       0x32 build/obj/sdc_lld.o
+                                0x10e (size before relaxing)
+ .debug_str     0x00002b6a       0x64 build/obj/pal_lld.o
+                                0x21e (size before relaxing)
+ .debug_str     0x00002bce       0x38 build/obj/i2c_lld.o
+                                0x114 (size before relaxing)
+ .debug_str     0x00002c06      0x143 build/obj/rtc_lld.o
+                                0x64f (size before relaxing)
+ .debug_str     0x00002d49      0x12d build/obj/spi_lld.o
+                                0x5c4 (size before relaxing)
+ .debug_str     0x00002e76       0x38 build/obj/gpt_lld.o
+                                0x114 (size before relaxing)
+ .debug_str     0x00002eae       0x38 build/obj/icu_lld.o
+                                0x114 (size before relaxing)
+ .debug_str     0x00002ee6       0xd3 build/obj/pwm_lld.o
+                                0x318 (size before relaxing)
+ .debug_str     0x00002fb9       0x95 build/obj/serial_lld.o
+                                0x502 (size before relaxing)
+ .debug_str     0x0000304e       0x3b build/obj/uart_lld.o
+                                0x117 (size before relaxing)
+ .debug_str     0x00003089       0x38 build/obj/usb_lld.o
+                                0x114 (size before relaxing)
+ .debug_str     0x000030c1       0x18 build/obj/board.o
+                                0x15d (size before relaxing)
+ .debug_str     0x000030d9      0x3a1 build/obj/sd_spi_stm32.o
+                                0x53f (size before relaxing)
+ .debug_str     0x0000347a      0x2ce build/obj/ff.o
+                                0x3e3 (size before relaxing)
+ .debug_str     0x00003748       0x5d build/obj/evtimer.o
+                                0x324 (size before relaxing)
+ .debug_str     0x000037a5      0x496 build/obj/syscalls.o
+                                0x5d9 (size before relaxing)
+ .debug_str     0x00003c3b      0x18e build/obj/shell.o
+                                0x4f5 (size before relaxing)
+ .debug_str     0x00003dc9       0xb8 build/obj/chprintf.o
+                                0x222 (size before relaxing)
+ .debug_str     0x00003e81       0x91 build/obj/chrtclib.o
+                                0x273 (size before relaxing)
+ .debug_str     0x00003f12      0x141 build/obj/core_cm3.o
+                                0x234 (size before relaxing)
+ .debug_str     0x00004053      0x19c build/obj/misc.o
+                                0x340 (size before relaxing)
+ .debug_str     0x000041ef      0x32a build/obj/stm32f10x_spi.o
+                                0x567 (size before relaxing)
+ .debug_str     0x00004519      0x214 build/obj/stm32f10x_gpio.o
+                                0x483 (size before relaxing)
+ .debug_str     0x0000472d      0x378 build/obj/stm32f10x_rcc.o
+                                0x584 (size before relaxing)
+ .debug_str     0x00004aa5       0xf4 build/obj/playback.o
+                                0x961 (size before relaxing)
+ .debug_str     0x00004b99       0xa3 build/obj/lcd3310.o
+                                0x4c5 (size before relaxing)
+ .debug_str     0x00004c3c      0x127 build/obj/display.o
+                                0x678 (size before relaxing)
+ .debug_str     0x00004d63       0x88 build/obj/buttons.o
+                                0x27f (size before relaxing)
+ .debug_str     0x00004deb       0x45 build/obj/servo.o
+                                0x2cc (size before relaxing)
+ .debug_str     0x00004e30       0x2f build/obj/trigger.o
+                                0x41f (size before relaxing)
+ .debug_str     0x00004e5f       0x11 build/obj/main.o
+                                 0xf2 (size before relaxing)
 
 .comment        0x00000000       0x2a
  .comment       0x00000000       0x2a build/obj/crt0.o
@@ -2861,6 +2889,7 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .comment       0x00000000       0x2b build/obj/display.o
  .comment       0x00000000       0x2b build/obj/buttons.o
  .comment       0x00000000       0x2b build/obj/servo.o
+ .comment       0x00000000       0x2b build/obj/trigger.o
  .comment       0x00000000       0x2b build/obj/main.o
 
 .ARM.attributes
@@ -3026,37 +3055,39 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .ARM.attributes
                 0x00000f1f       0x31 build/obj/servo.o
  .ARM.attributes
-                0x00000f50       0x31 build/obj/main.o
+                0x00000f50       0x31 build/obj/trigger.o
  .ARM.attributes
-                0x00000f81       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
+                0x00000f81       0x31 build/obj/main.o
  .ARM.attributes
-                0x00000faa       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
+                0x00000fb2       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
  .ARM.attributes
-                0x00000fd3       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+                0x00000fdb       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x00000ffc       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
+                0x00001004       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
  .ARM.attributes
-                0x00001025       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
+                0x0000102d       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
  .ARM.attributes
-                0x0000104e       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
+                0x00001056       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
  .ARM.attributes
-                0x00001077       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
+                0x0000107f       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
  .ARM.attributes
-                0x000010a0       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
+                0x000010a8       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
  .ARM.attributes
-                0x000010c9       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
+                0x000010d1       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
  .ARM.attributes
-                0x000010f2       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
+                0x000010fa       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
  .ARM.attributes
-                0x0000111b       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
+                0x00001123       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
  .ARM.attributes
-                0x00001144       0x29 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
+                0x0000114c       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
  .ARM.attributes
-                0x0000116d       0x1b /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
+                0x00001175       0x29 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
  .ARM.attributes
-                0x00001188       0x1b /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
+                0x0000119e       0x1b c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000011b9       0x1b c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
 
-.debug_frame    0x00000000     0x3a60
+.debug_frame    0x00000000     0x3ac4
  .debug_frame   0x00000000       0x50 build/obj/crt0.o
  .debug_frame   0x00000050       0x20 build/obj/vectors.o
  .debug_frame   0x00000070       0x20 build/obj/chcore.o
@@ -3117,20 +3148,21 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_frame   0x000035b8      0x168 build/obj/display.o
  .debug_frame   0x00003720       0x5c build/obj/buttons.o
  .debug_frame   0x0000377c       0x80 build/obj/servo.o
- .debug_frame   0x000037fc       0x2c build/obj/main.o
- .debug_frame   0x00003828       0x20 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
- .debug_frame   0x00003848       0x2c /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
- .debug_frame   0x00003874       0x64 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
- .debug_frame   0x000038d8       0x64 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
- .debug_frame   0x0000393c       0x2c /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
- .debug_frame   0x00003968       0x2c /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
- .debug_frame   0x00003994       0x2c /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
- .debug_frame   0x000039c0       0x30 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
- .debug_frame   0x000039f0       0x30 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
- .debug_frame   0x00003a20       0x20 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
- .debug_frame   0x00003a40       0x20 /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
+ .debug_frame   0x000037fc       0x64 build/obj/trigger.o
+ .debug_frame   0x00003860       0x2c build/obj/main.o
+ .debug_frame   0x0000388c       0x20 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
+ .debug_frame   0x000038ac       0x2c c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
+ .debug_frame   0x000038d8       0x64 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
+ .debug_frame   0x0000393c       0x64 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+ .debug_frame   0x000039a0       0x2c c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
+ .debug_frame   0x000039cc       0x2c c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
+ .debug_frame   0x000039f8       0x2c c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
+ .debug_frame   0x00003a24       0x30 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+ .debug_frame   0x00003a54       0x30 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+ .debug_frame   0x00003a84       0x20 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+ .debug_frame   0x00003aa4       0x20 c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
 
-.debug_loc      0x00000000     0x4d12
+.debug_loc      0x00000000     0x4d96
  .debug_loc     0x00000000       0x98 build/obj/chcore_v7m.o
  .debug_loc     0x00000098       0x84 build/obj/nvic.o
  .debug_loc     0x0000011c       0x78 build/obj/chsys.o
@@ -3188,7 +3220,8 @@ OUTPUT(build/ch.elf elf32-littlearm)
  .debug_loc     0x00004a5a      0x1a0 build/obj/display.o
  .debug_loc     0x00004bfa       0x6c build/obj/buttons.o
  .debug_loc     0x00004c66       0x8c build/obj/servo.o
- .debug_loc     0x00004cf2       0x20 build/obj/main.o
+ .debug_loc     0x00004cf2       0x78 build/obj/trigger.o
+ .debug_loc     0x00004d6a       0x2c build/obj/main.o
 
 Cross Reference Table
 
@@ -3197,6 +3230,7 @@ ADCD1                                             build/obj/adc_lld.o
 BusFaultVector                                    build/obj/vectors.o
 DebugMonitorVector                                build/obj/vectors.o
 EXTD1                                             build/obj/ext_lld.o
+                                                  build/obj/trigger.o
                                                   build/obj/buttons.o
                                                   build/obj/ext_lld_isr.o
 Fonts8x5                                          build/obj/lcd3310.o
@@ -3399,17 +3433,17 @@ __REVSH                                           build/obj/core_cm3.o
 __STREXB                                          build/obj/core_cm3.o
 __STREXH                                          build/obj/core_cm3.o
 __STREXW                                          build/obj/core_cm3.o
-__aeabi_idiv                                      /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
-__aeabi_idiv0                                     /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
-__aeabi_idivmod                                   /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-__aeabi_ldiv0                                     /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_dvmd_tls.o)
-__ctype_ptr__                                     /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
-__divsi3                                          /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a(_divsi3.o)
+__aeabi_idiv                                      c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+__aeabi_idiv0                                     c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+__aeabi_idivmod                                   c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+__aeabi_ldiv0                                     c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_dvmd_tls.o)
+__ctype_ptr__                                     c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
+__divsi3                                          c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2\libgcc.a(_divsi3.o)
 __early_init                                      build/obj/board.o
                                                   build/obj/crt0.o
 __fini_array_end                                  build/obj/crt0.o
@@ -3420,9 +3454,9 @@ __get_FAULTMASK                                   build/obj/core_cm3.o
 __get_MSP                                         build/obj/core_cm3.o
 __get_PRIMASK                                     build/obj/core_cm3.o
 __get_PSP                                         build/obj/core_cm3.o
-__gettzinfo                                       /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-gettzinfo.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+__gettzinfo                                       c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-gettzinfo.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
 __heap_base__                                     build/obj/chmemcore.o
 __heap_end__                                      build/obj/chmemcore.o
 __init_array_end                                  build/obj/crt0.o
@@ -3439,22 +3473,22 @@ __set_FAULTMASK                                   build/obj/core_cm3.o
 __set_MSP                                         build/obj/core_cm3.o
 __set_PRIMASK                                     build/obj/core_cm3.o
 __set_PSP                                         build/obj/core_cm3.o
-__tz_lock                                         /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-__tz_unlock                                       /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzlock.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-__tzcalc_limits                                   /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+__tz_lock                                         c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+__tz_unlock                                       c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzlock.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+__tzcalc_limits                                   c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
 _bss_end                                          build/obj/crt0.o
 _bss_start                                        build/obj/crt0.o
 _close_r                                          build/obj/syscalls.o
 _core_init                                        build/obj/chmemcore.o
                                                   build/obj/chsys.o
-_ctype_                                           /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-ctype_.o)
+_ctype_                                           c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-ctype_.o)
 _data                                             build/obj/crt0.o
-_daylight                                         /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+_daylight                                         c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
 _default_exit                                     build/obj/crt0.o
 _edata                                            build/obj/crt0.o
 _fstat_r                                          build/obj/syscalls.o
@@ -3464,11 +3498,12 @@ _idle_thread                                      build/obj/chsys.o
 _idle_thread_wa                                   build/obj/chsys.o
 _isatty_r                                         build/obj/syscalls.o
 _lseek_r                                          build/obj/syscalls.o
-_mktm_r                                           /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktm_r.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
+_mktm_r                                           c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktm_r.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
 _pal_lld_init                                     build/obj/pal_lld.o
                                                   build/obj/hal.o
 _pal_lld_setgroupmode                             build/obj/pal_lld.o
+                                                  build/obj/trigger.o
                                                   build/obj/servo.o
                                                   build/obj/buttons.o
                                                   build/obj/display.o
@@ -3497,8 +3532,8 @@ _stm32_dma_streams                                build/obj/stm32_dma.o
 _textdata                                         build/obj/crt0.o
 _thread_init                                      build/obj/chthreads.o
                                                   build/obj/chsys.o
-_timezone                                         /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
-_tzname                                           /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-tzvars.o)
+_timezone                                         c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
+_tzname                                           c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-tzvars.o)
 _unhandled_exception                              build/obj/vectors.o
 _vectors                                          build/obj/vectors.o
 _vt_init                                          build/obj/chvt.o
@@ -3582,11 +3617,13 @@ chIQReadTimeout                                   build/obj/chqueues.o
 chIQResetI                                        build/obj/chqueues.o
                                                   build/obj/serial.o
 chMBFetch                                         build/obj/chmboxes.o
+                                                  build/obj/trigger.o
                                                   build/obj/display.o
                                                   build/obj/playback.o
 chMBFetchI                                        build/obj/chmboxes.o
 chMBFetchS                                        build/obj/chmboxes.o
 chMBInit                                          build/obj/chmboxes.o
+                                                  build/obj/trigger.o
                                                   build/obj/display.o
                                                   build/obj/playback.o
 chMBPost                                          build/obj/chmboxes.o
@@ -3595,6 +3632,7 @@ chMBPostAhead                                     build/obj/chmboxes.o
 chMBPostAheadI                                    build/obj/chmboxes.o
 chMBPostAheadS                                    build/obj/chmboxes.o
 chMBPostI                                         build/obj/chmboxes.o
+                                                  build/obj/trigger.o
                                                   build/obj/display.o
                                                   build/obj/playback.o
 chMBPostS                                         build/obj/chmboxes.o
@@ -3728,7 +3766,6 @@ chThdRelease                                      build/obj/chdynamic.o
 chThdResume                                       build/obj/chthreads.o
 chThdSetPriority                                  build/obj/chthreads.o
 chThdSleep                                        build/obj/chthreads.o
-                                                  build/obj/main.o
                                                   build/obj/servo.o
                                                   build/obj/lcd3310.o
                                                   build/obj/mmc_spi.o
@@ -3756,8 +3793,8 @@ disk_read                                         build/obj/sd_spi_stm32.o
 disk_status                                       build/obj/sd_spi_stm32.o
                                                   build/obj/ff.o
 disk_timerproc                                    build/obj/sd_spi_stm32.o
-div                                               /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-div.o)
-                                                  /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+div                                               c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-div.o)
+                                                  c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
 dmaInit                                           build/obj/stm32_dma.o
                                                   build/obj/hal_lld.o
 dmaStreamAllocate                                 build/obj/stm32_dma.o
@@ -3777,6 +3814,7 @@ extObjectInit                                     build/obj/ext.o
                                                   build/obj/ext_lld.o
 extSetChannelModeI                                build/obj/ext.o
 extStart                                          build/obj/ext.o
+                                                  build/obj/trigger.o
                                                   build/obj/buttons.o
 extStop                                           build/obj/ext.o
 ext_lld_channel_disable                           build/obj/ext_lld.o
@@ -3816,6 +3854,7 @@ initButtons                                       build/obj/buttons.o
 initDisplay                                       build/obj/display.o
 initServo                                         build/obj/servo.o
                                                   build/obj/main.o
+initTrigger                                       build/obj/trigger.o
 isPlaying                                         build/obj/playback.o
 lcd3310Clear                                      build/obj/lcd3310.o
                                                   build/obj/display.o
@@ -3829,13 +3868,13 @@ lcd3310WriteByte                                  build/obj/lcd3310.o
 lcd3310WriteChar                                  build/obj/lcd3310.o
 lcd3310WriteText                                  build/obj/lcd3310.o
                                                   build/obj/display.o
-localtime_r                                       /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-lcltime_r.o)
+localtime_r                                       c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-lcltime_r.o)
                                                   build/obj/chrtclib.o
 main                                              build/obj/main.o
                                                   build/obj/crt0.o
-memset                                            /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-memset.o)
+memset                                            c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-memset.o)
                                                   build/obj/syscalls.o
-mktime                                            /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-mktime.o)
+mktime                                            c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-mktime.o)
                                                   build/obj/chrtclib.o
 mmcConnect                                        build/obj/mmc_spi.o
 mmcDisconnect                                     build/obj/mmc_spi.o
@@ -4041,11 +4080,11 @@ spi_lld_unselect                                  build/obj/spi_lld.o
                                                   build/obj/spi.o
 stm32_clock_init                                  build/obj/hal_lld.o
                                                   build/obj/board.o
-strcasecmp                                        /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strcasecmp.o)
+strcasecmp                                        c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strcasecmp.o)
                                                   build/obj/shell.o
-strpbrk                                           /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strpbrk.o)
+strpbrk                                           c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strpbrk.o)
                                                   build/obj/shell.o
-strspn                                            /home/z80/programs/code-sourcery/2011.03-42/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a(lib_a-strspn.o)
+strspn                                            c:/programs/codesourcery/arm-2012.03-56/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2\libc.a(lib_a-strspn.o)
                                                   build/obj/shell.o
 tmInit                                            build/obj/tm.o
                                                   build/obj/hal.o
@@ -4055,3 +4094,5 @@ vtlist                                            build/obj/chvt.o
                                                   build/obj/shell.o
                                                   build/obj/chthreads.o
                                                   build/obj/chsys.o
+waitForTrigger                                    build/obj/trigger.o
+                                                  build/obj/main.o

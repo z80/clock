@@ -18,15 +18,24 @@
 #include "hal.h"
 //#include "test.h"
 
-#include "dac.h"
-#include "playback.h"
-#include "display.h"
+//#include "dac.h"
+//#include "display.h"
 #include "servo.h"
-
+#include "playback.h"
+#include "trigger.h"
 
 /*
  * Application entry point.
  */
+
+static const char * files[] =
+{
+    "heil.raw",
+    "heil_hitler.raw",
+    "sieg_heil_arian.raw",
+    "sieg_heil_black_man.raw",
+    0
+};
 
 
 int main(void)
@@ -51,19 +60,14 @@ int main(void)
     //initDisplay();
     initServo();
 
+    int i=0;
     for ( ;; )
     {
+        waitForTrigger();
         heilUp();
-        //chThdSleepMilliseconds( 200 );
-        play( "anthem01.raw" );
+        play( files[i++] );
         heilDown();
-        chThdSleepSeconds( 5 );
-
-        heilUp();
-        chThdSleepMilliseconds( 200 );
-        play( "anthem02.raw" );
-        heilDown();
-        chThdSleepSeconds( 5 );
+        i = ( files[i] == 0 ) ? 0 : i;
     }
     /*
     for (;;)

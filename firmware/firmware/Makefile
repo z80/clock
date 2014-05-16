@@ -97,6 +97,7 @@ CSRC = $(PORTSRC) \
        src/display.c \
        src/buttons.c \
        src/servo.c \
+       src/trigger.c \
        src/main.c
        #src/3310.c \
        #src/3310-backend.c \

@@ -5,7 +5,7 @@
 #include "ch.h"
 
 void playbackInit( void );
-int  play( char * file );
+int  play( const char * file );
 int  isPlaying( void );
 
 

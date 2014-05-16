@@ -107,7 +107,7 @@ static void playbackStop( void )
     palClearPad( GPIOC,  9 ); // Clear Amp. enable.
 }
 
-int  play( char * file )
+int  play( const char * file )
 {
     is_playing = 1;
     do_exit_pwm = 0;
