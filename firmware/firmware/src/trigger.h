@@ -6,6 +6,7 @@
 
 void initTrigger( void );
 void waitForTrigger( void );
+void clearTrigger( void );
 
 
 #endif

@@ -17,7 +17,7 @@ static const EXTConfig extcfg =
     { EXT_CH_MODE_DISABLED, NULL },
     { EXT_CH_MODE_DISABLED, NULL },
     { EXT_CH_MODE_DISABLED, NULL },
-    { EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOA, extCb },
+    { EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOB, extCb },
     { EXT_CH_MODE_DISABLED, NULL },
     { EXT_CH_MODE_DISABLED, NULL },
     { EXT_CH_MODE_DISABLED, NULL },
@@ -51,13 +51,20 @@ void initTrigger( void )
 void waitForTrigger( void )
 {
     // Goto sleep mode.
-    PWR->CR |= (PWR_CR_PDDS | PWR_CR_LPDS | PWR_CR_CSBF | PWR_CR_CWUF);
-    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-    __WFI();
+    //PWR->CR |= (PWR_CR_PDDS | PWR_CR_LPDS | PWR_CR_CSBF | PWR_CR_CWUF);
+    //SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+    //__WFI();
 
     // When recovered from sleep wait for a mail.
     msg_t msg;
     chMBFetch( &mailbox, &msg, TIME_INFINITE );
+}
+
+void clearTrigger( void )
+{
+    msg_t msg;
+    while ( chMBFetch( &mailbox, &msg, MS2ST( 1 ) ) == RDY_OK )
+        ;
 }
 
 

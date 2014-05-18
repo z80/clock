@@ -30,11 +30,10 @@
 
 static const char * files[] =
 {
-    "heil.raw",
-    "heil_hitler.raw",
-    "sieg_heil_arian.raw",
-    "sieg_heil_black_man.raw",
-    0
+    "heil01.raw",
+    "heil02.raw",
+    "heil03.raw",
+    "heil04.raw",
 };
 
 
@@ -56,18 +55,22 @@ int main(void)
      * sleeping in a loop and check the button state.
      */
 
+    initTrigger();
     playbackInit();
     //initDisplay();
     initServo();
 
-    int i=0;
+    int i;
     for ( ;; )
     {
-        waitForTrigger();
-        heilUp();
-        play( files[i++] );
-        heilDown();
-        i = ( files[i] == 0 ) ? 0 : i;
+        for ( i=0; i<4; i++ )
+        {
+            waitForTrigger();
+            heilUp();
+            play( files[i] );
+            heilDown();
+            clearTrigger();
+        }
     }
     /*
     for (;;)
